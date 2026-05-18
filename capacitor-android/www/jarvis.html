@@ -28,6 +28,7 @@ if ('serviceWorker' in navigator) {
 <script src="js/config.js"></script>
 <script src="js/links-publicos.js"></script>
 <script src="js/tenant-modules.js"></script>
+<script src="js/brasil-cadastros.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Exo+2:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -3006,9 +3007,10 @@ window.excluirFuncionarioDef = function(id) {
   });
 };
 window.excluirNFDef = function(id) {
+  const nf = J.notasFiscaisEntrada?.find(x => x.id === id);
   return window._excluirDef({
-    collection: 'notas_entrada', id,
-    label: `NF #${id.slice(-6).toUpperCase()}`,
+    collection: 'notas_fiscais_entrada', id,
+    label: `NF ${nf?.numero || '#'+id.slice(-6).toUpperCase()}`,
     modulo: 'NF_ENTRADA'
   });
 };
@@ -3773,6 +3775,7 @@ window.iaAnalisarEstoque = function() { _jiaChamar('Quais pecas estao em estoque
 <script src="js/hardening-comercial.js"></script>
 <script src="js/uix-theme-fix.js"></script>
 <script src="js/hardening-operacional-20260515.js"></script>
+<script src="js/operacional-cadastros-nf-fix-20260518.js"></script>
 </body>
 </html>
 
