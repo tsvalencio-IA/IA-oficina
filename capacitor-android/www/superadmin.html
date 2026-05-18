@@ -130,12 +130,13 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .overlay.open{display:flex;}
 .modal{background:var(--surf2);border:1px solid var(--border2);border-radius:4px;width:100%;max-width:700px;margin:auto;position:relative;}
 .modal::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--purple),transparent);}
-.modal-head{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.modal-head{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:10px;position:sticky;top:0;z-index:8;background:var(--surf2);}
 .modal-title{font-family:var(--fd);font-size:1.1rem;font-weight:700;letter-spacing:2px;color:var(--purple);}
+.modal-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
 .modal-close{background:none;border:none;color:var(--muted);font-size:1.1rem;cursor:pointer;padding:4px 8px;}
 .modal-close:hover{color:var(--danger);}
 .modal-body{padding:20px;}
-.modal-foot{padding:14px 20px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px;}
+.modal-foot{padding:14px 20px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px;position:sticky;bottom:0;z-index:8;background:var(--surf2);}
 
 /* PILL */
 .pill{display:inline-block;padding:2px 9px;border-radius:10px;font-family:var(--fm);font-size:0.58rem;letter-spacing:1px;}
@@ -304,7 +305,10 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 <div class="modal">
   <div class="modal-head">
     <div class="modal-title" id="modalTenantTitle">NOVA OFICINA (TENANT)</div>
-    <button class="modal-close" onclick="fecharModal('modalTenant')">✕</button>
+    <div class="modal-actions">
+      <button class="btn-success" type="button" onclick="salvarTenant({manterAberto:true})">SALVAR SEM FECHAR</button>
+      <button class="modal-close" onclick="fecharModal('modalTenant')">✕</button>
+    </div>
   </div>
   <div class="modal-body">
     <input type="hidden" id="tId">
@@ -417,6 +421,19 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <div class="form-group"><label class="j-label">Firebase messagingSenderId</label><input class="j-input" id="tFbMessagingSenderId" placeholder="123456789"></div>
       <div class="form-group"><label class="j-label">Firebase appId</label><input class="j-input" id="tFbAppId" placeholder="1:123456789:web:abcdef"></div>
     </div>
+    <div style="background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.22);border-radius:6px;padding:12px;margin:10px 0;">
+      <div style="font-family:var(--fm);font-size:0.72rem;color:var(--cyan);letter-spacing:1px;font-weight:800;margin-bottom:10px;">INTEGRAÇÃO VALORIA - COTAÇÃO POR ROBÔ</div>
+      <div class="form-row c2">
+        <label class="mod-check" style="margin:0;"><input type="checkbox" id="tValorIAAtivo"> Ativar ValorIA nesta oficina</label>
+        <label class="mod-check" style="margin:0;"><input type="checkbox" id="tValorIALegacy"> Usar modo legado raiz</label>
+      </div>
+      <div class="form-row c2">
+        <div class="form-group"><label class="j-label">Tenant no ValorIA</label><input class="j-input" id="tValorIATenantId" placeholder="tiao-motos ou legacy_root"></div>
+        <div class="form-group"><label class="j-label">URL pública do fornecedor</label><input class="j-input" id="tValorIAPublicBaseUrl" placeholder="https://usuario.github.io/VALORIA/fornecedor.html"></div>
+      </div>
+      <div class="form-group"><label class="j-label">Firebase Config do ValorIA (JSON)</label><textarea class="j-input" id="tValorIAFirebaseJson" rows="5" placeholder='{"apiKey":"...","authDomain":"...","databaseURL":"https://...firebaseio.com","projectId":"...","storageBucket":"...","messagingSenderId":"...","appId":"..."}' style="resize:vertical;min-height:112px;font-family:var(--fm);"></textarea></div>
+      <div style="font-family:var(--fm);font-size:0.62rem;color:var(--muted2);line-height:1.45;">Quando ativo, o Jarvis salva a cotação normal na O.S. e também coloca os fornecedores na fila do robô ValorIA. Sem ativar aqui, nada é enviado ao ValorIA.</div>
+    </div>
     <div style="background:rgba(139,92,246,0.07);border:1px solid rgba(139,92,246,0.25);border-radius:6px;padding:12px;margin:10px 0;">
       <div style="font-family:var(--fm);font-size:0.72rem;color:var(--purple);letter-spacing:1px;font-weight:800;margin-bottom:10px;">CEREBRO thIAguinho DA OFICINA</div>
       <div class="form-row c2">
@@ -481,7 +498,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   </div>
   <div class="modal-foot">
     <button class="btn-ghost" onclick="fecharModal('modalTenant')">CANCELAR</button>
-    <button class="btn-primary" onclick="salvarTenant()">SALVAR TENANT</button>
+    <button class="btn-success" onclick="salvarTenant({manterAberto:true})">SALVAR E CONTINUAR</button>
+    <button class="btn-primary" onclick="salvarTenant()">SALVAR E FECHAR</button>
   </div>
 </div>
 </div>
@@ -738,6 +756,35 @@ function montarFirebaseOficina(){
   return Object.values(cfg).some(Boolean) ? cfg : null;
 }
 
+function montarValorIAFirebaseConfig(){
+  const raw=$v('tValorIAFirebaseJson').trim();
+  if(!raw) return null;
+  try{
+    const parsed=JSON.parse(raw);
+    return parsed.firebaseConfig || parsed.config || parsed;
+  }catch(e){
+    throw new Error('JSON do Firebase ValorIA invalido: '+(e.message||e));
+  }
+}
+
+function montarValorIAConfig(){
+  const ativo=!!$('tValorIAAtivo')?.checked;
+  let fb=null;
+  try{fb=montarValorIAFirebaseConfig();}catch(e){throw e;}
+  const cfg={
+    ativo,
+    enabled:ativo,
+    tenantId:$v('tValorIATenantId')||($('tValorIALegacy')?.checked?'legacy_root':''),
+    legacyMode:!!$('tValorIALegacy')?.checked,
+    publicBaseUrl:$v('tValorIAPublicBaseUrl'),
+    firebaseConfig:fb,
+    atualizadoEm:new Date().toISOString()
+  };
+  if(ativo && (!fb || !fb.databaseURL)) throw new Error('ValorIA ativo exige firebaseConfig com databaseURL.');
+  if(ativo && !cfg.tenantId) throw new Error('ValorIA ativo exige tenantId do ValorIA.');
+  return ativo || fb || cfg.publicBaseUrl || cfg.tenantId ? cfg : null;
+}
+
 function normalizarEmailsAdminTenant(raw){
   const invalidos=[];
   const emails=[...new Set(String(raw||'')
@@ -765,7 +812,8 @@ function normalizarSlugTenant(raw,nome){
 }
 
 function prepTenant(mode,id=null){
-  ['tId','tNome','tUser','tSenha','tAdminEmails','tWpp','tCloudName','tCloudPreset','tLogoFile','tAssinaturaFile','tBrainJsonFile','tBrainJsonRaw',...CAMPOS_DADOS_OFICINA,...CAMPOS_FIREBASE_OFICINA].forEach(f=>{if($(f))$(f).value='';});
+  ['tId','tNome','tUser','tSenha','tAdminEmails','tWpp','tCloudName','tCloudPreset','tLogoFile','tAssinaturaFile','tBrainJsonFile','tBrainJsonRaw','tValorIATenantId','tValorIAPublicBaseUrl','tValorIAFirebaseJson',...CAMPOS_DADOS_OFICINA,...CAMPOS_FIREBASE_OFICINA].forEach(f=>{if($(f))$(f).value='';});
+  ['tValorIAAtivo','tValorIALegacy'].forEach(f=>{if($(f))$(f).checked=false;});
   ['mOS','mCrm','mEst','mFin','mIA','mChat','mAgd','mRH','mComissoes','mAutoPecas','mVendaTerceiros','mVarejo','mAtacado','mComissaoVendas','mTabelaTempa','mCilia','mOrcamentoAutomatizado','mCotacao','mClienteOficial','mAssinatura','mPDF','mXLSX','mAuditoria','mRelatorios','mExportacoes','mWhatsappBot'].forEach(f=>{if($(f))$(f).checked=false;});
   $('tStatus').value='Online'; $('tNicho').value='carros'; $('tPlano').value='trial';
   $('tCloudName').value='dmuvm1o6m'; $('tCloudPreset').value='evolution';
@@ -808,6 +856,12 @@ function prepTenant(mode,id=null){
     $('tFbStorageBucket').value=fb.storageBucket||'';
     $('tFbMessagingSenderId').value=fb.messagingSenderId||'';
     $('tFbAppId').value=fb.appId||'';
+    const valoria=t.valorIA||t.valoria||t.valoriaIntegracao||t.valorIAIntegracao||{};
+    if($('tValorIAAtivo')) $('tValorIAAtivo').checked=!!(valoria.ativo||valoria.enabled||valoria.integrado||String(valoria.status||'').toLowerCase()==='ativo');
+    if($('tValorIALegacy')) $('tValorIALegacy').checked=!!valoria.legacyMode||!!valoria.modoLegado||String(valoria.tenantId||'')==='legacy_root';
+    if($('tValorIATenantId')) $('tValorIATenantId').value=valoria.tenantId||valoria.tenant||valoria.valoriaTenantId||'';
+    if($('tValorIAPublicBaseUrl')) $('tValorIAPublicBaseUrl').value=valoria.publicBaseUrl||valoria.baseUrl||valoria.fornecedorUrl||valoria.urlFornecedor||'';
+    if($('tValorIAFirebaseJson')) $('tValorIAFirebaseJson').value=valoria.firebaseConfig?JSON.stringify(valoria.firebaseConfig,null,2):'';
     const brain=t.brain||t.cerebro||t.thiaguinhoBrain||{};
     if($('tBrainContexto')) $('tBrainContexto').value=brain.contexto||'';
     if($('tBrainCatalogos')) $('tBrainCatalogos').value=brain.catalogos||'';
@@ -917,7 +971,8 @@ function montarSubmodulosComerciais(){
     auditoria:$('mAuditoria')?$('mAuditoria').checked:true,
     relatorios:$('mRelatorios')?$('mRelatorios').checked:true,
     exportacoes:$('mExportacoes')?$('mExportacoes').checked:true,
-    whatsappBot:$('mWhatsappBot')?$('mWhatsappBot').checked:false
+    whatsappBot:$('mWhatsappBot')?$('mWhatsappBot').checked:false,
+    valorIA:$('tValorIAAtivo')?$('tValorIAAtivo').checked:false
   };
   return {
     os:{criar:mod.os, editar:mod.os, aprovar:mod.os, salvarContinuar:mod.os, pdf:mod.os&&mod.pdf, xlsx:mod.os&&mod.xlsx, assinatura:mod.os&&mod.assinatura, guincho:mod.os, temparia:mod.os&&mod.tabelaTempa, orcamentoAutomatizado:mod.os&&mod.orcamentoAutomatizado, execucaoEquipe:mod.os&&mod.rh, auditoria:mod.os&&mod.auditoria, cotacao:mod.os&&mod.cotacao},
@@ -927,7 +982,7 @@ function montarSubmodulosComerciais(){
     ia:{jarvis:mod.ia, equipe:mod.ia&&mod.rh, superadmin:mod.ia, cliente:mod.ia&&mod.crm},
     cliente:{portalCliente:mod.crm, clienteOficial:mod.crm&&mod.os&&mod.clienteOficial, mensagens:mod.crm&&mod.chat, aprovacaoOnline:mod.crm&&mod.os, documentos:mod.crm&&mod.os},
     documentos:{pdf:mod.pdf&&mod.os, xlsx:mod.xlsx&&mod.os, templates:mod.templates!==false, assinatura:mod.assinatura&&mod.os},
-    integracoes:{cilia:mod.cilia, tabelaTempa:mod.tabelaTempa, orcamentoAutomatizado:mod.orcamentoAutomatizado&&mod.os, cotacao:mod.cotacao, whatsappBot:mod.whatsappBot&&mod.chat, pwa:true, apk:true, exe:true}
+    integracoes:{cilia:mod.cilia, tabelaTempa:mod.tabelaTempa, orcamentoAutomatizado:mod.orcamentoAutomatizado&&mod.os, cotacao:mod.cotacao, valorIA:mod.valorIA&&mod.cotacao, whatsappBot:mod.whatsappBot&&mod.chat, pwa:true, apk:true, exe:true}
   };
 }
 
@@ -942,6 +997,7 @@ function avisosDependenciasModulos(){
   if($('mAutoPecas')?.checked && !$('mFin')?.checked) avisos.push('Autopeças sem Financeiro registra venda, mas não gera caixa/contas a receber.');
   if($('mComissaoVendas')?.checked && !$('mAutoPecas')?.checked) avisos.push('Comissão de vendas depende do módulo Autopeças/Balcão.');
   if($('mCotacao')?.checked && (!$('mOS')?.checked || !$('mEst')?.checked)) avisos.push('Cotacao de pecas depende de O.S. e Estoque/Fornecedores.');
+  if($('tValorIAAtivo')?.checked && !$('mCotacao')?.checked) avisos.push('ValorIA depende do modulo Cotacao de pecas / fornecedores.');
   if($('mClienteOficial')?.checked && (!$('mOS')?.checked || !$('mCrm')?.checked)) avisos.push('Cliente Oficial depende de O.S. e CRM/Clientes.');
   if($('mPDF')?.checked && !$('mOS')?.checked) avisos.push('PDF depende de O.S.');
   if($('mXLSX')?.checked && !$('mOS')?.checked) avisos.push('XLSX/PMSP depende de O.S.');
@@ -975,7 +1031,8 @@ function montarCerebroTenantPayload(){
   }
 }
 
-async function salvarTenant(){
+async function salvarTenant(opcoes={}){
+  const manterAberto=!!opcoes.manterAberto;
   let cerebroTenant;
   try{cerebroTenant=montarCerebroTenantPayload();}catch(e){toast(e.message||e,'err');return;}
   if(!$v('tNome')||!$v('tUser')||!$v('tSenha')){toast('⚠ Preencha nome, usuário e senha','warn');return;}
@@ -986,6 +1043,8 @@ async function salvarTenant(){
     return;
   }
   const slugPublico=normalizarSlugTenant($v('tPublicSlug'),$v('tNome'));
+  let valorIAConfig=null;
+  try{valorIAConfig=montarValorIAConfig();}catch(e){toast(e.message||e,'err');return;}
   const id=$v('tId');
   if(slugPublico){
     try{
@@ -1046,6 +1105,10 @@ async function salvarTenant(){
       cloudPreset:$v('tCloudPreset')||'evolution'
     },
     firebaseConfig,
+    valorIA:valorIAConfig,
+    valoria:valorIAConfig,
+    valoriaIntegracao:valorIAConfig,
+    valorIAIntegracao:valorIAConfig,
     brain:{
       contexto:$v('tBrainContexto'),
       catalogos:$v('tBrainCatalogos'),
@@ -1090,7 +1153,8 @@ async function salvarTenant(){
       auditoria:$('mAuditoria')?$('mAuditoria').checked:true,
       relatorios:$('mRelatorios')?$('mRelatorios').checked:true,
       exportacoes:$('mExportacoes')?$('mExportacoes').checked:true,
-      whatsappBot:$('mWhatsappBot')?$('mWhatsappBot').checked:false
+      whatsappBot:$('mWhatsappBot')?$('mWhatsappBot').checked:false,
+      valorIA:!!valorIAConfig?.ativo
     },
     submodulos:montarSubmodulosComerciais(),
     dependenciasModulosAvisos:avisosDependenciasModulos(),
@@ -1100,18 +1164,27 @@ async function salvarTenant(){
   payload.cerebro=cerebroTenant;
   payload.thiaguinhoBrain=cerebroTenant;
   try{
+    let idSalvo=id;
     if(id){
       await db.collection('oficinas').doc(id).update(payload);
       // Sincroniza em tenants também
       try{await db.collection('tenants').doc(id).update(payload);}catch(e){}
-      toast('✓ TENANT ATUALIZADO');
+      toast(manterAberto?'✓ TENANT SALVO. CONTINUE EDITANDO.':'✓ TENANT ATUALIZADO');
     }else{
       payload.criadoEm=new Date().toISOString();
       const ref=await db.collection('oficinas').add(payload);
+      idSalvo=ref.id;
       await db.collection('tenants').doc(ref.id).set({...payload,oficinasId:ref.id});
       toast('✓ NOVA OFICINA IMPLANTADA! ID: '+ref.id.slice(-6).toUpperCase());
     }
-    fecharModal('modalTenant');
+    if(manterAberto){
+      if(idSalvo){
+        $('tId').value=idSalvo;
+        $('modalTenantTitle').innerText='EDITAR TENANT: '+($v('tNome')||'').toUpperCase();
+      }
+    }else{
+      fecharModal('modalTenant');
+    }
   }catch(e){toast('✕ ERRO: '+e.message,'err');}
 }
 

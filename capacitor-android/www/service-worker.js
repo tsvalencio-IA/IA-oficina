@@ -12,7 +12,7 @@
  *
  * Powered by thIAguinho Soluções Digitais
  */
-const CACHE_VERSION = 'thiaguinho-operacional-fiscal-financeiro-20260518-41';
+const CACHE_VERSION = 'thiaguinho-operacional-fiscal-financeiro-20260518-43';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -27,6 +27,7 @@ const PRECACHE_URLS_RAW = [
   './clienteOficial.html',
   './c.html',
   './cotacao.html',
+  './gerar_conhecimento.html',
   './superadmin.html',
   './manifest.json',
   './favicon.ico',
@@ -39,6 +40,7 @@ const PRECACHE_URLS_RAW = [
   './js/financeiro.js',
   './js/nfe-real-pro.js',
   './js/cotacoes.js',
+  './js/valoria-integracao.js',
   './js/cotacao-fornecedor.js',
   './js/exportar-pmsp.js',
   './js/os.js',
