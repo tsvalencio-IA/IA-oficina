@@ -80,7 +80,7 @@
 
   function podeFinanceiro(opts) {
     const r = role(opts);
-    return /superadmin|admin|gestor|gerente|financeiro|vendedor/.test(r);
+    return /superadmin|admin|jarvis|gestor|gerente|financeiro|vendedor|dono|proprietario|owner|oficina_admin|caixa/.test(r);
   }
 
   function placaLimpa(v) {
@@ -361,15 +361,36 @@
     if (/boleto|conta|titulo|duplicata|financeiro|pix|vencid|vencendo|pagar|receber/.test(q)) {
       if (!podeFinanceiro(opts)) return 'Seu perfil nao tem permissao para consultar financeiro. Posso consultar O.S., historico tecnico, defeitos, veiculos e execucao.';
       const hoje = hojeISO();
+      const analiseFinanceira = /analis|analise|resumo|risco|prioridade|dre|atual|geral/.test(q);
       let lista = ctx.financeiro;
       if (/hoje/.test(q)) lista = lista.filter(f => String(f.venc || f.vencimento || '').slice(0, 10) === hoje);
-      if (/vencid|atrasad/.test(q)) lista = lista.filter(f => {
+      if (!analiseFinanceira && /vencid|atrasad/.test(q)) lista = lista.filter(f => {
         const venc = String(f.venc || f.vencimento || '').slice(0, 10);
         return venc && venc < hoje && !/pago|liquid|baix|cancel/.test(norm(f.status));
       });
       if (/pix/.test(q) && /parcel/.test(q)) {
         lista = ctx.financeiro.filter(f => /pix/i.test(String(f.pgto || f.forma || '')) && (num(f.pgtoParcelas || f.parcelas || 1) > 1 || /\(\d+\s*\/\s*\d+\)/.test(String(f.desc || ''))));
         if (!lista.length) return 'Nao encontrei PIX parcelado nos dados carregados.';
+      }
+      if (analiseFinanceira) {
+        const vencidos = ctx.financeiro.filter(f => {
+          const venc = String(f.venc || f.vencimento || '').slice(0, 10);
+          return venc && venc < hoje && !/pago|liquid|baix|cancel/.test(norm(f.status));
+        });
+        const hojeLista = ctx.financeiro.filter(f => String(f.venc || f.vencimento || '').slice(0, 10) === hoje);
+        const pendentes = ctx.financeiro.filter(f => !/pago|liquid|baix|cancel/.test(norm(f.status)));
+        const pixParcelado = ctx.financeiro.filter(f => /pix/i.test(String(f.pgto || f.forma || '')) && (num(f.pgtoParcelas || f.parcelas || 1) > 1 || /\(\d+\s*\/\s*\d+\)/.test(String(f.desc || ''))));
+        const totalPendente = pendentes.reduce((s, f) => s + num(f.valor), 0);
+        const linhas = [
+          `<strong>Análise financeira local:</strong> ${ctx.financeiro.length} lançamento(s) carregado(s).`,
+          `Pendentes/em aberto: ${pendentes.length} (${moeda(totalPendente)}).`,
+          `Vencidos: ${vencidos.length}. Vencendo hoje: ${hojeLista.length}. PIX parcelado suspeito: ${pixParcelado.length}.`
+        ];
+        const prioridades = [...vencidos, ...hojeLista, ...pixParcelado, ...pendentes]
+          .filter((f, i, arr) => arr.findIndex(x => (x.id || x.desc || x.descricao) === (f.id || f.desc || f.descricao)) === i)
+          .slice(0, 20);
+        if (prioridades.length) linhas.push('<br><strong>Prioridades:</strong><br>' + prioridades.map(f => `- ${esc(f.venc || f.vencimento || '-')} | ${esc(f.desc || f.descricao || 'Lancamento')} | ${moeda(f.valor)} | ${esc(f.status || '-')}`).join('<br>'));
+        return linhas.join('<br>');
       }
       if (!lista.length) return 'Nao encontrei lancamento financeiro para essa pergunta nos dados carregados.';
       const total = lista.reduce((s, f) => s + num(f.valor), 0);

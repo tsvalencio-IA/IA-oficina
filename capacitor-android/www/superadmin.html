@@ -1,11 +1,11 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>(function(){try{var t=localStorage.getItem("thiaguinho_theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);else document.documentElement.setAttribute("data-theme","dark");}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();</script>
 <meta charset="UTF-8">
+<script>(function(){try{var t=localStorage.getItem("thiaguinho_theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);else document.documentElement.setAttribute("data-theme","dark");}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>J.A.R.V.I.S â€” SUPERADMIN SaaS</title>
-<!-- â•â•â• PWA â•â•â• -->
+<title>J.A.R.V.I.S — SUPERADMIN SaaS</title>
+<!-- ═══ PWA ═══ -->
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#00D4FF">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -168,11 +168,11 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 <!-- LOGIN SCREEN -->
 <div class="login-page" id="loginPage">
   <div class="login-box">
-    <div class="login-title" style="color:var(--purple)">âš¡ SUPERADMIN</div>
+    <div class="login-title" style="color:var(--purple)">⚡ SUPERADMIN</div>
     <div class="login-sub">J.A.R.V.I.S SAAS MASTER</div>
     <div class="form-group"><label class="j-label">Email Master</label><input class="j-input" id="lUser" name="username" type="email" inputmode="email" placeholder="admin@exemplo.com" autocomplete="username email" autocapitalize="none" autocorrect="off" spellcheck="false"></div>
-    <div class="form-group"><label class="j-label">Senha</label><input type="password" class="j-input" id="lPass" name="current-password" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" autocomplete="current-password"></div>
-    <div id="loginErr" style="color:var(--danger);font-family:var(--fm);font-size:0.72rem;margin-bottom:12px;display:none;">âš  Credenciais invÃ¡lidas</div>
+    <div class="form-group"><label class="j-label">Senha</label><input type="password" class="j-input" id="lPass" name="current-password" placeholder="••••••••" autocomplete="current-password"></div>
+    <div id="loginErr" style="color:var(--danger);font-family:var(--fm);font-size:0.72rem;margin-bottom:12px;display:none;">⚠ Credenciais inválidas</div>
     <button class="btn-primary" style="width:100%;padding:12px;justify-content:center;" onclick="fazerLogin()">AUTENTICAR</button>
   </div>
 </div>
@@ -182,21 +182,21 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 
 <aside class="sidebar">
   <div class="sb-logo">
-    <div class="sb-logo-title">âš¡ SUPERADMIN</div>
+    <div class="sb-logo-title">⚡ SUPERADMIN</div>
     <div class="sb-logo-sub">JARVIS SAAS MASTER</div>
   </div>
   <nav class="sb-nav">
     <div class="nav-sec">PAINEL</div>
-    <div class="nav-item active" onclick="ir('s-dashboard',this)">ðŸ“Š Dashboard</div>
-    <div class="nav-item" onclick="ir('s-tenants',this)">ðŸ¢ Oficinas (Tenants)</div>
-    <div class="nav-sec">CONFIGURAÃ‡ÃƒO</div>
-    <div class="nav-item" onclick="ir('s-ia',this)">ðŸ¤– IA / CÃ©rebro</div>
-    <div class="nav-item" onclick="ir('s-saas',this)">ðŸ’° Financeiro SaaS</div>
+    <div class="nav-item active" onclick="ir('s-dashboard',this)">📊 Dashboard</div>
+    <div class="nav-item" onclick="ir('s-tenants',this)">🏢 Oficinas (Tenants)</div>
+    <div class="nav-sec">CONFIGURAÇÃO</div>
+    <div class="nav-item" onclick="ir('s-ia',this)">🤖 IA / Cérebro</div>
+    <div class="nav-item" onclick="ir('s-saas',this)">💰 Financeiro SaaS</div>
     <div class="nav-sec">SUPORTE</div>
-    <div class="nav-item" onclick="ir('s-auditoria',this)">ðŸ”’ Auditoria Global</div>
+    <div class="nav-item" onclick="ir('s-auditoria',this)">🔒 Auditoria Global</div>
   </nav>
   <div class="sb-foot">
-    <button class="btn-sair" onclick="sair()">â» ENCERRAR SESSÃƒO</button>
+    <button class="btn-sair" onclick="sair()">⏻ ENCERRAR SESSÃO</button>
   </div>
 </aside>
 
@@ -214,14 +214,14 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <div class="section active" id="s-dashboard">
       <div class="kpi-grid">
         <div class="kpi p"><div class="kpi-label">TENANTS ATIVOS</div><div class="kpi-val" id="kTA">0</div></div>
-        <div class="kpi c"><div class="kpi-label">LICENÃ‡AS ONLINE</div><div class="kpi-val" id="kLO">0</div></div>
+        <div class="kpi c"><div class="kpi-label">LICENÇAS ONLINE</div><div class="kpi-val" id="kLO">0</div></div>
         <div class="kpi g"><div class="kpi-label">MRR ESTIMADO</div><div class="kpi-val" id="kMRR">R$ 0</div></div>
         <div class="kpi d"><div class="kpi-label">BLOQUEADOS</div><div class="kpi-val" id="kBL">0</div></div>
       </div>
       <div class="j-card">
-        <div class="j-card-head"><div class="j-card-title">ðŸ¢ OFICINAS CADASTRADAS</div><button class="btn-primary" onclick="ir('s-tenants',document.querySelector('.nav-item:nth-child(2)'));prepTenant('add');abrirModal('modalTenant')">+ NOVA OFICINA</button></div>
+        <div class="j-card-head"><div class="j-card-title">🏢 OFICINAS CADASTRADAS</div><button class="btn-primary" onclick="ir('s-tenants',document.querySelector('.nav-item:nth-child(2)'));prepTenant('add');abrirModal('modalTenant')">+ NOVA OFICINA</button></div>
         <div style="padding:0;overflow-x:auto;">
-          <table class="j-table"><thead><tr><th>Oficina</th><th>Nicho</th><th>Acesso</th><th>Status</th><th>Plano</th><th>IA Key</th></tr></thead><tbody id="dashTenants"></tbody></table>
+          <table class="j-table"><thead><tr><th>Oficina</th><th>Nicho</th><th>Acesso</th><th>Status</th><th>Plano</th><th>IA / Cérebro</th></tr></thead><tbody id="dashTenants"></tbody></table>
         </div>
       </div>
     </div>
@@ -239,7 +239,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
         </div>
         <div style="overflow-x:auto;">
           <table class="j-table">
-            <thead><tr><th>Nome Fantasia</th><th>Nicho</th><th>UsuÃ¡rio / Senha</th><th>Plano</th><th>Status</th><th>MÃ³dulos</th><th>AÃ§Ãµes</th></tr></thead>
+            <thead><tr><th>Nome Fantasia</th><th>Nicho</th><th>Usuário / Senha</th><th>Plano</th><th>Status</th><th>Módulos</th><th>Ações</th></tr></thead>
             <tbody id="tbTenants"></tbody>
           </table>
         </div>
@@ -250,22 +250,22 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <div class="section" id="s-ia">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
         <div class="j-card">
-          <div class="j-card-head"><div class="j-card-title">CÃ‰REBRO GLOBAL / CLOUDINARY</div></div>
+          <div class="j-card-head"><div class="j-card-title">CÉREBRO GLOBAL / CLOUDINARY</div></div>
           <div style="padding:18px;">
             <div class="form-group"><label class="j-label">Cloudinary Cloud Name</label><input class="j-input" id="iaCloudName" placeholder="dmuvm1o6m"></div>
             <div class="form-group"><label class="j-label">Cloudinary Upload Preset</label><input class="j-input" id="iaCloudPreset" placeholder="evolution"></div>
-            <div class="form-group"><label class="j-label">JSON do cÃ©rebro global</label><textarea class="j-input" id="iaBrainGlobalJson" rows="7" placeholder='{"versao":1,"escopo":"global","comportamento":{"tom":"direto","permitirPiadas":false},"conhecimento":[]}' style="resize:vertical;min-height:150px;font-family:var(--fm);"></textarea></div>
+            <div class="form-group"><label class="j-label">JSON do cérebro global</label><textarea class="j-input" id="iaBrainGlobalJson" rows="7" placeholder='{"versao":1,"escopo":"global","comportamento":{"tom":"direto","permitirPiadas":false},"conhecimento":[]}' style="resize:vertical;min-height:150px;font-family:var(--fm);"></textarea></div>
             <div class="form-row c2">
               <button class="btn-ghost" type="button" onclick="gerarModeloCerebroGlobal()">GERAR MODELO JSON</button>
               <input class="j-input" type="file" id="iaBrainGlobalFile" accept=".json,application/json" onchange="importarCerebroGlobalArquivo(this)">
             </div>
-            <button class="btn-cyan" onclick="salvarConfigIA()" style="width:100%;padding:10px;justify-content:center;">SALVAR CONFIGURAÃ‡ÃƒO LOCAL</button>
+            <button class="btn-cyan" onclick="salvarConfigIA()" style="width:100%;padding:10px;justify-content:center;">SALVAR CONFIGURAÇÃO LOCAL</button>
           </div>
         </div>
         <div class="j-card">
-          <div class="j-card-head"><div class="j-card-title">TESTAR CÃ‰REBRO LOCAL</div></div>
+          <div class="j-card-head"><div class="j-card-title">TESTAR CÉREBRO LOCAL</div></div>
           <div style="padding:18px;">
-            <div class="form-group"><label class="j-label">Pergunta de Teste</label><textarea class="j-input" id="iaTestInput" rows="3" placeholder="Pergunte sobre tenants, mÃ³dulos, riscos ou cÃ©rebro global..." style="resize:vertical;min-height:80px;"></textarea></div>
+            <div class="form-group"><label class="j-label">Pergunta de Teste</label><textarea class="j-input" id="iaTestInput" rows="3" placeholder="Pergunte sobre tenants, módulos, riscos ou cérebro global..." style="resize:vertical;min-height:80px;"></textarea></div>
             <button class="btn-primary" onclick="testarCerebroLocal()" style="margin-bottom:12px;">TESTAR AGORA</button>
             <div id="iaTestResult" style="background:rgba(0,0,0,0.3);border-radius:3px;padding:12px;font-size:0.8rem;min-height:60px;color:var(--muted2);display:none;font-family:var(--fm);line-height:1.6;"></div>
           </div>
@@ -278,11 +278,11 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px;">
         <div class="kpi g"><div class="kpi-label">RECEITA TOTAL</div><div class="kpi-val" id="saasRec">R$ 0</div></div>
         <div class="kpi d"><div class="kpi-label">DESPESAS</div><div class="kpi-val" id="saasDes">R$ 0</div></div>
-        <div class="kpi c"><div class="kpi-label">LUCRO LÃQUIDO</div><div class="kpi-val" id="saasLuc">R$ 0</div></div>
+        <div class="kpi c"><div class="kpi-label">LUCRO LÍQUIDO</div><div class="kpi-val" id="saasLuc">R$ 0</div></div>
       </div>
       <div class="j-card">
-        <div class="j-card-head"><div class="j-card-title">LANÃ‡AMENTOS SaaS</div><button class="btn-primary" onclick="prepSaasFin();abrirModal('modalSaasFin')">+ LANÃ‡AMENTO</button></div>
-        <div style="overflow-x:auto;"><table class="j-table"><thead><tr><th>Data</th><th>Tipo</th><th>DescriÃ§Ã£o</th><th>Tenant</th><th>Valor</th></tr></thead><tbody id="tbSaasFin"></tbody></table></div>
+        <div class="j-card-head"><div class="j-card-title">LANÇAMENTOS SaaS</div><button class="btn-primary" onclick="prepSaasFin();abrirModal('modalSaasFin')">+ LANÇAMENTO</button></div>
+        <div style="overflow-x:auto;"><table class="j-table"><thead><tr><th>Data</th><th>Tipo</th><th>Descrição</th><th>Tenant</th><th>Valor</th></tr></thead><tbody id="tbSaasFin"></tbody></table></div>
       </div>
     </div>
 
@@ -290,7 +290,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <div class="section" id="s-auditoria">
       <div class="j-card">
         <div class="j-card-head"><div class="j-card-title">LOG GLOBAL DE AUDITORIA</div></div>
-        <div style="overflow-x:auto;"><table class="j-table"><thead><tr><th>Data/Hora</th><th>Tenant</th><th>MÃ³dulo</th><th>UsuÃ¡rio</th><th>AÃ§Ã£o</th></tr></thead><tbody id="tbAudit"></tbody></table></div>
+        <div style="overflow-x:auto;"><table class="j-table"><thead><tr><th>Data/Hora</th><th>Tenant</th><th>Módulo</th><th>Usuário</th><th>Ação</th></tr></thead><tbody id="tbAudit"></tbody></table></div>
       </div>
     </div>
 
@@ -303,7 +303,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 <div class="modal">
   <div class="modal-head">
     <div class="modal-title" id="modalTenantTitle">NOVA OFICINA (TENANT)</div>
-    <button class="modal-close" onclick="fecharModal('modalTenant')">âœ•</button>
+    <button class="modal-close" onclick="fecharModal('modalTenant')">✕</button>
   </div>
   <div class="modal-body">
     <input type="hidden" id="tId">
@@ -311,10 +311,10 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <div class="form-group"><label class="j-label">Nome Fantasia</label><input class="j-input" id="tNome" placeholder="Oficina Silva Ltda."></div>
       <div class="form-group"><label class="j-label">Nicho Principal</label>
         <select class="j-select" id="tNicho">
-          <option value="carros">ðŸš— Oficina de Carros</option>
-          <option value="motos">ðŸï¸ Oficina de Motos</option>
-          <option value="bicicletas">ðŸš² Bicicletaria</option>
-          <option value="multi">ðŸ”§ Multi (Carros+Motos)</option>
+          <option value="carros">🚗 Oficina de Carros</option>
+          <option value="motos">🏍️ Oficina de Motos</option>
+          <option value="bicicletas">🚲 Bicicletaria</option>
+          <option value="multi">🔧 Multi (Carros+Motos)</option>
         </select>
       </div>
     </div>
@@ -357,8 +357,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <div style="background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.22);border-radius:6px;padding:12px;margin:10px 0;">
       <div style="font-family:var(--fm);font-size:0.72rem;color:var(--cyan);letter-spacing:1px;font-weight:800;margin-bottom:10px;">ASSINATURA DIGITALIZADA DA OFICINA</div>
       <div class="form-row c3">
-        <div class="form-group"><label class="j-label">Nome do assinante</label><input class="j-input" id="tAssinaturaNome" placeholder="Ex.: FÃ¡bio ValÃªncio"></div>
-        <div class="form-group"><label class="j-label">Cargo / funÃ§Ã£o</label><input class="j-input" id="tAssinaturaCargo" placeholder="Ex.: ResponsÃ¡vel tÃ©cnico"></div>
+        <div class="form-group"><label class="j-label">Nome do assinante</label><input class="j-input" id="tAssinaturaNome" placeholder="Ex.: Fábio Valêncio"></div>
+        <div class="form-group"><label class="j-label">Cargo / função</label><input class="j-input" id="tAssinaturaCargo" placeholder="Ex.: Responsável técnico"></div>
         <div class="form-group"><label class="j-label">CPF / CNPJ / documento</label><input class="j-input" id="tAssinaturaDocumento" placeholder="Opcional"></div>
       </div>
       <div class="form-row c2">
@@ -366,10 +366,10 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
         <div class="form-group"><label class="j-label">Enviar assinatura para Cloudinary</label><input class="j-input" type="file" id="tAssinaturaFile" accept="image/*,.png,.jpg,.jpeg,.webp"></div>
       </div>
       <button type="button" class="btn-ghost" onclick="uploadAssinaturaTenant()" style="width:100%;margin-top:6px;">ENVIAR ASSINATURA PARA CLOUDINARY</button>
-      <div style="font-family:var(--fm);font-size:0.62rem;color:var(--muted2);margin-top:8px;line-height:1.45;">A assinatura Ã© por oficina. Depois do upload, clique em SALVAR TENANT para gravar a URL no Firestore.</div>
+      <div style="font-family:var(--fm);font-size:0.62rem;color:var(--muted2);margin-top:8px;line-height:1.45;">A assinatura é por oficina. Depois do upload, clique em SALVAR TENANT para gravar a URL no Firestore.</div>
     </div>
     <div class="form-row c2">
-      <div class="form-group"><label class="j-label">UsuÃ¡rio de Login (Admin)</label><input class="j-input" id="tUser" placeholder="oficina.silva" style="font-family:var(--fm);"></div>
+      <div class="form-group"><label class="j-label">Usuário de Login (Admin)</label><input class="j-input" id="tUser" placeholder="oficina.silva" style="font-family:var(--fm);"></div>
       <div class="form-group"><label class="j-label">Senha do Admin</label><input class="j-input" id="tSenha" placeholder="senhasegura123"></div>
     </div>
     <div class="form-group">
@@ -378,21 +378,21 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <div style="font-family:var(--fm);font-size:0.62rem;color:var(--muted2);margin-top:6px;line-height:1.45;">Um e-mail por linha, virgula ou ponto e virgula. Todos entram como admin da oficina usando a senha admin acima. O login antigo em Usuario continua funcionando.</div>
     </div>
     <div class="form-row c2">
-      <div class="form-group"><label class="j-label">WhatsApp do ProprietÃ¡rio</label><input class="j-input" id="tWpp" placeholder="17999999999"></div>
+      <div class="form-group"><label class="j-label">WhatsApp do Proprietário</label><input class="j-input" id="tWpp" placeholder="17999999999"></div>
       <div class="form-group"><label class="j-label">Plano Contratado</label>
         <select class="j-select" id="tPlano">
-          <option value="trial">Trial (7 dias grÃ¡tis)</option>
-          <option value="starter">Starter â€” R$ 97/mÃªs</option>
-          <option value="pro">Pro â€” R$ 197/mÃªs</option>
-          <option value="enterprise">Enterprise â€” R$ 397/mÃªs</option>
+          <option value="trial">Trial (7 dias grátis)</option>
+          <option value="starter">Starter — R$ 97/mês</option>
+          <option value="pro">Pro — R$ 197/mês</option>
+          <option value="enterprise">Enterprise — R$ 397/mês</option>
         </select>
       </div>
     </div>
     <div class="form-row c2">
-      <div class="form-group"><label class="j-label">Status da LicenÃ§a</label>
+      <div class="form-group"><label class="j-label">Status da Licença</label>
         <select class="j-select" id="tStatus"><option value="Online">Online (Ativo)</option><option value="Trial">Trial</option><option value="Bloqueado">Bloqueado</option></select>
       </div>
-      <div class="form-group"><label class="j-label">CÃ©rebro JSON da oficina (opcional)</label><input class="j-input" type="file" id="tBrainJsonFile" accept=".json,application/json" onchange="importarCerebroTenantArquivo(this)"></div>
+      <div class="form-group"><label class="j-label">Cérebro JSON da oficina (opcional)</label><input class="j-input" type="file" id="tBrainJsonFile" accept=".json,application/json" onchange="importarCerebroTenantArquivo(this)"></div>
     </div>
     <div class="form-row c2">
       <div class="form-group"><label class="j-label">Cloudinary Cloud Name</label><input class="j-input" id="tCloudName" placeholder="dmuvm1o6m"></div>
@@ -427,7 +427,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
         <div class="form-group"><label class="j-label">Regras internas de resposta</label><textarea class="j-input" id="tBrainRegras" rows="4" placeholder="Como responder cliente/equipe/Jarvis, garantias, padroes de compra..." style="resize:vertical;min-height:96px;"></textarea></div>
       </div>
       <div class="form-group"><label class="j-label">Procedimentos tecnicos</label><textarea class="j-input" id="tBrainProcedimentos" rows="3" placeholder="Procedimentos e checklists internos usados pela oficina..." style="resize:vertical;min-height:80px;"></textarea></div>
-      <div class="form-group"><label class="j-label">JSON completo do cÃ©rebro privado</label><textarea class="j-input" id="tBrainJsonRaw" rows="5" placeholder='{"versao":1,"escopo":"tenant","comportamento":{"tom":"direto","permitirPiadas":false},"conhecimento":[]}' style="resize:vertical;min-height:110px;font-family:var(--fm);"></textarea></div>
+      <div class="form-group"><label class="j-label">JSON completo do cérebro privado</label><textarea class="j-input" id="tBrainJsonRaw" rows="5" placeholder='{"versao":1,"escopo":"tenant","comportamento":{"tom":"direto","permitirPiadas":false},"conhecimento":[]}' style="resize:vertical;min-height:110px;font-family:var(--fm);"></textarea></div>
       <div class="form-row c2">
         <button class="btn-ghost" type="button" onclick="gerarModeloCerebroTenant()">GERAR MODELO JSON</button>
         <button class="btn-ghost" type="button" onclick="validarCerebroTenant()">VALIDAR JSON DO TENANT</button>
@@ -444,24 +444,24 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <div class="form-group"><label class="j-label">Observacoes de documento</label><textarea class="j-input" id="tTplObservacoes" rows="2" placeholder="Rodape, validade, textos legais e regras de timbrado..." style="resize:vertical;min-height:64px;"></textarea></div>
     </div>
     <div class="form-group">
-      <label class="j-label" style="margin-bottom:8px;">MÃ³dulos Habilitados</label>
+      <label class="j-label" style="margin-bottom:8px;">Módulos Habilitados</label>
       <div class="mod-checks">
-        <label class="mod-check"><input type="checkbox" id="mOS" value="os"> ðŸ“‹ O.S. / Kanban</label>
-        <label class="mod-check"><input type="checkbox" id="mCrm" value="crm"> ðŸ‘¥ CRM / Clientes</label>
-        <label class="mod-check"><input type="checkbox" id="mEst" value="estoque"> ðŸ“¦ Estoque</label>
-        <label class="mod-check"><input type="checkbox" id="mFin" value="financeiro"> ðŸ’° Financeiro / DRE</label>
-        <label class="mod-check"><input type="checkbox" id="mIA" value="ia"> ðŸ¤– IA / CÃ©rebro</label>
-        <label class="mod-check"><input type="checkbox" id="mChat" value="chat"> ðŸ’¬ Chat CRM</label>
-        <label class="mod-check"><input type="checkbox" id="mAgd" value="agenda"> ðŸ“… Agenda</label>
-        <label class="mod-check"><input type="checkbox" id="mRH" value="rh"> ðŸ‘· Equipe / RH</label>
-        <label class="mod-check"><input type="checkbox" id="mComissoes" value="comissoes"> ðŸ’¸ Ver ComissÃµes</label>
-        <label class="mod-check"><input type="checkbox" id="mAutoPecas" value="autoPecas"> ðŸª AutopeÃ§as / BalcÃ£o</label>
-        <label class="mod-check"><input type="checkbox" id="mVendaTerceiros" value="vendaTerceiros"> ðŸ¤ Venda para terceiros</label>
-        <label class="mod-check"><input type="checkbox" id="mVarejo" value="varejo"> ðŸ›’ Varejo</label>
-        <label class="mod-check"><input type="checkbox" id="mAtacado" value="atacado"> ðŸ“¦ Atacado</label>
-        <label class="mod-check"><input type="checkbox" id="mComissaoVendas" value="comissaoVendas"> ðŸ’¸ ComissÃ£o sobre vendas</label>
-        <label class="mod-check"><input type="checkbox" id="mTabelaTempa" value="tabelaTempa" checked> ðŸ“– Tabela TempÃ¡ria SINDIREPA</label>
-        <label class="mod-check"><input type="checkbox" id="mCilia" value="cilia" checked> ðŸ”Ž Pesquisa CÃ­lia API</label>
+        <label class="mod-check"><input type="checkbox" id="mOS" value="os"> 📋 O.S. / Kanban</label>
+        <label class="mod-check"><input type="checkbox" id="mCrm" value="crm"> 👥 CRM / Clientes</label>
+        <label class="mod-check"><input type="checkbox" id="mEst" value="estoque"> 📦 Estoque</label>
+        <label class="mod-check"><input type="checkbox" id="mFin" value="financeiro"> 💰 Financeiro / DRE</label>
+        <label class="mod-check"><input type="checkbox" id="mIA" value="ia"> 🤖 IA / Cérebro</label>
+        <label class="mod-check"><input type="checkbox" id="mChat" value="chat"> 💬 Chat CRM</label>
+        <label class="mod-check"><input type="checkbox" id="mAgd" value="agenda"> 📅 Agenda</label>
+        <label class="mod-check"><input type="checkbox" id="mRH" value="rh"> 👷 Equipe / RH</label>
+        <label class="mod-check"><input type="checkbox" id="mComissoes" value="comissoes"> 💸 Ver Comissões</label>
+        <label class="mod-check"><input type="checkbox" id="mAutoPecas" value="autoPecas"> 🏪 Autopeças / Balcão</label>
+        <label class="mod-check"><input type="checkbox" id="mVendaTerceiros" value="vendaTerceiros"> 🤝 Venda para terceiros</label>
+        <label class="mod-check"><input type="checkbox" id="mVarejo" value="varejo"> 🛒 Varejo</label>
+        <label class="mod-check"><input type="checkbox" id="mAtacado" value="atacado"> 📦 Atacado</label>
+        <label class="mod-check"><input type="checkbox" id="mComissaoVendas" value="comissaoVendas"> 💸 Comissão sobre vendas</label>
+        <label class="mod-check"><input type="checkbox" id="mTabelaTempa" value="tabelaTempa" checked> 📖 Tabela Tempária SINDIREPA</label>
+        <label class="mod-check"><input type="checkbox" id="mCilia" value="cilia" checked> 🔎 Pesquisa Cília API</label>
         <label class="mod-check"><input type="checkbox" id="mOrcamentoAutomatizado" value="orcamentoAutomatizado" checked> Orcamento automatizado por regras</label>
         <label class="mod-check"><input type="checkbox" id="mCotacao" value="cotacao" checked> Cotacao de pecas / fornecedores</label>
         <label class="mod-check"><input type="checkbox" id="mClienteOficial" value="clienteOficial" checked> Cliente Oficial / orgao publico</label>
@@ -474,7 +474,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
         <label class="mod-check"><input type="checkbox" id="mWhatsappBot" value="whatsappBot"> Bot WhatsApp modular</label>
       </div>
       <div id="modDependenciasAviso" style="margin-top:10px;padding:10px;border:1px solid rgba(255,184,0,.35);background:rgba(255,184,0,.08);color:var(--warn);font-family:var(--fm);font-size:.68rem;line-height:1.45;">
-        DependÃªncias comerciais: NF/XML pode alimentar estoque e financeiro; estoque alimenta O.S.; equipe e clienteOficial dependem de O.S.; assinatura alimenta PDF/XLSX.
+        Dependências comerciais: NF/XML pode alimentar estoque e financeiro; estoque alimenta O.S.; equipe e clienteOficial dependem de O.S.; assinatura alimenta PDF/XLSX.
       </div>
     </div>
   </div>
@@ -488,13 +488,13 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 <!-- MODAL SAAS FIN -->
 <div class="overlay" id="modalSaasFin">
 <div class="modal" style="max-width:460px;">
-  <div class="modal-head"><div class="modal-title">LANÃ‡AMENTO SaaS</div><button class="modal-close" onclick="fecharModal('modalSaasFin')">âœ•</button></div>
+  <div class="modal-head"><div class="modal-title">LANÇAMENTO SaaS</div><button class="modal-close" onclick="fecharModal('modalSaasFin')">✕</button></div>
   <div class="modal-body">
     <div class="form-row c2">
-      <div class="form-group"><label class="j-label">Tipo</label><select class="j-select" id="sfTipo"><option value="Entrada">ðŸ’° Receita</option><option value="SaÃ­da">ðŸ’¸ Despesa</option></select></div>
+      <div class="form-group"><label class="j-label">Tipo</label><select class="j-select" id="sfTipo"><option value="Entrada">💰 Receita</option><option value="Saída">💸 Despesa</option></select></div>
       <div class="form-group"><label class="j-label">Valor (R$)</label><input type="number" step="0.01" class="j-input" id="sfValor" placeholder="0,00"></div>
     </div>
-    <div class="form-group"><label class="j-label">DescriÃ§Ã£o</label><input class="j-input" id="sfDesc" placeholder="Ex: Mensalidade Pro â€” Oficina Silva"></div>
+    <div class="form-group"><label class="j-label">Descrição</label><input class="j-input" id="sfDesc" placeholder="Ex: Mensalidade Pro — Oficina Silva"></div>
     <div class="form-row c2">
       <div class="form-group"><label class="j-label">Tenant</label><select class="j-select" id="sfTenant"><option value="">Avulso</option></select></div>
       <div class="form-group"><label class="j-label">Data</label><input type="date" class="j-input" id="sfData"></div>
@@ -504,7 +504,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <div class="form-group"><label class="j-label">% Comissao SaaS</label><input type="number" step="0.1" class="j-input" id="sfComissaoPct" placeholder="0"></div>
     </div>
   </div>
-  <div class="modal-foot"><button class="btn-ghost" onclick="fecharModal('modalSaasFin')">CANCELAR</button><button class="btn-primary" onclick="salvarSaasFin()">LANÃ‡AR</button></div>
+  <div class="modal-foot"><button class="btn-ghost" onclick="fecharModal('modalSaasFin')">CANCELAR</button><button class="btn-primary" onclick="salvarSaasFin()">LANÇAR</button></div>
 </div>
 </div>
 
@@ -515,18 +515,18 @@ if(!firebase.apps.length) firebase.initializeApp(FB);
 const db=firebase.firestore();
 
 // ============================================================
-// AUTH SUPERADMIN â€” tripla camada de seguranÃ§a
+// AUTH SUPERADMIN — tripla camada de segurança
 // ============================================================
 
 // Credenciais Firebase Auth (email real da conta)
 const MASTER_EMAIL = 'tsvalencio@gmail.com';
 const MASTER_UID   = 'H347zQ8bUccyjBeFzQQEJQdtDKy2';
 
-// Credenciais locais de emergÃªncia (quando Firebase Auth nÃ£o estÃ¡ configurado)
+// Credenciais locais de emergência (quando Firebase Auth não está configurado)
 const MASTER_LOCAL = [
   { u: 'thiaguinho', p: 'master2026' },
   { u: 'admin',      p: 'jarvis@2026' },
-  { u: MASTER_EMAIL, p: null } // preenchido em runtime sÃ³ pra referÃªncia de email
+  { u: MASTER_EMAIL, p: null } // preenchido em runtime só pra referência de email
 ];
 
 let allTenants=[], allSaasFin=[], allAudit=[];
@@ -553,15 +553,15 @@ async function fazerLogin() {
   errEl.style.display = 'none';
 
   if (!input || !pass) {
-    errEl.innerText = 'âš  Preencha o usuÃ¡rio e a senha.';
+    errEl.innerText = '⚠ Preencha o usuário e a senha.';
     errEl.style.display = 'block';
     return;
   }
 
   btn.disabled = true;
-  btn.innerText = 'â³ AUTENTICANDO...';
+  btn.innerText = '⏳ AUTENTICANDO...';
 
-  // â”€â”€â”€ CAMADA 1: credenciais locais (thiaguinho/admin) â”€â”€â”€â”€â”€â”€
+  // ─── CAMADA 1: credenciais locais (thiaguinho/admin) ──────
   const localOk = MASTER_LOCAL.some(c => c.u === input && c.p !== null && c.p === pass);
   if (localOk) {
     try{ localStorage.setItem('thiaguinho_superadmin_ultimo_login', input); }catch(e){}
@@ -570,14 +570,14 @@ async function fazerLogin() {
     return;
   }
 
-  // â”€â”€â”€ CAMADA 2: Firebase Auth email/senha â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-  // SÃ³ tenta se o input parecer um email
+  // ─── CAMADA 2: Firebase Auth email/senha ─────────────────
+  // Só tenta se o input parecer um email
   const isEmail = input.includes('@');
   if (isEmail) {
     try {
       const res  = await firebase.auth().signInWithEmailAndPassword(input, pass);
       const user = res.user;
-      // Valida que Ã© o dono certo (email OU uid)
+      // Valida que é o dono certo (email OU uid)
       if (user.email === MASTER_EMAIL || user.uid === MASTER_UID) {
         try{ localStorage.setItem('thiaguinho_superadmin_ultimo_login', input); }catch(e){}
         _abrirPainel();
@@ -585,29 +585,29 @@ async function fazerLogin() {
         return;
       } else {
         await firebase.auth().signOut();
-        _mostrarErro('Acesso negado â€” conta sem permissÃ£o de superadmin.', btn, orig);
+        _mostrarErro('Acesso negado — conta sem permissão de superadmin.', btn, orig);
         return;
       }
     } catch (e) {
-      // Se Auth nÃ£o estÃ¡ habilitado ou usuÃ¡rio nÃ£o existe via email/senha,
-      // mostra erro especÃ­fico e orientativo
+      // Se Auth não está habilitado ou usuário não existe via email/senha,
+      // mostra erro específico e orientativo
       const msgs = {
-        'auth/user-not-found':          'Email nÃ£o cadastrado no Firebase Auth. Use o usuÃ¡rio "thiaguinho".',
+        'auth/user-not-found':          'Email não cadastrado no Firebase Auth. Use o usuário "thiaguinho".',
         'auth/wrong-password':          'Senha incorreta.',
-        'auth/invalid-email':           'Email invÃ¡lido.',
+        'auth/invalid-email':           'Email inválido.',
         'auth/too-many-requests':       'Muitas tentativas. Aguarde alguns minutos.',
-        'auth/operation-not-allowed':   'Login por email nÃ£o habilitado no Firebase. Use o usuÃ¡rio "thiaguinho".',
-        'auth/network-request-failed':  'Sem conexÃ£o. Tente o usuÃ¡rio "thiaguinho" como alternativa.',
-        'auth/configuration-not-found': 'Firebase Auth nÃ£o configurado neste projeto. Use o usuÃ¡rio "thiaguinho".',
-        'auth/api-key-not-valid':       'Chave de API invÃ¡lida.',
+        'auth/operation-not-allowed':   'Login por email não habilitado no Firebase. Use o usuário "thiaguinho".',
+        'auth/network-request-failed':  'Sem conexão. Tente o usuário "thiaguinho" como alternativa.',
+        'auth/configuration-not-found': 'Firebase Auth não configurado neste projeto. Use o usuário "thiaguinho".',
+        'auth/api-key-not-valid':       'Chave de API inválida.',
       };
       _mostrarErro(msgs[e.code] || ('Erro Firebase: ' + e.message), btn, orig);
       return;
     }
   }
 
-  // â”€â”€â”€ CAMADA 3: nenhuma camada funcionou â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-  _mostrarErro('UsuÃ¡rio ou senha incorretos.', btn, orig);
+  // ─── CAMADA 3: nenhuma camada funcionou ───────────────────
+  _mostrarErro('Usuário ou senha incorretos.', btn, orig);
 }
 
 function _abrirPainel() {
@@ -615,12 +615,12 @@ function _abrirPainel() {
   $('mainPanel').style.display = 'flex';
   sessionStorage.setItem('sa_auth', '1');
   inicializar();
-  toast('âœ“ ACESSO MASTER CONCEDIDO');
+  toast('✓ ACESSO MASTER CONCEDIDO');
 }
 
 function _mostrarErro(msg, btn, orig) {
   const errEl = $('loginErr');
-  errEl.innerText = 'âš  ' + msg;
+  errEl.innerText = '⚠ ' + msg;
   errEl.style.display = 'block';
   if (btn) { btn.disabled = false; btn.innerText = orig; }
   setTimeout(() => errEl.style.display = 'none', 6000);
@@ -632,7 +632,7 @@ async function sair() {
   location.reload();
 }
 
-// NAVEGAÃ‡ÃƒO
+// NAVEGAÇÃO
 function ir(id,el){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
@@ -681,13 +681,13 @@ function renderDashboard(){
   // Tabela resumo
   $('dashTenants').innerHTML=allTenants.slice(0,8).map(t=>{
     const stCls=t.status==='Online'?'pill-green':t.status==='Trial'?'pill-warn':'pill-danger';
-    return `<tr><td><strong>${t.nomeFantasia||'-'}</strong></td><td><span class="pill pill-purple">${t.nicho||'-'}</span></td><td style="font-family:var(--fm);font-size:0.72rem;color:var(--cyan)">${t.usuario||'-'}</td><td><span class="pill ${stCls}">${t.status||'?'}</span></td><td style="font-family:var(--fm);font-size:0.72rem">${t.plano||'trial'}</td><td style="text-align:center">${t.modulos?.ia!==false?'âœ…':'âŒ'}</td></tr>`;
+    return `<tr><td><strong>${t.nomeFantasia||'-'}</strong></td><td><span class="pill pill-purple">${t.nicho||'-'}</span></td><td style="font-family:var(--fm);font-size:0.72rem;color:var(--cyan)">${t.usuario||'-'}</td><td><span class="pill ${stCls}">${t.status||'?'}</span></td><td style="font-family:var(--fm);font-size:0.72rem">${t.plano||'trial'}</td><td style="text-align:center"><span class="pill ${t.modulos?.ia!==false?'pill-green':'pill-danger'}">${t.modulos?.ia!==false?'Ativa':'Bloqueada'}</span></td></tr>`;
   }).join('')||'<tr><td colspan="6" style="text-align:center;padding:20px;color:var(--muted);font-family:var(--fm);font-size:0.75rem">Nenhum tenant cadastrado</td></tr>';
 }
 
 function renderTenants(filter=''){
   const list=filter?allTenants.filter(t=>(t.nomeFantasia||'').toLowerCase().includes(filter.toLowerCase())):allTenants;
-  const mods_map={os:'O.S.',crm:'CRM',estoque:'Est.',financeiro:'Fin.',ia:'IA',chat:'Chat',agenda:'Agd.',rh:'RH',comissoes:'Comiss.',autoPecas:'AutopeÃ§as',vendaTerceiros:'Terceiros',varejo:'Varejo',atacado:'Atacado',comissaoVendas:'Com.Vendas',tabelaTempa:'Tempa',orcamentoAutomatizado:'Orc.Auto'};
+  const mods_map={os:'O.S.',crm:'CRM',estoque:'Est.',financeiro:'Fin.',ia:'IA',chat:'Chat',agenda:'Agd.',rh:'RH',comissoes:'Comiss.',autoPecas:'Autopeças',vendaTerceiros:'Terceiros',varejo:'Varejo',atacado:'Atacado',comissaoVendas:'Com.Vendas',tabelaTempa:'Tempa',orcamentoAutomatizado:'Orc.Auto'};
   $('tbTenants').innerHTML=list.map(t=>{
     const stCls=t.status==='Online'?'pill-green':t.status==='Trial'?'pill-warn':'pill-danger';
     const mods=Object.entries(t.modulos||{}).filter(([,v])=>v).map(([k])=>`<span class="pill pill-purple" style="font-size:0.5rem;padding:1px 6px">${mods_map[k]||k}</span>`).join(' ');
@@ -699,9 +699,9 @@ function renderTenants(filter=''){
       <td><span class="pill ${stCls}">${t.status||'?'}</span></td>
       <td style="max-width:150px">${mods||'<span style="color:var(--muted);font-size:0.62rem">nenhum</span>'}</td>
       <td style="white-space:nowrap">
-        <button class="btn-ghost" style="margin-right:4px" onclick="prepTenant('edit','${t.id}');abrirModal('modalTenant')">âœ</button>
-        <button class="btn-warn" style="margin-right:4px" onclick="toggleStatus('${t.id}','${t.status}')">${t.status==='Online'?'ðŸ”’':'ðŸ”“'}</button>
-        <button class="btn-danger" onclick="deletarTenant('${t.id}','${t.nomeFantasia}')">ðŸ—‘</button>
+        <button class="btn-ghost" style="margin-right:4px" onclick="prepTenant('edit','${t.id}');abrirModal('modalTenant')">✏</button>
+        <button class="btn-warn" style="margin-right:4px" onclick="toggleStatus('${t.id}','${t.status}')">${t.status==='Online'?'🔒':'🔓'}</button>
+        <button class="btn-danger" onclick="deletarTenant('${t.id}','${t.nomeFantasia}')">🗑</button>
       </td>
     </tr>`;
   }).join('')||'<tr><td colspan="7" style="text-align:center;padding:20px;color:var(--muted);font-family:var(--fm);font-size:0.75rem">Nenhum tenant</td></tr>';
@@ -769,7 +769,7 @@ function prepTenant(mode,id=null){
   $('tStatus').value='Online'; $('tNicho').value='carros'; $('tPlano').value='trial';
   $('tCloudName').value='dmuvm1o6m'; $('tCloudPreset').value='evolution';
   $('modalTenantTitle').innerText='NOVA OFICINA (TENANT)';
-  // Habilita mÃ³dulos padrÃ£o
+  // Habilita módulos padrão
   ['mOS','mCrm','mEst','mFin','mAutoPecas','mVendaTerceiros','mVarejo','mComissaoVendas','mTabelaTempa','mCilia','mOrcamentoAutomatizado','mCotacao','mClienteOficial','mAssinatura','mPDF','mXLSX','mAuditoria','mRelatorios','mExportacoes'].forEach(f=>{if($(f))$(f).checked=true;});
   if(mode==='edit'&&id){
     const t=allTenants.find(x=>x.id===id); if(!t) return;
@@ -795,7 +795,7 @@ function prepTenant(mode,id=null){
     if($('tLogoUrl')) $('tLogoUrl').value=t.logoUrl||t.logotipoUrl||t.logo||t.logotipo||t.logoOficinaUrl||t.timbradoLogoUrl||'';
     const ass=t.assinatura||{};
     if($('tAssinaturaNome')) $('tAssinaturaNome').value=ass.nomeResponsavel||ass.nome||t.representante||t.responsavel||'';
-    if($('tAssinaturaCargo')) $('tAssinaturaCargo').value=ass.cargo||ass.funcao||'ResponsÃ¡vel tÃ©cnico';
+    if($('tAssinaturaCargo')) $('tAssinaturaCargo').value=ass.cargo||ass.funcao||'Responsável técnico';
     if($('tAssinaturaDocumento')) $('tAssinaturaDocumento').value=ass.documento||ass.cpfCnpj||'';
     if($('tAssinaturaUrl')) $('tAssinaturaUrl').value=ass.url||ass.assinaturaUrl||ass.imagemUrl||'';
     $('tCloudName').value=t.apiKeys?.cloudName||'dmuvm1o6m';
@@ -861,9 +861,9 @@ async function uploadAssinaturaTenant(){
     fd.append('context','tipo=assinatura_oficina|tenant=' + ($v('tId')||$v('tNome')||'novo'));
     const resp=await fetch(`https://api.cloudinary.com/v1_1/${cloud}/image/upload`,{method:'POST',body:fd});
     const json=await resp.json();
-    if(!resp.ok||!json.secure_url) throw new Error(json.error?.message||'Cloudinary nÃ£o retornou URL');
+    if(!resp.ok||!json.secure_url) throw new Error(json.error?.message||'Cloudinary não retornou URL');
     $('tAssinaturaUrl').value=json.secure_url;
-    toast('âœ“ Assinatura enviada. Agora clique em SALVAR TENANT.','ok');
+    toast('✓ Assinatura enviada. Agora clique em SALVAR TENANT.','ok');
   }catch(e){
     console.error(e);
     toast('Erro ao enviar assinatura: '+e.message,'err');
@@ -932,14 +932,14 @@ function montarSubmodulosComerciais(){
 
 function avisosDependenciasModulos(){
   const avisos=[];
-  if($('mCilia')?.checked && !$('mOS')?.checked) avisos.push('CÃ­lia importa peÃ§as para O.S.; habilite O.S. ou o vÃ­nculo ficarÃ¡ bloqueado.');
-  if($('mEst')?.checked && !$('mFin')?.checked) avisos.push('NF/XML sem Financeiro nÃ£o gera contas a pagar.');
-  if($('mRH')?.checked && !$('mOS')?.checked) avisos.push('Equipe depende de O.S. para execuÃ§Ã£o.');
-  if($('mTabelaTempa')?.checked && !$('mOS')?.checked) avisos.push('TempÃ¡ria depende de O.S. para aplicar TMO.');
+  if($('mCilia')?.checked && !$('mOS')?.checked) avisos.push('Cília importa peças para O.S.; habilite O.S. ou o vínculo ficará bloqueado.');
+  if($('mEst')?.checked && !$('mFin')?.checked) avisos.push('NF/XML sem Financeiro não gera contas a pagar.');
+  if($('mRH')?.checked && !$('mOS')?.checked) avisos.push('Equipe depende de O.S. para execução.');
+  if($('mTabelaTempa')?.checked && !$('mOS')?.checked) avisos.push('Tempária depende de O.S. para aplicar TMO.');
   if($('mOrcamentoAutomatizado')?.checked && !$('mOS')?.checked) avisos.push('Orcamento automatizado depende de O.S.');
-  if($('mAutoPecas')?.checked && !$('mEst')?.checked) avisos.push('AutopeÃ§as precisa de Estoque para baixa e margem por item.');
-  if($('mAutoPecas')?.checked && !$('mFin')?.checked) avisos.push('AutopeÃ§as sem Financeiro registra venda, mas nÃ£o gera caixa/contas a receber.');
-  if($('mComissaoVendas')?.checked && !$('mAutoPecas')?.checked) avisos.push('ComissÃ£o de vendas depende do mÃ³dulo AutopeÃ§as/BalcÃ£o.');
+  if($('mAutoPecas')?.checked && !$('mEst')?.checked) avisos.push('Autopeças precisa de Estoque para baixa e margem por item.');
+  if($('mAutoPecas')?.checked && !$('mFin')?.checked) avisos.push('Autopeças sem Financeiro registra venda, mas não gera caixa/contas a receber.');
+  if($('mComissaoVendas')?.checked && !$('mAutoPecas')?.checked) avisos.push('Comissão de vendas depende do módulo Autopeças/Balcão.');
   if($('mCotacao')?.checked && (!$('mOS')?.checked || !$('mEst')?.checked)) avisos.push('Cotacao de pecas depende de O.S. e Estoque/Fornecedores.');
   if($('mClienteOficial')?.checked && (!$('mOS')?.checked || !$('mCrm')?.checked)) avisos.push('Cliente Oficial depende de O.S. e CRM/Clientes.');
   if($('mPDF')?.checked && !$('mOS')?.checked) avisos.push('PDF depende de O.S.');
@@ -977,7 +977,7 @@ function montarCerebroTenantPayload(){
 async function salvarTenant(){
   let cerebroTenant;
   try{cerebroTenant=montarCerebroTenantPayload();}catch(e){toast(e.message||e,'err');return;}
-  if(!$v('tNome')||!$v('tUser')||!$v('tSenha')){toast('âš  Preencha nome, usuÃ¡rio e senha','warn');return;}
+  if(!$v('tNome')||!$v('tUser')||!$v('tSenha')){toast('⚠ Preencha nome, usuário e senha','warn');return;}
   const firebaseConfig=montarFirebaseOficina();
   const adminEmailsParsed=normalizarEmailsAdminTenant($v('tAdminEmails'));
   if(adminEmailsParsed.invalidos.length){
@@ -1034,7 +1034,7 @@ async function salvarTenant(){
     assinatura:{
       nomeResponsavel:$v('tAssinaturaNome')||$v('tRepresentante')||$v('tResponsavel'),
       nome:$v('tAssinaturaNome')||$v('tRepresentante')||$v('tResponsavel'),
-      cargo:$v('tAssinaturaCargo')||'ResponsÃ¡vel tÃ©cnico',
+      cargo:$v('tAssinaturaCargo')||'Responsável técnico',
       documento:$v('tAssinaturaDocumento'),
       url:$v('tAssinaturaUrl'),
       atualizadoEm:new Date().toISOString()
@@ -1101,31 +1101,31 @@ async function salvarTenant(){
   try{
     if(id){
       await db.collection('oficinas').doc(id).update(payload);
-      // Sincroniza em tenants tambÃ©m
+      // Sincroniza em tenants também
       try{await db.collection('tenants').doc(id).update(payload);}catch(e){}
-      toast('âœ“ TENANT ATUALIZADO');
+      toast('✓ TENANT ATUALIZADO');
     }else{
       payload.criadoEm=new Date().toISOString();
       const ref=await db.collection('oficinas').add(payload);
       await db.collection('tenants').doc(ref.id).set({...payload,oficinasId:ref.id});
-      toast('âœ“ NOVA OFICINA IMPLANTADA! ID: '+ref.id.slice(-6).toUpperCase());
+      toast('✓ NOVA OFICINA IMPLANTADA! ID: '+ref.id.slice(-6).toUpperCase());
     }
     fecharModal('modalTenant');
-  }catch(e){toast('âœ• ERRO: '+e.message,'err');}
+  }catch(e){toast('✕ ERRO: '+e.message,'err');}
 }
 
 async function deletarTenant(id,nome){
-  if(!confirm(`âš  EXPURGAR "${nome}" PERMANENTEMENTE?\n\nTodos os dados serÃ£o removidos.`)) return;
+  if(!confirm(`⚠ EXPURGAR "${nome}" PERMANENTEMENTE?\n\nTodos os dados serão removidos.`)) return;
   await db.collection('oficinas').doc(id).delete();
   try{await db.collection('tenants').doc(id).delete();}catch(e){}
-  toast('âœ“ TENANT REMOVIDO','warn');
+  toast('✓ TENANT REMOVIDO','warn');
 }
 
 async function toggleStatus(id,status){
   const novo=status==='Online'?'Bloqueado':'Online';
   await db.collection('oficinas').doc(id).update({status:novo,updatedAt:new Date().toISOString()});
   try{await db.collection('tenants').doc(id).update({status:novo});}catch(e){}
-  toast(`âœ“ STATUS â†’ ${novo}`);
+  toast(`✓ STATUS → ${novo}`);
 }
 
 // IA LOCAL / CEREBRO JSON
@@ -1230,7 +1230,7 @@ function prepSaasFin(){
   $('sfData').value=new Date().toISOString().split('T')[0];
 }
 async function salvarSaasFin(){
-  if(!$v('sfDesc')||!$v('sfValor')){toast('âš  Preencha descriÃ§Ã£o e valor','warn');return;}
+  if(!$v('sfDesc')||!$v('sfValor')){toast('⚠ Preencha descrição e valor','warn');return;}
   const valor=parseFloat($v('sfValor')||0);
   const pct=parseFloat($v('sfComissaoPct')||0);
   const resp=$v('sfComissaoResp');
@@ -1239,18 +1239,18 @@ async function salvarSaasFin(){
     tenantId:$v('sfTenant')||null,data:$v('sfData'),comissaoResponsavel:resp,comissaoPercentual:pct,comissaoValor:($v('sfTipo')==='Entrada'&&resp&&pct>0)?+(valor*pct/100).toFixed(2):0,createdAt:new Date().toISOString()
   });
   if($v('sfTipo')==='Entrada'&&resp&&pct>0){
-    await db.collection('saas_financeiro').add({tipo:'SaÃ­da',desc:'ComissÃ£o SaaS - '+resp,valor:+(valor*pct/100).toFixed(2),tenantId:$v('sfTenant')||null,data:$v('sfData'),comissaoDe:ref.id,comissaoResponsavel:resp,comissaoPercentual:pct,createdAt:new Date().toISOString()});
+    await db.collection('saas_financeiro').add({tipo:'Saída',desc:'Comissão SaaS - '+resp,valor:+(valor*pct/100).toFixed(2),tenantId:$v('sfTenant')||null,data:$v('sfData'),comissaoDe:ref.id,comissaoResponsavel:resp,comissaoPercentual:pct,createdAt:new Date().toISOString()});
   }
-  toast('âœ“ LANÃ‡AMENTO REGISTRADO'); fecharModal('modalSaasFin');
+  toast('✓ LANÇAMENTO REGISTRADO'); fecharModal('modalSaasFin');
 }
 function renderSaasFin(){
   let rec=0,des=0;
   $('tbSaasFin').innerHTML=allSaasFin.map(f=>{
     if(f.tipo==='Entrada') rec+=f.valor||0; else des+=f.valor||0;
     const t=allTenants.find(x=>x.id===f.tenantId);
-    const com = f.comissaoValor ? `<br><small style="color:var(--warn)">ComissÃ£o: ${f.comissaoResponsavel||'-'} ${moeda(f.comissaoValor)}</small>` : '';
+    const com = f.comissaoValor ? `<br><small style="color:var(--warn)">Comissão: ${f.comissaoResponsavel||'-'} ${moeda(f.comissaoValor)}</small>` : '';
     return `<tr><td style="font-family:var(--fm);font-size:0.72rem;color:var(--muted)">${dtBr(f.data)}</td><td><span class="pill ${f.tipo==='Entrada'?'pill-green':'pill-danger'}">${f.tipo}</span></td><td>${f.desc||'-'}${com}</td><td style="font-size:0.75rem">${t?.nomeFantasia||'Avulso'}</td><td style="font-family:var(--fm);font-weight:700;color:${f.tipo==='Entrada'?'var(--success)':'var(--danger)'}">${moeda(f.valor)}</td></tr>`;
-  }).join('')||'<tr><td colspan="5" style="text-align:center;padding:20px;color:var(--muted);font-family:var(--fm);font-size:0.75rem">Sem lanÃ§amentos</td></tr>';
+  }).join('')||'<tr><td colspan="5" style="text-align:center;padding:20px;color:var(--muted);font-family:var(--fm);font-size:0.75rem">Sem lançamentos</td></tr>';
   $('saasRec').innerText=moeda(rec); $('saasDes').innerText=moeda(des);
   const luc=rec-des; $('saasLuc').innerText=moeda(luc); $('saasLuc').style.color=luc>=0?'var(--cyan)':'var(--danger)';
 }

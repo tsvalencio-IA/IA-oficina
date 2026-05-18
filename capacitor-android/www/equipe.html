@@ -1,16 +1,16 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>(function(){try{var t=localStorage.getItem("thiaguinho_theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);else document.documentElement.setAttribute("data-theme","dark");}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();</script>
 <meta charset="UTF-8">
+<script>(function(){try{var t=localStorage.getItem("thiaguinho_theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);else document.documentElement.setAttribute("data-theme","dark");}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>thIAguinho SaaS â€” Painel da Equipe</title>
-<!-- â•â•â• PWA â•â•â• -->
+<title>thIAguinho SaaS — Painel da Equipe</title>
+<!-- ═══ PWA ═══ -->
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#00D4FF">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="t.h.I.A.g.u.i.n.h.o. MecÃ¢nico">
+<meta name="apple-mobile-web-app-title" content="t.h.I.A.g.u.i.n.h.o. Mecânico">
 <meta name="mobile-web-app-capable" content="yes">
 <script>
 if ('serviceWorker' in navigator) {
@@ -123,7 +123,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .section{display:none;}
 .section.active{display:block;}
 
-/* KPI ROW (mecÃ¢nico) */
+/* KPI ROW (mecânico) */
 .mec-kpis{display:grid;grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));gap:12px;margin-bottom:20px;}
 .mec-kpi{background:var(--surf);border:1px solid var(--border);border-radius:3px;padding:16px;position:relative;overflow:hidden;}
 .mec-kpi::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;}
@@ -171,7 +171,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .form-row.c2{grid-template-columns:1fr 1fr;}
 .form-row.c3{grid-template-columns:1fr 1fr 1fr;}
 
-/* BOTÃ•ES */
+/* BOTÕES */
 .btn-primary{padding:8px 16px;background:var(--cyan);color:#000;border:none;border-radius:2px;font-family:var(--fd);font-size:0.85rem;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;gap:6px;}
 .btn-primary:hover{background:#0099CC;}
 .btn-primary:disabled{opacity:0.5;cursor:not-allowed;}
@@ -182,7 +182,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .btn-danger{padding:6px 12px;background:transparent;border:1px solid rgba(255,59,59,0.3);border-radius:2px;color:var(--danger);font-family:var(--fm);font-size:0.68rem;cursor:pointer;}
 .btn-success{padding:6px 12px;background:transparent;border:1px solid rgba(0,255,136,0.3);border-radius:2px;color:var(--success);font-family:var(--fm);font-size:0.68rem;cursor:pointer;}
 
-/* BOTÃƒO ÃCONE DO CHAT */
+/* BOTÃO ÍCONE DO CHAT */
 .btn-chat-icon{width:40px;height:40px;min-width:40px;background:var(--surf3);border:1px solid var(--border);border-radius:3px;color:var(--cyan);font-size:1.05rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;touch-action:manipulation;user-select:none;-webkit-tap-highlight-color:transparent;}
 .btn-chat-icon:hover{border-color:var(--cyan);background:rgba(0,212,255,0.1);}
 .btn-chat-icon:active{transform:scale(0.96);}
@@ -297,7 +297,7 @@ body.equipe-operacional .mec-financeiro-only{display:none!important;}
   .fab-nova-os{bottom:20px;right:16px;}
   .pneu-slider{height:8px;}
 }
-/* MODAL IA â€” z-index 9999, sempre por cima */
+/* MODAL IA — z-index 9999, sempre por cima */
 .overlay-ia{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:9999;display:none;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);}
 .overlay-ia.open{display:flex;animation:ia-tv-on 0.22s ease;}
 @keyframes ia-tv-on{0%{opacity:0;transform:scale(0.95);}70%{opacity:1;transform:scale(1.01);}100%{opacity:1;transform:scale(1);}}
@@ -365,30 +365,30 @@ body.equipe-page .overlay.open{display:flex!important;}
 </head>
 <body class="equipe-page">
 <div id="toastBox"></div>
-<button class="fab-nova-os" onclick="prepOS('add');abrirModal('modalOS')" title="Nova O.S." aria-label="Nova Ordem de ServiÃ§o">ï¼‹</button>
+<button class="fab-nova-os" onclick="prepOS('add');abrirModal('modalOS')" title="Nova O.S." aria-label="Nova Ordem de Serviço">＋</button>
 
 <div class="topbar">
   <div class="topbar-left">
     <div class="logo">J.A.R.V.I.S</div>
-    <div class="topbar-info">EQUIPE Â· <strong id="tbTenantNome">...</strong></div>
+    <div class="topbar-info">EQUIPE · <strong id="tbTenantNome">...</strong></div>
   </div>
   <div class="topbar-right">
     <div class="user-pill">
       <div class="av" id="topAv">M</div>
       <div>
         <div class="un" id="topNome">...</div>
-        <div class="ur" id="topCargo">MECÃ‚NICO</div>
+        <div class="ur" id="topCargo">MECÂNICO</div>
       </div>
     </div>
-    <button class="btn-sair" onclick="sair()">â» SAIR</button>
+    <button class="btn-sair" onclick="sair()">⏻ SAIR</button>
   </div>
 </div>
 
 <div class="page">
   <div class="tab-bar">
-    <div class="tab active" onclick="irTab('t-kanban',this)">ðŸ”§ PÃTIO / O.S.</div>
-    <div class="tab" onclick="irTab('t-chat',this)">ðŸ’¬ CHAT COM ADMIN <span class="tab-badge d-none" id="chatTabBadge">0</span></div>
-    <div class="tab" onclick="irTab('t-ia',this)">ðŸ¤– thIAguinho</div>
+    <div class="tab active" onclick="irTab('t-kanban',this)">🔧 PÁTIO / O.S.</div>
+    <div class="tab" onclick="irTab('t-chat',this)">💬 CHAT COM ADMIN <span class="tab-badge d-none" id="chatTabBadge">0</span></div>
+    <div class="tab" onclick="irTab('t-ia',this)">🤖 thIAguinho</div>
   </div>
 
   <div class="content">
@@ -400,18 +400,18 @@ body.equipe-page .overlay.open{display:flex!important;}
           <div class="mec-kpi-val" id="kMeusOS">0</div>
         </div>
 <div class="mec-kpi c2">
-          <div class="mec-kpi-label">EM EXECUÃ‡ÃƒO AGORA</div>
+          <div class="mec-kpi-label">EM EXECUÇÃO AGORA</div>
           <div class="mec-kpi-val" id="kEmExec">0</div>
         </div>
 <div class="mec-kpi c3 mec-financeiro-only" id="kpiComissao" style="display:none; border-bottom: 2px solid var(--success); cursor:pointer; transition: background 0.2s;" onclick="abrirModal('modalExtratoFunc')" onmouseover="this.style.background='rgba(0, 255, 136, 0.05)'" onmouseout="this.style.background=''">
           <div style="display:flex; justify-content:space-between; align-items:flex-start;">
             <div>
-              <div class="mec-kpi-label" style="color:var(--success)">COMISSÃ•ES A RECEBER</div>
+              <div class="mec-kpi-label" style="color:var(--success)">COMISSÕES A RECEBER</div>
               <div class="mec-kpi-val" id="kMinhaComissao" style="color:var(--success);">R$ 0,00</div>
             </div>
-            <div style="font-size:1.4rem; opacity:0.6;">ðŸ“„</div>
+            <div style="font-size:1.4rem; opacity:0.6;">📄</div>
           </div>
-          <div style="font-family:var(--fm);font-size:0.55rem;color:var(--muted);margin-top:8px;text-align:right;">CLIQUE PARA VER EXTRATO COMPLETO âž”</div>
+          <div style="font-family:var(--fm);font-size:0.55rem;color:var(--muted);margin-top:8px;text-align:right;">CLIQUE PARA VER EXTRATO COMPLETO ➔</div>
         </div>
       </div>
       <div class="equipe-kanban-toolbar" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:10px;flex-wrap:wrap;">
@@ -424,29 +424,29 @@ body.equipe-page .overlay.open{display:flex!important;}
 
       <div class="kanban-wrap">
         <div class="k-col" style="border-top:2px solid var(--muted2)"><div class="k-col-head"><span class="k-col-label" style="color:var(--muted2)">TRIAGEM</span><span class="k-col-count" id="cnt-Aguardando">0</span></div><div class="k-col-body" id="kb-Aguardando"></div></div>
-        <div class="k-col" style="border-top:2px solid var(--warn)"><div class="k-col-head"><span class="k-col-label" style="color:var(--warn)">ORÃ‡AMENTO</span><span class="k-col-count" id="cnt-Orcamento">0</span></div><div class="k-col-body" id="kb-Orcamento"></div></div>
+        <div class="k-col" style="border-top:2px solid var(--warn)"><div class="k-col-head"><span class="k-col-label" style="color:var(--warn)">ORÇAMENTO</span><span class="k-col-count" id="cnt-Orcamento">0</span></div><div class="k-col-body" id="kb-Orcamento"></div></div>
         <div class="k-col" style="border-top:2px solid var(--cyan)"><div class="k-col-head"><span class="k-col-label" style="color:var(--cyan)">APROVADO</span><span class="k-col-count" id="cnt-Aprovado">0</span></div><div class="k-col-body" id="kb-Aprovado"></div></div>
-        <div class="k-col" style="border-top:2px solid #FF8C00"><div class="k-col-head"><span class="k-col-label" style="color:#FF8C00">EM SERVIÃ‡O</span><span class="k-col-count" id="cnt-Andamento">0</span></div><div class="k-col-body" id="kb-Andamento"></div></div>
+        <div class="k-col" style="border-top:2px solid #FF8C00"><div class="k-col-head"><span class="k-col-label" style="color:#FF8C00">EM SERVIÇO</span><span class="k-col-count" id="cnt-Andamento">0</span></div><div class="k-col-body" id="kb-Andamento"></div></div>
         <div class="k-col" style="border-top:2px solid var(--success)"><div class="k-col-head"><span class="k-col-label" style="color:var(--success)">PRONTO P/ RETIRADA</span><span class="k-col-count" id="cnt-Pronto">0</span></div><div class="k-col-body" id="kb-Pronto"></div></div>
-        <div class="k-col" style="border-top:2px solid #00FF88;opacity:0.85;"><div class="k-col-head"><span class="k-col-label" style="color:#00FF88">âœ“ ENTREGUE</span><span class="k-col-count" id="cnt-Entregue">0</span></div><div class="k-col-body" id="kb-Entregue"></div></div>
+        <div class="k-col" style="border-top:2px solid #00FF88;opacity:0.85;"><div class="k-col-head"><span class="k-col-label" style="color:#00FF88">✓ ENTREGUE</span><span class="k-col-count" id="cnt-Entregue">0</span></div><div class="k-col-body" id="kb-Entregue"></div></div>
       </div>
     </div>
 
     <div class="section" id="t-chat">
       <div class="j-card">
         <div class="j-card-header">
-          <div class="j-card-title">CHAT COM A ADMINISTRAÃ‡ÃƒO</div>
+          <div class="j-card-title">CHAT COM A ADMINISTRAÇÃO</div>
         </div>
         <div class="chat-box">
           <div class="chat-msgs" id="chatMsgs">
             <div style="text-align:center;color:var(--muted);font-family:var(--fm);font-size:0.72rem;padding:30px;">Sem mensagens ainda</div>
           </div>
           <div class="chat-foot">
-            <button type="button" class="btn-chat-icon" id="btnPTTEquipe" onclick="togglePTT('btnPTTEquipe')" title="Gravar Ã¡udio PTT" aria-label="Gravar Ã¡udio">ðŸŽ¤</button>
-            <button type="button" class="btn-chat-icon" id="btnSTTChat" onclick="iniciarVoz('chatInput',this)" title="Voz para texto" aria-label="Voz para texto">ðŸŽ™ï¸</button>
+            <button type="button" class="btn-chat-icon" id="btnPTTEquipe" onclick="togglePTT('btnPTTEquipe')" title="Gravar áudio PTT" aria-label="Gravar áudio">🎤</button>
+            <button type="button" class="btn-chat-icon" id="btnSTTChat" onclick="iniciarVoz('chatInput',this)" title="Voz para texto" aria-label="Voz para texto">🎙️</button>
             <input type="file" id="fileInputEquipe" accept="image/*,audio/*,video/*,application/pdf,.doc,.docx,.xls,.xlsx" style="display:none" onchange="enviarArquivoChat(this)">
-            <button type="button" class="btn-chat-icon" onclick="document.getElementById('fileInputEquipe').click()" title="Anexar foto ou arquivo" aria-label="Anexar arquivo">ðŸ“Ž</button>
-            <input class="j-input" id="chatInput" placeholder="Escreva ou use ðŸŽ™ï¸..." style="flex:1;" autocomplete="off">
+            <button type="button" class="btn-chat-icon" onclick="document.getElementById('fileInputEquipe').click()" title="Anexar foto ou arquivo" aria-label="Anexar arquivo">📎</button>
+            <input class="j-input" id="chatInput" placeholder="Escreva ou use 🎙️..." style="flex:1;" autocomplete="off">
             <button class="btn-primary" onclick="enviarMsg()">ENVIAR</button>
           </div>
         </div>
@@ -456,23 +456,23 @@ body.equipe-page .overlay.open{display:flex!important;}
     <div class="section" id="t-ia">
       <div style="background:var(--surf-1);border:1px solid rgba(167,139,250,0.25);border-radius:var(--r-xl);overflow:hidden; height: 75vh; display:flex; flex-direction:column;">
         <div style="padding:16px 20px;background:linear-gradient(135deg,rgba(167,139,250,0.1),transparent);border-bottom:1px solid rgba(167,139,250,0.2);display:flex;align-items:center;gap:12px;">
-          <div style="font-size:1.5rem;">ðŸ¤–</div>
+          <div style="font-size:1.5rem;">🤖</div>
           <div>
             <div style="font-family:var(--fd);font-size:1.1rem;font-weight:700;color:white;">thIAguinho</div>
-            <div style="font-family:var(--fm);font-size:0.6rem;color:#A78BFA;letter-spacing:1px;">ASSISTENTE DO MECÃ‚NICO</div>
+            <div style="font-family:var(--fm);font-size:0.6rem;color:#A78BFA;letter-spacing:1px;">ASSISTENTE DO MECÂNICO</div>
           </div>
         </div>
         <div style="padding:10px 14px;border-bottom:1px solid rgba(167,139,250,0.1);display:flex;gap:8px;flex-wrap:wrap;background:rgba(0,0,0,0.1);">
-          <span onclick="iaChip('Como testar bobina de igniÃ§Ã£o com multÃ­metro?')" style="padding:6px 12px;background:rgba(167,139,250,0.12);border:1px solid rgba(167,139,250,0.2);border-radius:20px;font-family:var(--fm);font-size:0.7rem;color:#A78BFA;cursor:pointer;">Dica de Falha (DTC)</span>
-          <span onclick="iaChip('Qual a ordem de aperto do cabeÃ§ote EA111?')" style="padding:6px 12px;background:rgba(167,139,250,0.12);border:1px solid rgba(167,139,250,0.2);border-radius:20px;font-family:var(--fm);font-size:0.7rem;color:#A78BFA;cursor:pointer;">Torque EA111</span>
+          <span onclick="iaChip('Como testar bobina de ignição com multímetro?')" style="padding:6px 12px;background:rgba(167,139,250,0.12);border:1px solid rgba(167,139,250,0.2);border-radius:20px;font-family:var(--fm);font-size:0.7rem;color:#A78BFA;cursor:pointer;">Dica de Falha (DTC)</span>
+          <span onclick="iaChip('Qual a ordem de aperto do cabeçote EA111?')" style="padding:6px 12px;background:rgba(167,139,250,0.12);border:1px solid rgba(167,139,250,0.2);border-radius:20px;font-family:var(--fm);font-size:0.7rem;color:#A78BFA;cursor:pointer;">Torque EA111</span>
         </div>
         <div id="iaMsgs" style="flex:1;overflow-y:auto;padding:20px;background:var(--surf-0);display:flex;flex-direction:column;gap:12px;">
-          <div style="text-align:center;color:var(--text-muted);font-size:0.85rem;padding:20px;">PeÃ§a ajuda para diagnÃ³sticos, torques ou manuais.<br><small>(O Assistente foca apenas nos veÃ­culos atualmente no pÃ¡tio)</small></div>
+          <div style="text-align:center;color:var(--text-muted);font-size:0.85rem;padding:20px;">Peça ajuda para diagnósticos, torques ou manuais.<br><small>(O Assistente foca apenas nos veículos atualmente no pátio)</small></div>
         </div>
         <div class="ia-foot-wrap">
-          <button type="button" class="btn-ia-voice" id="btnVozIA" onclick="iniciarVozIA()" title="Falar com a IA">ðŸŽ™ï¸</button>
+          <button type="button" class="btn-ia-voice" id="btnVozIA" onclick="iniciarVozIA()" title="Falar com a IA">🎙️</button>
           <input id="iaInput" class="j-input" placeholder="Pergunte ao thIAguinho..." style="margin:0;border-radius:24px;border-color:rgba(167,139,250,0.25);flex:1;">
-          <button onclick="iaEnviar()" style="background:#A78BFA;border:none;border-radius:50%;width:44px;height:44px;min-width:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;color:#000;flex-shrink:0;">âž¤</button>
+          <button onclick="iaEnviar()" style="background:#A78BFA;border:none;border-radius:50%;width:44px;height:44px;min-width:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;color:#000;flex-shrink:0;">➤</button>
         </div>
       </div>
     </div>
@@ -484,20 +484,20 @@ body.equipe-page .overlay.open{display:flex!important;}
 <div class="modal-ia">
   <div class="modal-ia-head">
     <div style="display:flex;align-items:center;gap:12px;">
-      <div style="width:40px;height:40px;background:rgba(167,139,250,0.15);border:1px solid rgba(167,139,250,0.35);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;">ðŸ¤–</div>
+      <div style="width:40px;height:40px;background:rgba(167,139,250,0.15);border:1px solid rgba(167,139,250,0.35);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;">🤖</div>
       <div>
         <div style="font-family:var(--fd);font-size:1.1rem;font-weight:700;letter-spacing:2px;color:#A78BFA;">thIAguinho</div>
         <div id="iaOSSubtitle" style="font-family:var(--fm);font-size:0.58rem;color:rgba(167,139,250,0.6);letter-spacing:1px;text-transform:uppercase;">ASSISTENTE DA O.S.</div>
       </div>
     </div>
-    <button onclick="fecharModalIA()" style="background:rgba(255,59,59,0.1);border:1px solid rgba(255,59,59,0.25);border-radius:6px;color:var(--danger);cursor:pointer;padding:6px 14px;font-family:var(--fm);font-size:0.65rem;letter-spacing:1px;">âœ• FECHAR</button>
+    <button onclick="fecharModalIA()" style="background:rgba(255,59,59,0.1);border:1px solid rgba(255,59,59,0.25);border-radius:6px;color:var(--danger);cursor:pointer;padding:6px 14px;font-family:var(--fm);font-size:0.65rem;letter-spacing:1px;">✕ FECHAR</button>
   </div>
   <div class="modal-ia-body" id="modalIaOSBody">
-    <div style="text-align:center;color:var(--muted);font-family:var(--fm);font-size:0.78rem;padding:40px 0;">Aguardando anÃ¡lise...</div>
+    <div style="text-align:center;color:var(--muted);font-family:var(--fm);font-size:0.78rem;padding:40px 0;">Aguardando análise...</div>
   </div>
   <div class="modal-ia-foot">
     <button onclick="fecharModalIA()" style="padding:8px 18px;background:transparent;border:1px solid var(--border);border-radius:4px;color:var(--muted2);font-family:var(--fm);font-size:0.7rem;cursor:pointer;">CANCELAR</button>
-    <button id="btnAplicarIaOS" style="padding:8px 22px;background:#A78BFA;border:none;border-radius:4px;color:#000;font-family:var(--fd);font-size:0.9rem;font-weight:700;letter-spacing:1px;cursor:pointer;display:none;" onclick="aplicarSugestaoIA()">âœ“ APLICAR</button>
+    <button id="btnAplicarIaOS" style="padding:8px 22px;background:#A78BFA;border:none;border-radius:4px;color:#000;font-family:var(--fd);font-size:0.9rem;font-weight:700;letter-spacing:1px;cursor:pointer;display:none;" onclick="aplicarSugestaoIA()">✓ APLICAR</button>
   </div>
 </div>
 </div>
@@ -506,40 +506,40 @@ body.equipe-page .overlay.open{display:flex!important;}
 <div class="modal">
   <div class="modal-head">
     <div style="display:flex;flex-direction:column;gap:4px;">
-      <div class="modal-title">FICHA TÃ‰CNICA O.S.</div>
+      <div class="modal-title">FICHA TÉCNICA O.S.</div>
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
         <span class="pill pill-cyan" id="osIdBadge" style="font-size:0.68rem;letter-spacing:2px;">NOVA</span>
         <span id="osPlacanHeader" style="display:none;font-family:var(--fm);font-size:0.85rem;font-weight:700;letter-spacing:3px;color:var(--warn);background:rgba(255,184,0,0.1);border:1px solid rgba(255,184,0,0.3);border-radius:3px;padding:2px 10px;"></span>
         <span id="osClienteHeader" style="font-family:var(--fm);font-size:0.65rem;color:var(--muted2);"></span>
       </div>
     </div>
-    <button class="modal-close" onclick="fecharModal('modalOS')">âœ•</button>
+    <button class="modal-close" onclick="fecharModal('modalOS')">✕</button>
   </div>
   <div id="bannerHistVeiculo" style="display:none;padding:10px 20px;background:rgba(255,184,0,0.06);border-bottom:1px solid rgba(255,184,0,0.2);">
-    <div style="font-family:var(--fm);font-size:0.58rem;color:var(--warn);letter-spacing:1px;margin-bottom:5px;">âš  HISTÃ“RICO DESTE VEÃCULO NA OFICINA</div>
+    <div style="font-family:var(--fm);font-size:0.58rem;color:var(--warn);letter-spacing:1px;margin-bottom:5px;">⚠ HISTÓRICO DESTE VEÍCULO NA OFICINA</div>
     <div id="bannerHistContent" style="font-size:0.78rem;color:var(--text);line-height:1.6;"></div>
   </div>
   <div class="modal-tabs">
-    <div class="mtab active" onclick="swTab(this,'tp1','tp2','tp3')">ORÃ‡AMENTO</div>
+    <div class="mtab active" onclick="swTab(this,'tp1','tp2','tp3')">ORÇAMENTO</div>
     <div class="mtab" onclick="swTab(this,'tp2','tp1','tp3')">PROVAS & CHECKLIST</div>
     <div class="mtab" onclick="swTab(this,'tp3','tp1','tp2')">TIMELINE</div>
   </div>
 
   <div class="tab-pane active" id="tp1">
     <div class="form-row c2">
-      <div class="form-group"><label class="j-label">Tipo de VeÃ­culo</label>
+      <div class="form-group"><label class="j-label">Tipo de Veículo</label>
         <select class="j-select" id="osTipo" onchange="filtrarVeics()">
-          <option value="carro">ðŸš— Carro</option><option value="moto">ðŸï¸ Moto</option><option value="bicicleta">ðŸš² Bicicleta</option>
+          <option value="carro">🚗 Carro</option><option value="moto">🏍️ Moto</option><option value="bicicleta">🚲 Bicicleta</option>
         </select>
       </div>
       <div class="form-group"><label class="j-label">Status</label>
         <select class="j-select" id="osStatus" onchange="window._validarStatusMecanico(this)">
           <option value="Aguardando">Triagem</option>
-          <option value="Orcamento">OrÃ§amento</option>
+          <option value="Orcamento">Orçamento</option>
           <option value="Aprovado">Aprovado</option>
-          <option value="Andamento">Em ServiÃ§o</option>
-          <option value="Pronto">âœ“ Pronto p/ Retirada (mecÃ¢nico finaliza aqui)</option>
-          <option value="Entregue" data-restrito="gestor">ðŸ”’ Entregue (somente gestor/caixa)</option>
+          <option value="Andamento">Em Serviço</option>
+          <option value="Pronto">✓ Pronto p/ Retirada (mecânico finaliza aqui)</option>
+          <option value="Entregue" data-restrito="gestor">🔒 Entregue (somente gestor/caixa)</option>
         </select>
         <div id="osStatusAviso" style="font-family:var(--fm);font-size:0.6rem;color:var(--warn);margin-top:4px;display:none;letter-spacing:0.5px;"></div>
       </div>
@@ -548,7 +548,7 @@ body.equipe-page .overlay.open{display:flex!important;}
       <div class="form-group"><label class="j-label">Cliente</label>
         <select class="j-select" id="osCliente" onchange="filtrarVeics()"></select>
       </div>
-      <div class="form-group"><label class="j-label">VeÃ­culo</label>
+      <div class="form-group"><label class="j-label">Veículo</label>
         <select class="j-select" id="osVeiculo"></select>
       </div>
     </div>
@@ -563,26 +563,26 @@ body.equipe-page .overlay.open{display:flex!important;}
     <div class="form-group"><label class="j-label">Defeito / Problema Relatado</label>
       <div class="field-voice-wrap has-textarea">
         <textarea class="j-textarea" id="osDesc" rows="3" placeholder="Descreva o problema..."></textarea>
-        <button type="button" class="btn-voice" onclick="iniciarVoz('osDesc',this)" title="Falar para preencher">ðŸŽ™ï¸</button>
+        <button type="button" class="btn-voice" onclick="iniciarVoz('osDesc',this)" title="Falar para preencher">🎙️</button>
       </div>
     </div>
-    <div class="form-group"><label class="j-label">DiagnÃ³stico TÃ©cnico</label>
+    <div class="form-group"><label class="j-label">Diagnóstico Técnico</label>
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;">
         <label class="j-label" style="margin-bottom:0;"></label>
-        <button type="button" onclick="iaSugerirDiagnostico()" style="padding:3px 10px;background:rgba(167,139,250,0.12);border:1px solid rgba(167,139,250,0.3);border-radius:12px;color:#A78BFA;font-family:var(--fm);font-size:0.58rem;letter-spacing:1px;cursor:pointer;">ðŸ¤– IA SUGERIR</button>
+        <button type="button" onclick="iaSugerirDiagnostico()" style="padding:3px 10px;background:rgba(167,139,250,0.12);border:1px solid rgba(167,139,250,0.3);border-radius:12px;color:#A78BFA;font-family:var(--fm);font-size:0.58rem;letter-spacing:1px;cursor:pointer;">🤖 IA SUGERIR</button>
       </div>
       <div class="field-voice-wrap has-textarea">
-        <textarea class="j-textarea" id="osDiag" rows="2" placeholder="DiagnÃ³stico do mecÃ¢nico..."></textarea>
-        <button type="button" class="btn-voice" onclick="iniciarVoz('osDiag',this)" title="Falar para preencher">ðŸŽ™ï¸</button>
+        <textarea class="j-textarea" id="osDiag" rows="2" placeholder="Diagnóstico do mecânico..."></textarea>
+        <button type="button" class="btn-voice" onclick="iniciarVoz('osDiag',this)" title="Falar para preencher">🎙️</button>
       </div>
     </div>
 
     <div style="background:var(--surf3);border:1px solid rgba(0,212,255,0.15);border-radius:3px;padding:14px;margin-bottom:14px;">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:6px;">
-        <span style="font-family:var(--fd);font-weight:700;color:var(--cyan);">SERVIÃ‡OS A SEREM EXECUTADOS</span>
+        <span style="font-family:var(--fd);font-weight:700;color:var(--cyan);">SERVIÇOS A SEREM EXECUTADOS</span>
         <div style="display:flex;gap:6px;">
-          <button type="button" onclick="iaSugerirServicos()" style="padding:4px 10px;background:rgba(167,139,250,0.12);border:1px solid rgba(167,139,250,0.3);border-radius:12px;color:#A78BFA;font-family:var(--fm);font-size:0.58rem;letter-spacing:1px;cursor:pointer;">ðŸ¤– IA</button>
-          <button type="button" class="btn-outline" onclick="adicionarServico()">+ SERVIÃ‡O</button>
+          <button type="button" onclick="iaSugerirServicos()" style="padding:4px 10px;background:rgba(167,139,250,0.12);border:1px solid rgba(167,139,250,0.3);border-radius:12px;color:#A78BFA;font-family:var(--fm);font-size:0.58rem;letter-spacing:1px;cursor:pointer;">🤖 IA</button>
+          <button type="button" class="btn-outline" onclick="adicionarServico()">+ SERVIÇO</button>
         </div>
       </div>
       <div id="containerServicos" style="display:flex;flex-direction:column;gap:7px;"></div>
@@ -590,8 +590,8 @@ body.equipe-page .overlay.open{display:flex!important;}
 
     <div style="background:var(--surf3);border:1px solid rgba(0,255,136,0.15);border-radius:3px;padding:14px;">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-        <span style="font-family:var(--fd);font-weight:700;color:var(--success);">PEÃ‡AS NECESSÃRIAS</span>
-        <button type="button" class="btn-success" onclick="adicionarPeca()">+ PEÃ‡A</button>
+        <span style="font-family:var(--fd);font-weight:700;color:var(--success);">PEÇAS NECESSÁRIAS</span>
+        <button type="button" class="btn-success" onclick="adicionarPeca()">+ PEÇA</button>
       </div>
       <div id="containerPecas" style="display:flex;flex-direction:column;gap:7px;margin-bottom:10px;"></div>
       
@@ -613,10 +613,10 @@ body.equipe-page .overlay.open{display:flex!important;}
 
       <div id="mediaPreviewLocal" style="display:none;background:rgba(0,212,255,0.04);border:1px dashed var(--border2);border-radius:3px;padding:10px;margin-bottom:12px;">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;gap:8px;flex-wrap:wrap;">
-          <span style="font-family:var(--fm);font-size:0.62rem;color:var(--cyan);letter-spacing:1px;">PRÃ‰VIA â€” <span id="mediaPreviewCount">0</span> ARQUIVO(S) SELECIONADO(S)</span>
+          <span style="font-family:var(--fm);font-size:0.62rem;color:var(--cyan);letter-spacing:1px;">PRÉVIA — <span id="mediaPreviewCount">0</span> ARQUIVO(S) SELECIONADO(S)</span>
           <div style="display:flex;gap:6px;">
             <span id="mediaProgress" style="font-family:var(--fm);font-size:0.6rem;color:var(--muted);display:none;"></span>
-            <button class="btn-ghost" type="button" onclick="limparPreviewOS()" style="font-size:0.6rem;padding:4px 10px;">âœ• LIMPAR</button>
+            <button class="btn-ghost" type="button" onclick="limparPreviewOS()" style="font-size:0.6rem;padding:4px 10px;">✕ LIMPAR</button>
           </div>
         </div>
         <div class="media-grid" id="mediaPreviewGrid"></div>
@@ -626,16 +626,16 @@ body.equipe-page .overlay.open{display:flex!important;}
       <input type="hidden" id="mediaArray" value="[]">
     </div>
     <div style="background:var(--surf3);border:1px solid var(--border);border-radius:3px;padding:14px;">
-      <div style="font-family:var(--fd);font-weight:700;margin-bottom:12px;color:var(--warn);">âš¡ CHECKLIST RÃPIDO</div>
+      <div style="font-family:var(--fd);font-weight:700;margin-bottom:12px;color:var(--warn);">⚡ CHECKLIST RÁPIDO</div>
 
       <div class="form-group">
-        <label class="j-label">CombustÃ­vel</label>
+        <label class="j-label">Combustível</label>
         <div class="comb-grid" id="combGrid">
-          <div class="comb-opt" onclick="setComb('Reserva',this)">âš  Reserva</div>
-          <div class="comb-opt" onclick="setComb('1/4',this)">â–‚ 1/4</div>
-          <div class="comb-opt" onclick="setComb('Meio',this)">â–„ Meio</div>
-          <div class="comb-opt" onclick="setComb('3/4',this)">â–† 3/4</div>
-          <div class="comb-opt active" onclick="setComb('N/A',this)">â€” N/A</div>
+          <div class="comb-opt" onclick="setComb('Reserva',this)">⚠ Reserva</div>
+          <div class="comb-opt" onclick="setComb('1/4',this)">▂ 1/4</div>
+          <div class="comb-opt" onclick="setComb('Meio',this)">▄ Meio</div>
+          <div class="comb-opt" onclick="setComb('3/4',this)">▆ 3/4</div>
+          <div class="comb-opt active" onclick="setComb('N/A',this)">— N/A</div>
         </div>
         <input type="hidden" id="chkComb" value="N/A">
       </div>
@@ -644,12 +644,12 @@ body.equipe-page .overlay.open{display:flex!important;}
         <label class="j-label">Estado dos Pneus</label>
         <div class="pneu-bar-wrap">
           <div class="pneu-row">
-            <span class="pneu-label">ðŸ”µ Dianteiro</span>
+            <span class="pneu-label">🔵 Dianteiro</span>
             <input type="range" class="pneu-slider" id="chkPD" min="0" max="100" value="100" oninput="$('pneuDVal').innerText=this.value+'%'">
             <span class="pneu-val" id="pneuDVal">100%</span>
           </div>
           <div class="pneu-row">
-            <span class="pneu-label">ðŸ”´ Traseiro</span>
+            <span class="pneu-label">🔴 Traseiro</span>
             <input type="range" class="pneu-slider" id="chkPT" min="0" max="100" value="100" oninput="$('pneuTVal').innerText=this.value+'%'">
             <span class="pneu-val" id="pneuTVal">100%</span>
           </div>
@@ -660,19 +660,19 @@ body.equipe-page .overlay.open{display:flex!important;}
         <label class="j-label">Itens de Entrada</label>
         <div class="chk-grid">
           <button type="button" class="chk-btn" id="chk-painel" onclick="toggleChk('chk-painel','chkPainel')">
-            <span class="chk-icon">ðŸŽ›ï¸</span>
+            <span class="chk-icon">🎛️</span>
             <span>Painel</span>
           </button>
           <button type="button" class="chk-btn" id="chk-pressao" onclick="toggleChk('chk-pressao','chkPressao')">
-            <span class="chk-icon">ðŸ”§</span>
-            <span>PressÃ£o OK</span>
+            <span class="chk-icon">🔧</span>
+            <span>Pressão OK</span>
           </button>
           <button type="button" class="chk-btn" id="chk-car" onclick="toggleChk('chk-car','chkCar')">
-            <span class="chk-icon">ðŸš—</span>
+            <span class="chk-icon">🚗</span>
             <span>Carroceria</span>
           </button>
           <button type="button" class="chk-btn" id="chk-doc" onclick="toggleChk('chk-doc','chkDoc')">
-            <span class="chk-icon">ðŸ“„</span>
+            <span class="chk-icon">📄</span>
             <span>Documentos</span>
           </button>
         </div>
@@ -683,10 +683,10 @@ body.equipe-page .overlay.open{display:flex!important;}
       </div>
 
       <div class="form-group">
-        <label class="j-label">Avarias PrÃ©vias / Obs</label>
+        <label class="j-label">Avarias Prévias / Obs</label>
         <div class="field-voice-wrap has-textarea">
-          <textarea class="j-textarea" id="chkObs" rows="2" placeholder="ArranhÃµes, amassados... (ou use o microfone)"></textarea>
-          <button type="button" class="btn-voice" onclick="iniciarVoz('chkObs',this)" title="Falar avarias">ðŸŽ™ï¸</button>
+          <textarea class="j-textarea" id="chkObs" rows="2" placeholder="Arranhões, amassados... (ou use o microfone)"></textarea>
+          <button type="button" class="btn-voice" onclick="iniciarVoz('chkObs',this)" title="Falar avarias">🎙️</button>
         </div>
       </div>
     </div>
@@ -708,8 +708,8 @@ body.equipe-page .overlay.open{display:flex!important;}
 <div class="overlay" id="modalExtratoFunc">
 <div class="modal">
   <div class="modal-head">
-    <div class="modal-title">ðŸ“„ EXTRATO FINANCEIRO</div>
-    <button class="modal-close" onclick="fecharModal('modalExtratoFunc')">âœ•</button>
+    <div class="modal-title">📄 EXTRATO FINANCEIRO</div>
+    <button class="modal-close" onclick="fecharModal('modalExtratoFunc')">✕</button>
   </div>
   <div class="modal-body" style="padding: 0; max-height: 60vh; overflow-y: auto;">
     <table class="j-table" style="margin: 0;">
@@ -717,13 +717,13 @@ body.equipe-page .overlay.open{display:flex!important;}
         <tr>
           <th>Data</th>
           <th>Tipo</th>
-          <th>DescriÃ§Ã£o / Origem</th>
+          <th>Descrição / Origem</th>
           <th>Status</th>
           <th>Valor</th>
         </tr>
       </thead>
       <tbody id="tbExtratoFunc">
-        <tr><td colspan="5" style="text-align:center;padding:20px;color:var(--muted);font-size:0.8rem;">Carregando histÃ³rico...</td></tr>
+        <tr><td colspan="5" style="text-align:center;padding:20px;color:var(--muted);font-size:0.8rem;">Carregando histórico...</td></tr>
       </tbody>
     </table>
   </div>
@@ -737,7 +737,7 @@ body.equipe-page .overlay.open{display:flex!important;}
 const $ = id => document.getElementById(id);
 const $v = id => $(id) ? $(id).value.trim() : '';
 
-// SESSÃƒO
+// SESSÃO
 const J = {
   tid: sessionStorage.getItem('j_tid'),
   role: sessionStorage.getItem('j_role'),
@@ -807,8 +807,8 @@ $('tbTenantNome').innerText = J.tnome || 'Oficina';
 $('topNome').innerText = J.nome || 'Equipe';
 $('topAv').innerText = String(J.nome || 'E').charAt(0).toUpperCase();
 if($('topCargo')) {
-  let roleDisplay = J.role || 'MECÃ‚NICO';
-  if (roleDisplay.toLowerCase() === 'equipe') roleDisplay = 'MECÃ‚NICO';
+  let roleDisplay = J.role || 'MECÂNICO';
+  if (roleDisplay.toLowerCase() === 'equipe') roleDisplay = 'MECÂNICO';
   $('topCargo').innerText = roleDisplay.toUpperCase();
 }
 aplicarModulosEquipe(J.oficina);
@@ -873,20 +873,20 @@ function moeda(v){
   return 'R$ ' + n.toFixed(2).replace('.', ',');
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════
 // STT - SPEECH TO TEXT (reconhecimento de voz)
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════
 const STT_SUPPORT = ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window);
 let _sttActive = null;
 
 function iniciarVoz(fieldId, btnEl) {
-  if (!STT_SUPPORT) { toast('âš  Seu navegador nÃ£o suporta reconhecimento de voz. Use Chrome/Edge.', 'warn'); return; }
+  if (!STT_SUPPORT) { toast('⚠ Seu navegador não suporta reconhecimento de voz. Use Chrome/Edge.', 'warn'); return; }
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
   if (_sttActive) {
     try { _sttActive.stop(); } catch(e) {}
     _sttActive = null;
-    if (btnEl) { btnEl.classList.remove('listening'); btnEl.innerHTML = 'ðŸŽ™ï¸'; }
+    if (btnEl) { btnEl.classList.remove('listening'); btnEl.innerHTML = '🎙️'; }
     return;
   }
 
@@ -895,7 +895,7 @@ function iniciarVoz(fieldId, btnEl) {
   rec.interimResults = true;
   rec.continuous = false;
 
-  if (btnEl) { btnEl.classList.add('listening'); btnEl.innerHTML = 'â¹'; }
+  if (btnEl) { btnEl.classList.add('listening'); btnEl.innerHTML = '⏹'; }
   _sttActive = rec;
 
   const field = $(fieldId);
@@ -907,16 +907,16 @@ function iniciarVoz(fieldId, btnEl) {
     if (field) field.value = baseVal + (baseVal ? ' ' : '') + transcript;
   };
   rec.onerror = (e) => {
-    toast('âš  Erro no microfone: ' + (e.error || 'desconhecido'), 'err');
-    if (btnEl) { btnEl.classList.remove('listening'); btnEl.innerHTML = 'ðŸŽ™ï¸'; }
+    toast('⚠ Erro no microfone: ' + (e.error || 'desconhecido'), 'err');
+    if (btnEl) { btnEl.classList.remove('listening'); btnEl.innerHTML = '🎙️'; }
     _sttActive = null;
   };
   rec.onend = () => {
-    if (btnEl) { btnEl.classList.remove('listening'); btnEl.innerHTML = 'ðŸŽ™ï¸'; }
+    if (btnEl) { btnEl.classList.remove('listening'); btnEl.innerHTML = '🎙️'; }
     _sttActive = null;
   };
   rec.start();
-  toast('ðŸ”´ Fale agora... Clique â¹ para parar.', 'ok');
+  toast('🔴 Fale agora... Clique ⏹ para parar.', 'ok');
 }
 
 function iniciarVozIA() {
@@ -924,9 +924,9 @@ function iniciarVozIA() {
   iniciarVoz('iaInput', btn);
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════
 // CHECKLIST TOUCH
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════
 function toggleChk(btnId, hiddenId) {
   const btn = $(btnId);
   const hidden = $(hiddenId);
@@ -935,25 +935,25 @@ function toggleChk(btnId, hiddenId) {
   const isFail = btn.classList.contains('chk-fail');
 
   if (!isOk && !isFail) {
-    // neutro â†’ OK
+    // neutro → OK
     btn.classList.add('chk-ok');
     hidden.value = 'ok';
-    btn.querySelector('.chk-icon').innerText = 'âœ…';
+    btn.querySelector('.chk-icon').innerText = '✅';
   } else if (isOk) {
-    // OK â†’ Falha
+    // OK → Falha
     btn.classList.remove('chk-ok');
     btn.classList.add('chk-fail');
     hidden.value = 'fail';
-    btn.querySelector('.chk-icon').innerText = 'âŒ';
+    btn.querySelector('.chk-icon').innerText = '❌';
   } else {
-    // Falha â†’ neutro
+    // Falha → neutro
     btn.classList.remove('chk-fail');
     hidden.value = '';
     const icons = {
-      'chk-painel': 'ðŸŽ›ï¸', 'chk-pressao': 'ðŸ”§',
-      'chk-car': 'ðŸš—', 'chk-doc': 'ðŸ“„'
+      'chk-painel': '🎛️', 'chk-pressao': '🔧',
+      'chk-car': '🚗', 'chk-doc': '📄'
     };
-    btn.querySelector('.chk-icon').innerText = icons[btnId] || 'â—';
+    btn.querySelector('.chk-icon').innerText = icons[btnId] || '●';
   }
 }
 
@@ -963,13 +963,13 @@ function setComb(val, el) {
   $('chkComb').value = val;
 }
 
-// Restaurar estado dos botÃµes touch ao editar OS
+// Restaurar estado dos botões touch ao editar OS
 function _restaurarChkBtns(os) {
   const mapa = {
-    chkPainel: {btnId:'chk-painel', hiddenId:'chkPainel', iconNeutro:'ðŸŽ›ï¸'},
-    chkPressao: {btnId:'chk-pressao', hiddenId:'chkPressao', iconNeutro:'ðŸ”§'},
-    chkCar: {btnId:'chk-car', hiddenId:'chkCar', iconNeutro:'ðŸš—'},
-    chkDoc: {btnId:'chk-doc', hiddenId:'chkDoc', iconNeutro:'ðŸ“„'},
+    chkPainel: {btnId:'chk-painel', hiddenId:'chkPainel', iconNeutro:'🎛️'},
+    chkPressao: {btnId:'chk-pressao', hiddenId:'chkPressao', iconNeutro:'🔧'},
+    chkCar: {btnId:'chk-car', hiddenId:'chkCar', iconNeutro:'🚗'},
+    chkDoc: {btnId:'chk-doc', hiddenId:'chkDoc', iconNeutro:'📄'},
   };
   Object.entries(mapa).forEach(([key, cfg]) => {
     const btn = $(cfg.btnId);
@@ -982,15 +982,15 @@ function _restaurarChkBtns(os) {
     if (val === 'ok' || val === true) {
       btn.classList.add('chk-ok');
       hidden.value = 'ok';
-      btn.querySelector('.chk-icon').innerText = 'âœ…';
+      btn.querySelector('.chk-icon').innerText = '✅';
     } else if (val === 'fail') {
       btn.classList.add('chk-fail');
       hidden.value = 'fail';
-      btn.querySelector('.chk-icon').innerText = 'âŒ';
+      btn.querySelector('.chk-icon').innerText = '❌';
     }
   });
 
-  // CombustÃ­vel
+  // Combustível
   const combVal = os.chkComb || 'N/A';
   $('chkComb').value = combVal;
   document.querySelectorAll('.comb-opt').forEach(o => {
@@ -1009,8 +1009,8 @@ function _resetChkBtns() {
   ['chk-painel','chk-pressao','chk-car','chk-doc'].forEach(id => {
     const btn = $(id); if (!btn) return;
     btn.classList.remove('chk-ok','chk-fail');
-    const icons = {'chk-painel':'ðŸŽ›ï¸','chk-pressao':'ðŸ”§','chk-car':'ðŸš—','chk-doc':'ðŸ“„'};
-    btn.querySelector('.chk-icon').innerText = icons[id] || 'â—';
+    const icons = {'chk-painel':'🎛️','chk-pressao':'🔧','chk-car':'🚗','chk-doc':'📄'};
+    btn.querySelector('.chk-icon').innerText = icons[id] || '●';
   });
   ['chkPainel','chkPressao','chkCar','chkDoc'].forEach(id => { if($(id)) $(id).value=''; });
   document.querySelectorAll('.comb-opt').forEach(o => o.classList.remove('active'));
@@ -1020,29 +1020,29 @@ function _resetChkBtns() {
   $('chkPD').value = 100; if($('pneuDVal')) $('pneuDVal').innerText = '100%';
   $('chkPT').value = 100; if($('pneuTVal')) $('pneuTVal').innerText = '100%';
 }
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// QUICK-MOVE STATUS no Kanban (LOTE B â€” fluxo coerente)
-// MecÃ¢nico: Triagem â†’ OrÃ§amento â†’ Em ServiÃ§o â†’ Pronto (FIM DA JORNADA DO MECÃ‚NICO)
-// SÃ³ GESTOR pode marcar "Entregue" (exige ter recebido o pagamento no caixa).
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════
+// QUICK-MOVE STATUS no Kanban (LOTE B — fluxo coerente)
+// Mecânico: Triagem → Orçamento → Em Serviço → Pronto (FIM DA JORNADA DO MECÂNICO)
+// Só GESTOR pode marcar "Entregue" (exige ter recebido o pagamento no caixa).
+// ═══════════════════════════════════════════════════════════════
 const STATUS_NEXT = {
-  'Aguardando': {label:'â†’ OrÃ§amento',           next:'Orcamento'},
-  'Orcamento':  {label:'âœ“ Aprovar Itens',       next:'Aprovado'},
-  'Aprovado':   {label:'â†’ Em ServiÃ§o',          next:'Andamento'},
-  'Andamento':  {label:'âœ“ Pronto p/ Retirada',  next:'Pronto'},
-  'Pronto':     {label:'âš  Aguardando caixa',    next:null},  // mecÃ¢nico NÃƒO move daqui
-  'Entregue':   {label:'âœ“ Entregue',            next:null},
+  'Aguardando': {label:'→ Orçamento',           next:'Orcamento'},
+  'Orcamento':  {label:'✓ Aprovar Itens',       next:'Aprovado'},
+  'Aprovado':   {label:'→ Em Serviço',          next:'Andamento'},
+  'Andamento':  {label:'✓ Pronto p/ Retirada',  next:'Pronto'},
+  'Pronto':     {label:'⚠ Aguardando caixa',    next:null},  // mecânico NÃO move daqui
+  'Entregue':   {label:'✓ Entregue',            next:null},
 };
 
 async function quickMoveOS(osId, novoStatus, ev) {
   ev.stopPropagation();
   if (!novoStatus) {
-    toast('âš  O gestor/caixa deve marcar como Entregue apÃ³s confirmar o pagamento.', 'warn');
+    toast('⚠ O gestor/caixa deve marcar como Entregue após confirmar o pagamento.', 'warn');
     return;
   }
-  // Trava: mecÃ¢nico nÃ£o pode mover para "Entregue" (sÃ³ gestor/admin)
+  // Trava: mecânico não pode mover para "Entregue" (só gestor/admin)
   if (novoStatus === 'Entregue' && !['admin','gestor','gerente'].includes(J.role)) {
-    toast('âš  Apenas o gestor ou o caixa pode marcar uma O.S. como ENTREGUE.', 'err');
+    toast('⚠ Apenas o gestor ou o caixa pode marcar uma O.S. como ENTREGUE.', 'err');
     return;
   }
 
@@ -1074,13 +1074,13 @@ async function quickMoveOS(osId, novoStatus, ev) {
         origemStatus: 'equipe_kanban',
         toast
       });
-      if (result) toast('âœ“ OrÃ§amento aprovado com os itens selecionados.', 'ok');
+      if (result) toast('✓ Orçamento aprovado com os itens selecionados.', 'ok');
       return;
     }
     const tl = [];
     if (os && os.timeline) tl.push(...os.timeline);
 
-    const labelAntes = (stAntes === 'Pronto') ? 'Pronto p/ Retirada' : (stAntes || 'â€”');
+    const labelAntes = (stAntes === 'Pronto') ? 'Pronto p/ Retirada' : (stAntes || '—');
     const labelNovo  = (novoStatus === 'Pronto') ? 'Pronto p/ Retirada' : novoStatus;
     tl.push({
       dt: new Date().toISOString(),
@@ -1100,7 +1100,7 @@ async function quickMoveOS(osId, novoStatus, ev) {
       timeline: tl,
       updatedAt: new Date().toISOString()
     });
-    toast(`âœ“ Status: ${labelNovo}`, 'ok');
+    toast(`✓ Status: ${labelNovo}`, 'ok');
 
     // Quando vira "Pronto", avisa o admin/gestor no chat da equipe.
     if (novoStatus === 'Pronto' && stAntes !== 'Pronto') {
@@ -1111,7 +1111,7 @@ async function quickMoveOS(osId, novoStatus, ev) {
 
 /**
  * Avisa o admin/gestor no chat interno quando a equipe marca a OS como pronta.
- * O WhatsApp do cliente fica sob confirmaÃ§Ã£o do dono/gestor no Jarvis.
+ * O WhatsApp do cliente fica sob confirmação do dono/gestor no Jarvis.
  */
 async function _avisarAdminPronto(os) {
   if (!os) return;
@@ -1126,7 +1126,7 @@ async function _avisarAdminPronto(os) {
       deNome: J.nome || 'Equipe',
       para: 'admin',
       sender: 'equipe',
-      msg: `OS #${String(os.id || '').slice(-6).toUpperCase()} marcada como PRONTO pela equipe. Cliente: ${cliente?.nome || 'nÃ£o identificado'} | VeÃ­culo: ${placa}${modelo}. Conferir e enviar aviso ao cliente pelo Jarvis.`,
+      msg: `OS #${String(os.id || '').slice(-6).toUpperCase()} marcada como PRONTO pela equipe. Cliente: ${cliente?.nome || 'não identificado'} | Veículo: ${placa}${modelo}. Conferir e enviar aviso ao cliente pelo Jarvis.`,
       lidaAdmin: false,
       lidaEquipe: true,
       origem: 'status_pronto',
@@ -1135,30 +1135,30 @@ async function _avisarAdminPronto(os) {
     });
     toast('Admin avisado no chat da equipe.', 'ok');
   } catch (e) {
-    toast('OS pronta, mas nÃ£o consegui avisar o admin no chat: ' + e.message, 'warn');
+    toast('OS pronta, mas não consegui avisar o admin no chat: ' + e.message, 'warn');
   }
 }
 
 /**
- * Dispara WhatsApp "Pronto para retirada" quando o mecÃ¢nico conclui o serviÃ§o.
- * Cliente Ã© avisado pelo WhatsApp com mensagem profissional.
+ * Dispara WhatsApp "Pronto para retirada" quando o mecânico conclui o serviço.
+ * Cliente é avisado pelo WhatsApp com mensagem profissional.
  */
 function _dispararWppPronto(os) {
   if (!os) return;
   const cliente = (dbClientes || []).find(c => c.id === os.clienteId);
   if (!cliente?.wpp) {
-    toast('Cliente sem WhatsApp cadastrado. Aviso automÃ¡tico nÃ£o enviado.', 'warn');
+    toast('Cliente sem WhatsApp cadastrado. Aviso automático não enviado.', 'warn');
     return;
   }
   const veic = (dbVeiculos || []).find(v => v.id === os.veiculoId);
-  const placa = os.placa || veic?.placa || 'seu veÃ­culo';
+  const placa = os.placa || veic?.placa || 'seu veículo';
   const modelo = veic?.modelo ? ` ${veic.modelo}` : '';
   const fone = String(cliente.wpp).replace(/\D/g, '');
   const nomeOficina = J.tnome || 'Oficina';
 
-  const msg = `OlÃ¡ ${cliente.nome}! ðŸ‘‹\n\nAqui Ã© da *${nomeOficina}*.\n\nâœ… Seu veÃ­culo *${placa}${modelo}* estÃ¡ *PRONTO PARA RETIRADA*!\n\nPassamos a O.S. #${os.id.slice(-6).toUpperCase()} para o caixa. Pode vir buscar quando for melhor pra vocÃª.\n\nAguardamos!`;
+  const msg = `Olá ${cliente.nome}! 👋\n\nAqui é da *${nomeOficina}*.\n\n✅ Seu veículo *${placa}${modelo}* está *PRONTO PARA RETIRADA*!\n\nPassamos a O.S. #${os.id.slice(-6).toUpperCase()} para o caixa. Pode vir buscar quando for melhor pra você.\n\nAguardamos!`;
 
-  if (confirm(`Enviar aviso automÃ¡tico para ${cliente.nome} via WhatsApp?\n\nâœ“ PRONTO PARA RETIRADA\nVeÃ­culo ${placa}`)) {
+  if (confirm(`Enviar aviso automático para ${cliente.nome} via WhatsApp?\n\n✓ PRONTO PARA RETIRADA\nVeículo ${placa}`)) {
     if (typeof window.thiaOpenWhatsApp === 'function') window.thiaOpenWhatsApp(fone, msg);
     else window.open(`https://web.whatsapp.com/send?phone=55${fone}&text=${encodeURIComponent(msg)}`, '_blank');
   }
@@ -1176,9 +1176,9 @@ $('iaInput')?.addEventListener('keydown', e => {
   if (e.key === 'Enter') iaEnviar();
 });
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// BLINDAGEM DA IA: REMOÃ‡ÃƒO DO GOOGLE SEARCH E FILTRO CIRÃšRGICO
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════
+// BLINDAGEM DA IA: REMOÇÃO DO GOOGLE SEARCH E FILTRO CIRÚRGICO
+// ═══════════════════════════════════════════════════════════════
 async function iaEnviar() {
   const inp = $('iaInput');
   const msg = inp?.value?.trim();
@@ -1223,9 +1223,9 @@ function _iaReplace(id, html) {
   $('iaMsgs').scrollTop = 99999;
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// MOTOR DE MÃDIA DO CHAT
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════
+// MOTOR DE MÍDIA DO CHAT
+// ═══════════════════════════════════════════════════════════════
 
 function _escapeHtml(s){
   return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -1246,7 +1246,7 @@ function formatarMidiaChat(texto){
   const u = _escapeAttr(url);
   if(tipo==='AUDIO')   return `<audio src="${u}" controls preload="metadata" style="height:34px;max-width:220px;outline:none;display:block;"></audio>`;
   if(tipo==='IMAGEM')  return `<img src="${u}" loading="lazy" alt="imagem" style="max-width:220px;max-height:220px;border-radius:6px;cursor:zoom-in;display:block;" onclick="window.open('${u}','_blank','noopener')">`;
-  if(tipo==='ARQUIVO') return `<a href="${u}" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:underline;display:inline-block;padding:4px 0">ðŸ“Ž Ver Anexo</a>`;
+  if(tipo==='ARQUIVO') return `<a href="${u}" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:underline;display:inline-block;padding:4px 0">📎 Ver Anexo</a>`;
   return _escapeHtml(limpo).replace(/\n/g,'<br>');
 }
 
@@ -1262,7 +1262,7 @@ async function togglePTT(btnId){
   }
 
   if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || typeof window.MediaRecorder==='undefined'){
-    toast('Este navegador nÃ£o suporta gravaÃ§Ã£o de Ã¡udio.','err'); return;
+    toast('Este navegador não suporta gravação de áudio.','err'); return;
   }
 
   try{
@@ -1278,7 +1278,7 @@ async function togglePTT(btnId){
 
     _pttState = { recorder, stream, chunks:[], btnId, mime: mime||'audio/webm' };
     recorder.ondataavailable = ev => { if(ev.data && ev.data.size>0) _pttState.chunks.push(ev.data); };
-    recorder.onerror = ev => { toast('Erro na gravaÃ§Ã£o: '+(ev?.error?.message||'desconhecido'),'err'); _pttLimpar(); };
+    recorder.onerror = ev => { toast('Erro na gravação: '+(ev?.error?.message||'desconhecido'),'err'); _pttLimpar(); };
     recorder.onstop = async ()=>{
       if(_pttState.stream){
         try{ _pttState.stream.getTracks().forEach(t=>{try{t.stop();}catch(e){}}); }catch(e){}
@@ -1289,26 +1289,26 @@ async function togglePTT(btnId){
         btnEl.style.color=''; btnEl.style.background=''; btnEl.disabled = true; btnEl.innerHTML='<span class="j-spinner"></span>';
       }
       try{
-        if(!_pttState.chunks.length){ toast('GravaÃ§Ã£o vazia â€” fale algo antes de parar.','err'); _pttLimpar(); return; }
+        if(!_pttState.chunks.length){ toast('Gravação vazia — fale algo antes de parar.','err'); _pttLimpar(); return; }
         const blob = new Blob(_pttState.chunks,{type:_pttState.mime||'audio/webm'});
-        if(blob.size < 500){ toast('Ãudio muito curto.','err'); _pttLimpar(); return; }
+        if(blob.size < 500){ toast('Áudio muito curto.','err'); _pttLimpar(); return; }
         const fd = new FormData();
         fd.append('file', blob, 'ptt.' + (_pttState.mime.includes('mp4')?'m4a':'webm'));
         fd.append('upload_preset', J.cloudPreset);
 
         const res = await fetch(`https://api.cloudinary.com/v1_1/${J.cloudName}/auto/upload`,{method:'POST',body:fd});
         const data = await res.json();
-        if(!data.secure_url) throw new Error(data?.error?.message||'Falha no upload do Ã¡udio.');
+        if(!data.secure_url) throw new Error(data?.error?.message||'Falha no upload do áudio.');
 
         $('chatInput').value = '[AUDIO]' + data.secure_url;
         await enviarMsg();
-      }catch(e){ toast('Erro ao enviar Ã¡udio: '+(e.message||e),'err'); }finally{ _pttLimpar(); }
+      }catch(e){ toast('Erro ao enviar áudio: '+(e.message||e),'err'); }finally{ _pttLimpar(); }
     };
     recorder.start();
-    btn.style.color='#fff'; btn.style.background='var(--danger)'; btn.innerHTML='â¹';
+    btn.style.color='#fff'; btn.style.background='var(--danger)'; btn.innerHTML='⏹';
     btn.title='Clique para parar e enviar'; btn.setAttribute('aria-pressed','true');
-    toast('ðŸ”´ Gravando... Clique â¹ para enviar.','ok');
-  }catch(err){ toast('âš  PermissÃ£o de microfone negada ou indisponÃ­vel.','err'); _pttLimpar(); }
+    toast('🔴 Gravando... Clique ⏹ para enviar.','ok');
+  }catch(err){ toast('⚠ Permissão de microfone negada ou indisponível.','err'); _pttLimpar(); }
 }
 
 function _pttLimpar(){
@@ -1316,8 +1316,8 @@ function _pttLimpar(){
   if(st.stream){ try{ st.stream.getTracks().forEach(t=>{try{t.stop();}catch(e){}}); }catch(e){} }
   const btnEl = $(st.btnId || 'btnPTTEquipe');
   if(btnEl){
-    btnEl.style.color=''; btnEl.style.background=''; btnEl.innerHTML='ðŸŽ¤';
-    btnEl.disabled = false; btnEl.title='Gravar Ã¡udio'; btnEl.removeAttribute('aria-pressed');
+    btnEl.style.color=''; btnEl.style.background=''; btnEl.innerHTML='🎤';
+    btnEl.disabled = false; btnEl.title='Gravar áudio'; btnEl.removeAttribute('aria-pressed');
   }
   _pttState = { recorder:null, stream:null, chunks:[], btnId:null, mime:'' };
 }
@@ -1367,10 +1367,10 @@ function _renderPreviewOS(){
   grid.innerHTML = _batchOSFiles.map((f,i)=>{
     const isVideo = /^video\//.test(f.type||'');
     const url = URL.createObjectURL(f);
-    const mediaEl = isVideo ? `<video src="${url}" muted></video>` : `<img src="${url}" alt="prÃ©via">`;
+    const mediaEl = isVideo ? `<video src="${url}" muted></video>` : `<img src="${url}" alt="prévia">`;
     return `<div class="media-item" data-idx="${i}">
       ${mediaEl}
-      <button class="media-del" type="button" onclick="removerFotoPreview(${i})" title="Remover">âœ•</button>
+      <button class="media-del" type="button" onclick="removerFotoPreview(${i})" title="Remover">✕</button>
     </div>`;
   }).join('');
 }
@@ -1425,9 +1425,9 @@ async function enviarFotosBatch(){
 
   if(btn){ btn.disabled=false; btn.innerText='ENVIAR TODAS'; }
   if(prog){ prog.style.display='none'; prog.innerText=''; }
-  if(sucesso && !falhas) toast(`âœ“ ${sucesso} arquivo(s) enviado(s). Lembre de SALVAR a O.S.`,'ok');
-  else if(sucesso && falhas) toast(`âš  ${sucesso} ok, ${falhas} falhou. Lembre de SALVAR a O.S.`,'warn');
-  else toast('âœ• Nenhum arquivo enviado.','err');
+  if(sucesso && !falhas) toast(`✓ ${sucesso} arquivo(s) enviado(s). Lembre de SALVAR a O.S.`,'ok');
+  else if(sucesso && falhas) toast(`⚠ ${sucesso} ok, ${falhas} falhou. Lembre de SALVAR a O.S.`,'warn');
+  else toast('✕ Nenhum arquivo enviado.','err');
 }
 
 // ============================================================
@@ -1452,22 +1452,22 @@ function renderKanbanFalhaEquipe(msg){
   });
 }
 document.addEventListener('DOMContentLoaded',()=>{
-  // Avisar sobre STT se nÃ£o suportado
+  // Avisar sobre STT se não suportado
   if (!STT_SUPPORT) {
     document.querySelectorAll('.btn-voice,.btn-ia-voice').forEach(b => {
-      b.title = 'Voz nÃ£o suportada â€” use Chrome ou Edge';
+      b.title = 'Voz não suportada — use Chrome ou Edge';
       b.style.opacity = '0.35';
     });
   }
 
-  statusEquipeDados('Sincronizando pÃ¡tio da equipe...', 'warn');
+  statusEquipeDados('Sincronizando pátio da equipe...', 'warn');
   db.collection('ordens_servico').where('tenantId','==',J.tid).onSnapshot(snap=>{
     dbOS=snap.docs.map(d=>({id:d.id,...d.data()}));
     statusEquipeDados('');
     renderKanban(); renderKPIs();
   }, err => {
     console.error('[Equipe] Falha ao carregar O.S.', err);
-    statusEquipeDados('NÃ£o foi possÃ­vel carregar as O.S. da equipe. Verifique permissÃ£o do Firestore, tenant da sessÃ£o e conexÃ£o.', 'err');
+    statusEquipeDados('Não foi possível carregar as O.S. da equipe. Verifique permissão do Firestore, tenant da sessão e conexão.', 'err');
     renderKanbanFalhaEquipe('Falha ao carregar O.S.');
   });
   db.collection('clientes').where('tenantId','==',J.tid).onSnapshot(snap=>{
@@ -1491,7 +1491,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     else if(badge) badge.classList.add('d-none');
   });
 
-// VERIFICA PERMISSÃƒO DE COMISSÃƒO DO GESTOR E MONTA EXTRATO
+// VERIFICA PERMISSÃO DE COMISSÃO DO GESTOR E MONTA EXTRATO
   db.collection('oficinas').doc(J.tid).onSnapshot(doc => {
     if (doc.exists) {
       const ofi = doc.data();
@@ -1502,7 +1502,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       if (cardComissao) cardComissao.style.display = podeVer ? 'block' : 'none';
 
       if (podeVer) {
-        // Trazemos TODO o histÃ³rico financeiro amarrado a este usuÃ¡rio
+        // Trazemos TODO o histórico financeiro amarrado a este usuário
         db.collection('financeiro')
           .where('tenantId', '==', J.tid)
           .where('mecId', '==', J.fid)
@@ -1515,7 +1515,7 @@ document.addEventListener('DOMContentLoaded',()=>{
                                      .sort((a,b) => (b.venc || b.createdAt) > (a.venc || a.createdAt) ? 1 : -1);
 
             docs.forEach(fin => {
-              // 1. Calcula o total a receber no card principal (sÃ³ pendentes)
+              // 1. Calcula o total a receber no card principal (só pendentes)
               if (fin.isComissao && fin.status === 'Pendente') {
                 totalPendente += (fin.valor || 0);
               }
@@ -1528,9 +1528,9 @@ document.addEventListener('DOMContentLoaded',()=>{
               let valorStyle = '';
               
               if (fin.isComissao) {
-                  tipoBadge = '<span class="pill pill-cyan">COMISSÃƒO</span>';
+                  tipoBadge = '<span class="pill pill-cyan">COMISSÃO</span>';
                   valorStyle = 'color:var(--success)';
-              } else if (fin.tipo === 'SaÃ­da') {
+              } else if (fin.tipo === 'Saída') {
                   if ((fin.desc||'').includes('Vale') || (fin.desc||'').includes('Adiantamento')) {
                       tipoBadge = '<span class="pill pill-warn">VALE/ADIANT.</span>';
                       valorStyle = 'color:var(--danger)';
@@ -1560,7 +1560,7 @@ document.addEventListener('DOMContentLoaded',()=>{
             // Injeta as linhas no Modal
             const tbExtrato = document.getElementById('tbExtratoFunc');
             if (tbExtrato) {
-                tbExtrato.innerHTML = extratoHTML || '<tr><td colspan="5" style="text-align:center;padding:20px;color:var(--muted);font-size:0.8rem;">Nenhum histÃ³rico financeiro encontrado.</td></tr>';
+                tbExtrato.innerHTML = extratoHTML || '<tr><td colspan="5" style="text-align:center;padding:20px;color:var(--muted);font-size:0.8rem;">Nenhum histórico financeiro encontrado.</td></tr>';
             }
           });
       }
@@ -1600,10 +1600,10 @@ function renderKPIs(){
 }
 
 // ============================================================
-// KANBAN â€” fluxo coerente por perfil (LOTE B)
-// MecÃ¢nico: Triagem â†’ Em ExecuÃ§Ã£o â†’ Pronto p/ Retirada â†’ Entregue
-// MecÃ¢nico SÃ“ pode mover atÃ© "Pronto p/ Retirada".
-// SÃ³ gestor/gerente/admin pode marcar "Entregue" (exige pagamento no caixa).
+// KANBAN — fluxo coerente por perfil (LOTE B)
+// Mecânico: Triagem → Em Execução → Pronto p/ Retirada → Entregue
+// Mecânico SÓ pode mover até "Pronto p/ Retirada".
+// Só gestor/gerente/admin pode marcar "Entregue" (exige pagamento no caixa).
 // ============================================================
 function renderKanban(){
   const busca=($v('searchOS')||'').toLowerCase();
@@ -1619,7 +1619,7 @@ function renderKanban(){
     'Andamento':'Andamento','box':'Andamento','EmServico':'Andamento','em_servico':'Andamento',
     'Pronto':'Pronto','pronto':'Pronto','faturado':'Pronto','Pronto_Retirada':'Pronto',
     // Concluido legado vai pra PRONTO (era erroneamente Entregue).
-    // SÃ³ vai pra Entregue quando o GESTOR explicitamente marcar no caixa.
+    // Só vai pra Entregue quando o GESTOR explicitamente marcar no caixa.
     'Concluido':'Pronto','concluido':'Pronto',
     'Entregue':'Entregue','entregue':'Entregue',
     'Aguardando':'Aguardando'
@@ -1629,7 +1629,7 @@ function renderKanban(){
     const st = (o.status||'').toLowerCase();
     if (st === 'cancelado') return false;
     
-    // Se for gerente, vendedor ou admin, vÃª TODO o pÃ¡tio.
+    // Se for gerente, vendedor ou admin, vê TODO o pátio.
     if (['gerente', 'vendedor', 'admin'].includes(String(J.role||'').toLowerCase())) return true;
     
     // Visibilidade do kanban: mecanico ve todo o patio; KPI/comissao seguem filtrados por J.fid.
@@ -1639,7 +1639,7 @@ function renderKanban(){
 
   minhasOS.forEach(o=>{
     const v = dbVeiculos.find(x=>x.id===o.veiculoId) || {placa:o.placa, tipo:o.tipoVeiculo||'carro'};
-    const c = dbClientes.find(x=>x.id===o.clienteId) || {nome:o.cliente||'â€”'};
+    const c = dbClientes.find(x=>x.id===o.clienteId) || {nome:o.cliente||'—'};
     if(busca && !(v?.placa||'').toLowerCase().includes(busca) && !(c?.nome||'').toLowerCase().includes(busca)) return;
     const st = stMap[o.status] || 'Aguardando';
     if(cols[st]){ cols[st].push({os:o,v,c}); cnts[st]++; }
@@ -1650,40 +1650,40 @@ function renderKanban(){
     const cEl=$('cnt-'+s); if(cEl) cEl.innerText=cnts[s];
     const kEl=$('kb-'+s); if(!kEl) return;
     const cor = corMap[s];
-    // O MecÃ¢nico NÃƒO vÃª os valores da O.S. no kanban
+    // O Mecânico NÃO vê os valores da O.S. no kanban
     kEl.innerHTML=cols[s].sort((a,b)=>new Date(b.os.updatedAt||0)-new Date(a.os.updatedAt||0)).map(({os,v,c})=>{
       const qm = STATUS_NEXT[s];
       const qmBtn = qm ? `<button class="k-move-btn" onclick="quickMoveOS('${os.id}','${qm.next}',event)">${qm.label}</button>` : '';
       const valores = `<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;margin:8px 0;">
-        <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);padding:5px;border-radius:3px;"><small style="display:block;font-family:var(--fm);font-size:.47rem;color:var(--muted);">ORÃ‡.</small><b style="font-family:var(--fm);font-size:.58rem;color:var(--warn);">SEM VALOR</b></div>
+        <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);padding:5px;border-radius:3px;"><small style="display:block;font-family:var(--fm);font-size:.47rem;color:var(--muted);">ORÇ.</small><b style="font-family:var(--fm);font-size:.58rem;color:var(--warn);">SEM VALOR</b></div>
         <div style="background:rgba(0,212,255,.05);border:1px solid rgba(0,212,255,.12);padding:5px;border-radius:3px;"><small style="display:block;font-family:var(--fm);font-size:.47rem;color:var(--muted);">APROV.</small><b style="font-family:var(--fm);font-size:.58rem;color:var(--cyan);">STATUS</b></div>
         <div style="background:rgba(0,255,136,.05);border:1px solid rgba(0,255,136,.12);padding:5px;border-radius:3px;"><small style="display:block;font-family:var(--fm);font-size:.47rem;color:var(--muted);">FIN.</small><b style="font-family:var(--fm);font-size:.58rem;color:var(--success);">OCULTO</b></div>
       </div>`;
       return `
       <div class="k-card" style="border-left-color:${cor}" onclick="prepOS('edit','${os.id}');abrirModal('modalOS')">
         <div class="k-placa" style="color:${cor}">${v?.placa||os.placa||'S/PLACA'}</div>
-        <div class="k-cli">${c?.nome||os.cliente||'â€”'}</div>
-        <div class="k-desc">${os.desc||os.relato||'Sem descriÃ§Ã£o'}</div>
+        <div class="k-cli">${c?.nome||os.cliente||'—'}</div>
+        <div class="k-desc">${os.desc||os.relato||'Sem descrição'}</div>
         ${valores}
         <div class="k-footer">
-          <span class="k-tipo ${v?.tipo||'carro'}">${{carro:'ðŸš— CARRO',moto:'ðŸï¸ MOTO',bicicleta:'ðŸš² BICICLETA'}[v?.tipo||'carro']||'VEÃCULO'}</span>
+          <span class="k-tipo ${v?.tipo||'carro'}">${{carro:'🚗 CARRO',moto:'🏍️ MOTO',bicicleta:'🚲 BICICLETA'}[v?.tipo||'carro']||'VEÍCULO'}</span>
         </div>
         <div class="k-card-actions" onclick="event.stopPropagation()">
           ${qmBtn}
-          <button class="k-move-btn danger" onclick="event.stopPropagation();prepOS('edit','${os.id}');abrirModal('modalOS')">âœ Editar</button>
+          <button class="k-move-btn danger" onclick="event.stopPropagation();prepOS('edit','${os.id}');abrirModal('modalOS')">✏ Editar</button>
         </div>
-      </div>`}).join('') || `<div style="text-align:center;padding:20px;color:var(--muted);font-family:var(--fm);font-size:0.7rem;">â€” Vazio â€”</div>`;
+      </div>`}).join('') || `<div style="text-align:center;padding:20px;color:var(--muted);font-family:var(--fm);font-size:0.7rem;">— Vazio —</div>`;
   });
 }
 
 // ============================================================
-// O.S. LÃ“GICA DE SERVIÃ‡OS E PEÃ‡AS SEM PREÃ‡OS
+// O.S. LÓGICA DE SERVIÇOS E PEÇAS SEM PREÇOS
 // ============================================================
 function popularSelects(){
   const cOpts='<option value="">Selecione...</option>'+dbClientes.map(c=>`<option value="${c.id}">${c.nome}</option>`).join('');
   if($('osCliente')) $('osCliente').innerHTML=cOpts;
-  // Redesenhar kanban sempre que clientes ou veÃ­culos chegarem do Firestore
-  // Isso garante que as placas apareÃ§am mesmo no primeiro carregamento
+  // Redesenhar kanban sempre que clientes ou veículos chegarem do Firestore
+  // Isso garante que as placas apareçam mesmo no primeiro carregamento
   renderKanban();
 }
 function filtrarVeics(){
@@ -1709,8 +1709,8 @@ function prepOS(mode,id=null){
   limparPreviewOS(); _resetChkBtns();
   popularSelects();
 
-  // â•â•â• Esconde opÃ§Ã£o "Entregue" se quem abriu nÃ£o for gestor/admin â•â•â•
-  // MecÃ¢nico nÃ£o deve nem ver essa opÃ§Ã£o. UX limpa.
+  // ═══ Esconde opção "Entregue" se quem abriu não for gestor/admin ═══
+  // Mecânico não deve nem ver essa opção. UX limpa.
   const role = (J.role||'').toLowerCase();
   const ehGestor = ['admin','gestor','gerente','superadmin'].includes(role);
   const optEntregue = document.querySelector('#osStatus option[value="Entregue"]');
@@ -1752,26 +1752,26 @@ function escExecEquipe(v){
 
 function statusOptionsExecEquipe(tipo, atual) {
   const t = String(tipo || '').toLowerCase();
-  const opts = t.includes('peca') || t.includes('peÃ§a') ? [
+  const opts = t.includes('peca') || t.includes('peça') ? [
     ['pendente', 'Pendente'],
-    ['em_execucao', 'Em execuÃ§Ã£o'],
+    ['em_execucao', 'Em execução'],
     ['executado', 'Executado'],
-    ['executado_obs', 'Executado com observaÃ§Ã£o'],
-    ['nao_executado', 'NÃ£o executado'],
+    ['executado_obs', 'Executado com observação'],
+    ['nao_executado', 'Não executado'],
     ['cancelado', 'Cancelado']
   ] : [
     ['pendente', 'Pendente'],
-    ['em_execucao', 'Em execuÃ§Ã£o'],
+    ['em_execucao', 'Em execução'],
     ['executado', 'Executado'],
-    ['executado_obs', 'Executado com observaÃ§Ã£o'],
-    ['nao_executado', 'NÃ£o executado'],
+    ['executado_obs', 'Executado com observação'],
+    ['nao_executado', 'Não executado'],
     ['cancelado', 'Cancelado']
   ];
   return opts.map(([value, label]) => `<option value="${value}" ${String(atual || 'pendente') === value ? 'selected' : ''}>${label}</option>`).join('');
 }
 
 async function salvarExecucaoAprovadosEquipe(osId) {
-  if (!osId) { toast('Salve a O.S. antes de marcar execuÃ§Ã£o.', 'warn'); return; }
+  if (!osId) { toast('Salve a O.S. antes de marcar execução.', 'warn'); return; }
   const osAtual = dbOS.find(x => x.id === osId) || {};
   const execucaoItens = { ...(osAtual.execucaoItens || {}) };
   const rows = document.querySelectorAll('#resumoAprovacaoEquipe .execucao-aprovado-row');
@@ -1780,7 +1780,7 @@ async function salvarExecucaoAprovadosEquipe(osId) {
     const st = row.querySelector('.exec-status')?.value || 'pendente';
     const obs = (row.querySelector('.exec-obs')?.value || '').trim();
     if (['executado_obs','nao_executado','cancelado'].includes(st) && !obs) {
-      toast('âš  Informe observaÃ§Ã£o para itens executados com observaÃ§Ã£o, nÃ£o executados ou cancelados.', 'warn');
+      toast('⚠ Informe observação para itens executados com observação, não executados ou cancelados.', 'warn');
       return;
     }
   }
@@ -1801,14 +1801,14 @@ async function salvarExecucaoAprovadosEquipe(osId) {
   timeline.push({
     dt: new Date().toISOString(),
     user: J.nome || 'Equipe',
-    acao: `Equipe atualizou execuÃ§Ã£o interna de ${rows.length} item(ns) aprovado(s).`
+    acao: `Equipe atualizou execução interna de ${rows.length} item(ns) aprovado(s).`
   });
   await db.collection('ordens_servico').doc(osId).update({
     execucaoItens,
     timeline,
     updatedAt: new Date().toISOString()
   });
-  toast('âœ“ ExecuÃ§Ã£o dos itens aprovados salva.', 'ok');
+  toast('✓ Execução dos itens aprovados salva.', 'ok');
 }
 
 function aplicarMarcadoresAprovacaoEquipe(os) {
@@ -1817,7 +1817,7 @@ function aplicarMarcadoresAprovacaoEquipe(os) {
   document.querySelectorAll('#containerServicos .aprovacao-item-badge,#containerPecas .aprovacao-item-badge').forEach(el => el.remove());
   if (!U.hasApproval?.(os)) return;
   const keys = U.getApprovedKeys?.(os) || new Set();
-  const mk = key => `<div class="aprovacao-item-badge" style="font-family:var(--fm);font-size:.56rem;letter-spacing:.7px;color:${keys.has(key) ? 'var(--success)' : 'var(--danger)'};padding:2px 4px;border:1px solid ${keys.has(key) ? 'rgba(0,255,136,.25)' : 'rgba(255,59,59,.25)'};border-radius:2px;white-space:nowrap;">${keys.has(key) ? 'APROVADO' : 'NÃƒO APROVADO'}</div>`;
+  const mk = key => `<div class="aprovacao-item-badge" style="font-family:var(--fm);font-size:.56rem;letter-spacing:.7px;color:${keys.has(key) ? 'var(--success)' : 'var(--danger)'};padding:2px 4px;border:1px solid ${keys.has(key) ? 'rgba(0,255,136,.25)' : 'rgba(255,59,59,.25)'};border-radius:2px;white-space:nowrap;">${keys.has(key) ? 'APROVADO' : 'NÃO APROVADO'}</div>`;
   document.querySelectorAll('#containerServicos>div').forEach((row, idx) => {
     row.querySelector('.aprovacao-item-badge')?.remove();
     row.insertAdjacentHTML('beforeend', mk('servico-' + idx));
@@ -1835,25 +1835,25 @@ function aplicarMarcadoresAprovacaoEquipe(os) {
   const exec = os?.execucaoItens || {};
   const execHtml = aprovados.length ? `
     <div style="margin-top:14px;border-top:1px solid rgba(255,255,255,.12);padding-top:12px;">
-      <div style="font-family:var(--fm);font-size:.72rem;color:var(--cyan);font-weight:800;letter-spacing:1px;margin-bottom:8px;">EXECUÃ‡ÃƒO DOS ITENS APROVADOS</div>
-      <div style="font-family:var(--fm);font-size:.60rem;color:var(--muted);margin-bottom:8px;">MecÃ¢nicos e usuÃ¡rios da equipe podem marcar o que foi executado, trocado, nÃ£o executado ou nÃ£o encontrado. O cliente nÃ£o visualiza essas marcaÃ§Ãµes internas.</div>
+      <div style="font-family:var(--fm);font-size:.72rem;color:var(--cyan);font-weight:800;letter-spacing:1px;margin-bottom:8px;">EXECUÇÃO DOS ITENS APROVADOS</div>
+      <div style="font-family:var(--fm);font-size:.60rem;color:var(--muted);margin-bottom:8px;">Mecânicos e usuários da equipe podem marcar o que foi executado, trocado, não executado ou não encontrado. O cliente não visualiza essas marcações internas.</div>
       <div style="display:grid;gap:7px;">
         ${aprovados.map(it => {
           const e = exec[it.key] || {};
           return `<div class="execucao-aprovado-row" data-key="${escExecEquipe(it.key)}" data-tipo="${escExecEquipe(it.tipo)}" style="display:grid;grid-template-columns:minmax(220px,1fr) 190px minmax(200px,1fr);gap:7px;align-items:center;background:rgba(0,0,0,.16);border:1px solid rgba(255,255,255,.10);border-radius:3px;padding:8px;">
             <div style="font-size:.75rem;color:var(--text);"><b>${escExecEquipe(it.labelTipo || it.tipo)}</b> ${it.codigo ? '[' + escExecEquipe(it.codigo) + '] ' : ''}${escExecEquipe(it.desc || '-')}${it.tempo ? `<br><small style="color:var(--muted);">TMO ${String(it.tempo).replace('.', ',')}h</small>` : ''}</div>
             <select class="j-select exec-status" style="font-size:.72rem;">${statusOptionsExecEquipe(it.tipo, e.status || 'pendente')}</select>
-            <input class="j-input exec-obs" value="${escExecEquipe(e.obs || '')}" placeholder="ObservaÃ§Ã£o interna: peÃ§a nÃ£o encontrada, aguardando, executado...">
+            <input class="j-input exec-obs" value="${escExecEquipe(e.obs || '')}" placeholder="Observação interna: peça não encontrada, aguardando, executado...">
           </div>`;
         }).join('')}
       </div>
-      <button type="button" class="btn-primary" style="margin-top:10px;" onclick="salvarExecucaoAprovadosEquipe('${escExecEquipe(os.id || '')}')">SALVAR EXECUÃ‡ÃƒO DA EQUIPE</button>
+      <button type="button" class="btn-primary" style="margin-top:10px;" onclick="salvarExecucaoAprovadosEquipe('${escExecEquipe(os.id || '')}')">SALVAR EXECUÇÃO DA EQUIPE</button>
     </div>` : '';
   const box = document.createElement('div');
   box.id = 'resumoAprovacaoEquipe';
   box.style.cssText = 'background:rgba(0,255,136,.07);border:1px solid rgba(0,255,136,.24);border-radius:4px;padding:12px;margin-bottom:14px;';
   box.innerHTML = `
-    <div style="font-family:var(--fd);font-weight:800;color:var(--success);letter-spacing:1px;margin-bottom:8px;">ORCAMENTO APROVADO - ${aprovados.length}/${itens.length} ITEM(NS) â€” VALORES OCULTOS PARA EQUIPE</div>
+    <div style="font-family:var(--fd);font-weight:800;color:var(--success);letter-spacing:1px;margin-bottom:8px;">ORCAMENTO APROVADO - ${aprovados.length}/${itens.length} ITEM(NS) — VALORES OCULTOS PARA EQUIPE</div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;">
       ${aprovados.map(it => `<div style="border:1px solid rgba(0,255,136,.2);background:rgba(0,0,0,.14);border-radius:3px;padding:8px;font-size:.75rem;"><b style="color:var(--success);">APROVADO</b><br>${U.escapeHtml?.(it.desc || '-') || it.desc || '-'}<br><small>${it.codigo ? '[' + (U.escapeHtml?.(it.codigo) || it.codigo) + '] ' : ''}${it.tempo ? 'TMO ' + String(it.tempo).replace('.', ',') + 'h' : ''}</small></div>`).join('')}
       ${pendentes.map(it => `<div style="border:1px solid rgba(255,184,0,.24);background:rgba(0,0,0,.1);border-radius:3px;padding:8px;font-size:.75rem;opacity:.75;"><b style="color:var(--warn);">NAO APROVADO</b><br>${U.escapeHtml?.(it.desc || '-') || it.desc || '-'}<br><small>Mantido para historico.</small></div>`).join('')}
@@ -1863,7 +1863,7 @@ function aplicarMarcadoresAprovacaoEquipe(os) {
   if (alvo) alvo.insertAdjacentElement('beforebegin', box);
 }
 
-// ADICIONAR SERVIÃ‡OS (DINÃ‚MICO POR CARGO)
+// ADICIONAR SERVIÇOS (DINÂMICO POR CARGO)
 function adicionarServico(s=null){
   const div=document.createElement('div');
   const podeVerPreco = ['gerente', 'vendedor', 'admin'].includes(J.role);
@@ -1876,16 +1876,16 @@ function adicionarServico(s=null){
     : `<input type="hidden" class="serv-valor" value="${s?s.valor:0}">`;
 
   div.innerHTML=`
-    <input type="text" class="j-input serv-desc" id="${uid}" placeholder="Descreva o serviÃ§o..." value="${s?s.desc:''}" style="flex:1;padding-right:40px;">
-    <button type="button" class="btn-voice" style="position:absolute;right:${podeVerPreco ? '100px' : '38px'};top:50%;transform:translateY(-50%);" onclick="iniciarVoz('${uid}',this)" title="Falar serviÃ§o">ðŸŽ™ï¸</button>
+    <input type="text" class="j-input serv-desc" id="${uid}" placeholder="Descreva o serviço..." value="${s?s.desc:''}" style="flex:1;padding-right:40px;">
+    <button type="button" class="btn-voice" style="position:absolute;right:${podeVerPreco ? '100px' : '38px'};top:50%;transform:translateY(-50%);" onclick="iniciarVoz('${uid}',this)" title="Falar serviço">🎙️</button>
     ${inputValor}
-    <button type="button" onclick="this.parentElement.remove()" style="background:rgba(255,59,59,0.1);border:1px solid rgba(255,59,59,0.3);border-radius:2px;color:var(--danger);cursor:pointer;width:28px;height:34px;font-size:10px;flex-shrink:0;">âœ•</button>
+    <button type="button" onclick="this.parentElement.remove()" style="background:rgba(255,59,59,0.1);border:1px solid rgba(255,59,59,0.3);border-radius:2px;color:var(--danger);cursor:pointer;width:28px;height:34px;font-size:10px;flex-shrink:0;">✕</button>
   `;
   $('containerServicos').appendChild(div);
 }
 function renderServicoRow(s){ adicionarServico(s); }
 
-// ADICIONAR PEÃ‡AS (DINÃ‚MICO POR CARGO)
+// ADICIONAR PEÇAS (DINÂMICO POR CARGO)
 function adicionarPeca(){
   const div=document.createElement('div');
   const podeVerPreco = ['gerente', 'vendedor', 'admin'].includes(J.role);
@@ -1900,12 +1900,12 @@ function adicionarPeca(){
 
   div.innerHTML=`
     <select class="j-select peca-sel" onchange="selPeca(this)">
-      <option value="">Selecionar peÃ§a...</option>
+      <option value="">Selecionar peça...</option>
       ${dbEstoque.filter(p=>(p.qtd||0)>0).map(p=>`<option value="${p.id}" data-v="${p.venda||0}" data-d="${p.desc||''}">${p.desc} ${podeVerPreco ? '(R$ '+p.venda+')' : ''}</option>`).join('')}
     </select>
     <input type="number" class="j-input peca-qtd" value="1" min="1" placeholder="Qtd">
     ${inputValor}
-    <button type="button" onclick="this.parentElement.remove()" style="background:rgba(255,59,59,0.1);border:1px solid rgba(255,59,59,0.3);border-radius:2px;color:var(--danger);cursor:pointer;width:28px;height:34px;font-size:10px;">âœ•</button>
+    <button type="button" onclick="this.parentElement.remove()" style="background:rgba(255,59,59,0.1);border:1px solid rgba(255,59,59,0.3);border-radius:2px;color:var(--danger);cursor:pointer;width:28px;height:34px;font-size:10px;">✕</button>
   `;
   $('containerPecas').appendChild(div);
 }
@@ -1929,7 +1929,7 @@ function renderPecaRow(p){
     </select>
     <input type="number" class="j-input peca-qtd" value="${p.qtd||1}" min="1">
     ${inputValor}
-    <button type="button" onclick="this.parentElement.remove()" style="background:rgba(255,59,59,0.1);border:1px solid rgba(255,59,59,0.3);border-radius:2px;color:var(--danger);cursor:pointer;width:28px;height:34px;font-size:10px;">âœ•</button>
+    <button type="button" onclick="this.parentElement.remove()" style="background:rgba(255,59,59,0.1);border:1px solid rgba(255,59,59,0.3);border-radius:2px;color:var(--danger);cursor:pointer;width:28px;height:34px;font-size:10px;">✕</button>
   `;
   $('containerPecas').appendChild(div);
 }
@@ -1944,9 +1944,9 @@ function parseBR(v) {
   return parseFloat(String(v || '0').replace(/\./g, '').replace(',', '.')) || 0;
 }
 
-// INTEGRAÃ‡ÃƒO DE DEEP DIFF E SALVAMENTO NA O.S.
+// INTEGRAÇÃO DE DEEP DIFF E SALVAMENTO NA O.S.
 async function salvarOS(){
-  if(!$v('osCliente')||!$v('osVeiculo')){toast('âš  Cliente e veÃ­culo obrigatÃ³rios','warn');return;}
+  if(!$v('osCliente')||!$v('osVeiculo')){toast('⚠ Cliente e veículo obrigatórios','warn');return;}
   
   const pecas=[];
   document.querySelectorAll('#containerPecas>div').forEach(r=>{
@@ -1967,19 +1967,19 @@ async function salvarOS(){
     if(desc) servicos.push({desc, valor});
   });
 
-  // O Total Ã© recalculado secretamente para nÃ£o perder a integridade dos dados no Firebase
+  // O Total é recalculado secretamente para não perder a integridade dos dados no Firebase
   let t = parseBR($v('osMO'))||0;
   pecas.forEach(p => t += (p.qtd * p.venda));
   servicos.forEach(s => t += s.valor);
 
   const id = $v('osId');
-  const funcUser = J.nome || 'MecÃ¢nico';
+  const funcUser = J.nome || 'Mecânico';
   let tl = [];
   let motivoTriagemEquipe = '';
   let moverTriagemConfirmado = false;
   const isTriagemEquipe = st => /^(aguardando|triagem)$/i.test(String(st || '').trim());
 
-  // --- INÃCIO: DEEP DIFF (AUDITORIA GRANULAR) ---
+  // --- INÍCIO: DEEP DIFF (AUDITORIA GRANULAR) ---
   if (id) {
       const oldOS = dbOS.find(x => x.id === id) || {};
       const oldMediaCountStatus = (oldOS.media || oldOS.fotos || []).length;
@@ -2009,17 +2009,17 @@ async function salvarOS(){
       const oldDiag = (oldOS.diagnostico || '').trim();
       const novoDiag = ($v('osDiag') || '').trim();
       if (novoDiag && novoDiag !== oldDiag) {
-          tl.push({ dt: new Date().toISOString(), user: funcUser, acao: `DiagnÃ³stico TÃ©cnico atualizado.` });
+          tl.push({ dt: new Date().toISOString(), user: funcUser, acao: `Diagnóstico Técnico atualizado.` });
           registouAlgo = true;
       }
 
-      const mapCheck = { chkPainel: 'Painel', chkPressao: 'PressÃ£o dos Pneus', chkCar: 'Carroceria', chkDoc: 'Documentos' };
+      const mapCheck = { chkPainel: 'Painel', chkPressao: 'Pressão dos Pneus', chkCar: 'Carroceria', chkDoc: 'Documentos' };
       ['chkPainel', 'chkPressao', 'chkCar', 'chkDoc'].forEach(chk => {
           const oldVal = oldOS[chk];
           const newVal = $(chk)?.value;
           if (oldVal !== newVal && newVal) {
               const estado = newVal === 'ok' ? 'Marcou OK' : 'Marcou FALHA';
-              tl.push({ dt: new Date().toISOString(), user: funcUser, acao: `${estado} na inspeÃ§Ã£o: ${mapCheck[chk]}` });
+              tl.push({ dt: new Date().toISOString(), user: funcUser, acao: `${estado} na inspeção: ${mapCheck[chk]}` });
               registouAlgo = true;
           }
       });
@@ -2030,17 +2030,17 @@ async function salvarOS(){
           const descNovo = (newP.desc || '').toLowerCase().trim();
           const oldP = oldPecas.find(p => (p.desc || '').toLowerCase().trim() === descNovo);
           if (!oldP) {
-              tl.push({ dt: new Date().toISOString(), user: funcUser, acao: `Adicionou peÃ§a: ${newP.desc} (Qtd: ${newP.qtd})` });
+              tl.push({ dt: new Date().toISOString(), user: funcUser, acao: `Adicionou peça: ${newP.desc} (Qtd: ${newP.qtd})` });
               registouAlgo = true;
           } else if (parseFloat(oldP.qtd || 0) !== parseFloat(newP.qtd || 0)) {
-              tl.push({ dt: new Date().toISOString(), user: funcUser, acao: `Alterou quantidade da peÃ§a ${newP.desc} para ${newP.qtd}` });
+              tl.push({ dt: new Date().toISOString(), user: funcUser, acao: `Alterou quantidade da peça ${newP.desc} para ${newP.qtd}` });
               registouAlgo = true;
           }
       });
       oldPecas.forEach(oldP => {
           const descOld = (oldP.desc || '').toLowerCase().trim();
           if (!newPecas.find(p => (p.desc || '').toLowerCase().trim() === descOld)) {
-              tl.push({ dt: new Date().toISOString(), user: funcUser, acao: `Removeu peÃ§a: ${oldP.desc}` });
+              tl.push({ dt: new Date().toISOString(), user: funcUser, acao: `Removeu peça: ${oldP.desc}` });
               registouAlgo = true;
           }
       });
@@ -2050,14 +2050,14 @@ async function salvarOS(){
       newServicos.forEach(newS => {
           const descNovo = (newS.desc || '').toLowerCase().trim();
           if (!oldServicos.find(s => (s.desc || '').toLowerCase().trim() === descNovo)) {
-              tl.push({ dt: new Date().toISOString(), user: funcUser, acao: `Adicionou serviÃ§o: ${newS.desc}` });
+              tl.push({ dt: new Date().toISOString(), user: funcUser, acao: `Adicionou serviço: ${newS.desc}` });
               registouAlgo = true;
           }
       });
       oldServicos.forEach(oldS => {
           const descOld = (oldS.desc || '').toLowerCase().trim();
           if (!newServicos.find(s => (s.desc || '').toLowerCase().trim() === descOld)) {
-              tl.push({ dt: new Date().toISOString(), user: funcUser, acao: `Removeu serviÃ§o: ${oldS.desc}` });
+              tl.push({ dt: new Date().toISOString(), user: funcUser, acao: `Removeu serviço: ${oldS.desc}` });
               registouAlgo = true;
           }
       });
@@ -2065,7 +2065,7 @@ async function salvarOS(){
       const oldMedia = (oldOS.media || oldOS.fotos || []).length;
       const newMedia = (JSON.parse($('mediaArray').value || '[]')).length;
       if (newMedia > oldMedia) {
-          tl.push({ dt: new Date().toISOString(), user: funcUser, acao: `Anexou ${newMedia - oldMedia} foto(s) de evidÃªncia.` });
+          tl.push({ dt: new Date().toISOString(), user: funcUser, acao: `Anexou ${newMedia - oldMedia} foto(s) de evidência.` });
           registouAlgo = true;
       }
 
@@ -2096,9 +2096,9 @@ async function salvarOS(){
   const osAntigaAprovacao = id ? (dbOS.find(x => x.id === id) || {}) : {};
   const UOS = window.JOS || window.JarvisOSUtils || {};
   if (id && UOS.hasApproval?.(osAntigaAprovacao)) {
-    // O.S. aprovada: equipe/mecÃ¢nico nÃ£o pode remover/editar o orÃ§amento aprovado/reprovado.
-    // MantÃ©m orÃ§amento, aprovaÃ§Ã£o, total e histÃ³rico financeiro como estavam; equipe sÃ³ muda status operacional,
-    // diagnÃ³stico/checklist/mÃ­dia/timeline e execuÃ§Ã£o interna dos itens aprovados.
+    // O.S. aprovada: equipe/mecânico não pode remover/editar o orçamento aprovado/reprovado.
+    // Mantém orçamento, aprovação, total e histórico financeiro como estavam; equipe só muda status operacional,
+    // diagnóstico/checklist/mídia/timeline e execução interna dos itens aprovados.
     p.pecas = osAntigaAprovacao.pecas || [];
     p.servicos = osAntigaAprovacao.servicos || [];
     p.total = osAntigaAprovacao.total || p.total;
@@ -2136,7 +2136,7 @@ async function salvarOS(){
       toast
     });
     if (!aprovacao) {
-      toast('AprovaÃ§Ã£o cancelada. A O.S. continua com o orÃ§amento preservado.', 'warn');
+      toast('Aprovação cancelada. A O.S. continua com o orçamento preservado.', 'warn');
       return;
     }
     p.aprovacao = {
@@ -2150,17 +2150,17 @@ async function salvarOS(){
     };
     p.itensAprovados = aprovacao.keys;
     p.totalAprovado = aprovacao.totalAprovado;
-    tl.push({ dt: new Date().toISOString(), user: J.nome || 'Equipe', acao: `OrÃ§amento APROVADO (${aprovacao.status}) - ${aprovacao.itens.length}/${aprovacao.totalItens} item(ns) - total ${UOS.moeda ? UOS.moeda(aprovacao.totalAprovado) : aprovacao.totalAprovado}` });
+    tl.push({ dt: new Date().toISOString(), user: J.nome || 'Equipe', acao: `Orçamento APROVADO (${aprovacao.status}) - ${aprovacao.itens.length}/${aprovacao.totalItens} item(ns) - total ${UOS.moeda ? UOS.moeda(aprovacao.totalAprovado) : aprovacao.totalAprovado}` });
     p.timeline = tl;
   }
 
-  // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-  // TRANCA DE SEGURANÃ‡A: mecÃ¢nico/equipe NÃƒO pode salvar status=Entregue.
-  // Mesmo se alguÃ©m abrir o DevTools e mudar o select.value, esta tranca
-  // bloqueia. SÃ³ admin/gestor/gerente pode marcar Entregue (exige caixa).
-  // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+  // ═══════════════════════════════════════════════════════════════
+  // TRANCA DE SEGURANÇA: mecânico/equipe NÃO pode salvar status=Entregue.
+  // Mesmo se alguém abrir o DevTools e mudar o select.value, esta tranca
+  // bloqueia. Só admin/gestor/gerente pode marcar Entregue (exige caixa).
+  // ═══════════════════════════════════════════════════════════════
   if (p.status === 'Entregue' && !['admin','gestor','gerente','superadmin'].includes((J.role||'').toLowerCase())) {
-    toast('âš  Apenas o gestor/caixa pode marcar uma O.S. como ENTREGUE. Mude para "Pronto p/ Retirada" e avise o caixa.', 'err');
+    toast('⚠ Apenas o gestor/caixa pode marcar uma O.S. como ENTREGUE. Mude para "Pronto p/ Retirada" e avise o caixa.', 'err');
     if ($('osStatus')) $('osStatus').value = 'Pronto';
     return;
   }
@@ -2176,10 +2176,10 @@ async function salvarOS(){
     }
   }
 
-  toast('âœ“ O.S. SALVA'); fecharModal('modalOS');
+  toast('✓ O.S. SALVA'); fecharModal('modalOS');
 }
 
-// Validador do select de status â€” alerta o mecÃ¢nico se ele tentar Entregue
+// Validador do select de status — alerta o mecânico se ele tentar Entregue
 window._validarStatusMecanico = function(sel) {
   const aviso = document.getElementById('osStatusAviso');
   if (!aviso) return;
@@ -2189,12 +2189,12 @@ window._validarStatusMecanico = function(sel) {
   if (sel.value === 'Entregue' && !ehGestor) {
     aviso.style.display = 'block';
     aviso.style.color = 'var(--danger)';
-    aviso.textContent = 'ðŸ”’ VocÃª nÃ£o tem permissÃ£o para marcar como Entregue. Use "Pronto p/ Retirada" e avise o caixa.';
+    aviso.textContent = '🔒 Você não tem permissão para marcar como Entregue. Use "Pronto p/ Retirada" e avise o caixa.';
     sel.value = 'Pronto';
   } else if (sel.value === 'Pronto') {
     aviso.style.display = 'block';
     aviso.style.color = 'var(--success)';
-    aviso.textContent = 'âœ“ Ao salvar, o admin serÃ¡ avisado no chat da equipe para conferir e enviar o WhatsApp ao cliente.';
+    aviso.textContent = '✓ Ao salvar, o admin será avisado no chat da equipe para conferir e enviar o WhatsApp ao cliente.';
   } else {
     aviso.style.display = 'none';
   }
@@ -2205,7 +2205,7 @@ function renderMediaGrid(){
   $('mediaGrid').innerHTML=media.map((m,i)=>`
     <div class="media-item">
       ${m.type==='video'?`<video src="${m.url}" controls></video>`:`<img src="${m.url}" onclick="window.open('${m.url}')" style="cursor:zoom-in">`}
-      <button class="media-del" onclick="rmMedia(${i})">âœ•</button>
+      <button class="media-del" onclick="rmMedia(${i})">✕</button>
     </div>`).join('');
 }
 function rmMedia(idx){
@@ -2223,7 +2223,7 @@ function renderTimeline(){
 }
 
 // ============================================================
-// CHAT EQUIPE â†” ADMIN
+// CHAT EQUIPE ↔ ADMIN
 // ============================================================
 function renderChat(){
   const msgs=$('chatMsgs');
@@ -2251,9 +2251,9 @@ $('chatInput')?.addEventListener('keydown',e=>{
   if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); enviarMsg(); }
 });
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// PLACA + HISTÃ“RICO DO VEÃCULO NO CABEÃ‡ALHO DA O.S.
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════
+// PLACA + HISTÓRICO DO VEÍCULO NO CABEÇALHO DA O.S.
+// ═══════════════════════════════════════════════════════════════
 function atualizarHeaderOS(veiculoId, clienteId) {
   const v = dbVeiculos.find(x => x.id === veiculoId);
   const c = dbClientes.find(x => x.id === clienteId);
@@ -2267,9 +2267,9 @@ function atualizarHeaderOS(veiculoId, clienteId) {
     if (placa) { placaEl.innerText = placa; placaEl.style.display = ''; }
     else placaEl.style.display = 'none';
   }
-  if (cliEl) cliEl.innerText = nomeCliente ? `${nomeCliente}${modelo ? ' Â· ' + modelo : ''}` : modelo;
+  if (cliEl) cliEl.innerText = nomeCliente ? `${nomeCliente}${modelo ? ' · ' + modelo : ''}` : modelo;
 
-  // HistÃ³rico
+  // Histórico
   const banner  = document.getElementById('bannerHistVeiculo');
   const content = document.getElementById('bannerHistContent');
   if (!banner || !content || !veiculoId) { if(banner) banner.style.display='none'; return; }
@@ -2282,15 +2282,15 @@ function atualizarHeaderOS(veiculoId, clienteId) {
   if (!osVeiculo.length) { banner.style.display = 'none'; return; }
 
   content.innerHTML = osVeiculo.map(o => {
-    const data = o.data ? new Date(o.data + 'T12:00:00').toLocaleDateString('pt-BR') : 'â€”';
-    const km   = o.km   ? ` Â· ${o.km} km` : '';
+    const data = o.data ? new Date(o.data + 'T12:00:00').toLocaleDateString('pt-BR') : '—';
+    const km   = o.km   ? ` · ${o.km} km` : '';
     const desc = (o.desc || o.relato || 'S/desc').substring(0, 70);
     const pecasStr = o.pecas?.filter(p=>p.desc).map(p=>p.desc).slice(0,3).join(', ');
     const servStr  = o.servicos?.filter(s=>s.desc).map(s=>s.desc).slice(0,3).join(', ');
     const detalhe  = pecasStr || servStr || '';
     return `<div style="padding:4px 0;border-bottom:1px solid rgba(255,184,0,0.08);font-size:0.76rem;">
-      <strong style="color:var(--warn);">${data}${km}</strong> â€” ${desc}
-      ${detalhe ? `<br><span style="color:var(--muted2);font-size:0.7rem;">â†³ ${detalhe}</span>` : ''}
+      <strong style="color:var(--warn);">${data}${km}</strong> — ${desc}
+      ${detalhe ? `<br><span style="color:var(--muted2);font-size:0.7rem;">↳ ${detalhe}</span>` : ''}
     </div>`;
   }).join('');
   banner.style.display = 'block';
@@ -2302,9 +2302,9 @@ document.addEventListener('change', function(e) {
   }
 });
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// MODAL IA â€” ABRIR/FECHAR (z-index 9999)
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════
+// MODAL IA — ABRIR/FECHAR (z-index 9999)
+// ═══════════════════════════════════════════════════════════════
 function abrirModalIA(subtitulo) {
   const el = document.getElementById('modalIaOS');
   if (!el) return;
@@ -2323,9 +2323,9 @@ function fecharModalIA() {
   }, 150);
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// IA ASSISTENTE DA O.S. (MODO CIRÃšRGICO SEM GOOGLE SEARCH)
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════
+// IA ASSISTENTE DA O.S. (MODO CIRÚRGICO SEM GOOGLE SEARCH)
+// ═══════════════════════════════════════════════════════════════
 let _iaOSMode = '', _iaOSSugestao = null;
 
 async function _iaConsultarOS(prompt, modo) {
@@ -2366,47 +2366,47 @@ async function _iaConsultarOS(prompt, modo) {
 }
 async function iaSugerirDiagnostico() {
   const problema = $v('osDesc');
-  if (!problema) { toast('âš  Descreva o problema primeiro.','warn'); return; }
+  if (!problema) { toast('⚠ Descreva o problema primeiro.','warn'); return; }
   const veiculo = document.getElementById('osVeiculo')?.options[document.getElementById('osVeiculo')?.selectedIndex]?.text || '';
   const km = $v('osKm'), tipo = $v('osTipo');
 
-  // Enriquecer com histÃ³rico real do veÃ­culo
+  // Enriquecer com histórico real do veículo
   const veiculoId = $v('osVeiculo');
   let histStr = '';
   if (veiculoId) {
     const hist = dbOS.filter(o=>o.veiculoId===veiculoId).sort((a,b)=>new Date(b.createdAt||0)-new Date(a.createdAt||0)).slice(0,5);
     if (hist.length) {
-      histStr = '\nHISTÃ“RICO DESTE VEÃCULO:\n' + hist.map(o=>`- ${o.data||'?'}: ${o.desc||''} | Diag: ${o.diagnostico||''} | PeÃ§as: ${(o.pecas||[]).map(p=>p.desc).join(', ')}`).join('\n');
+      histStr = '\nHISTÓRICO DESTE VEÍCULO:\n' + hist.map(o=>`- ${o.data||'?'}: ${o.desc||''} | Diag: ${o.diagnostico||''} | Peças: ${(o.pecas||[]).map(p=>p.desc).join(', ')}`).join('\n');
     }
   }
 
-  const prompt = `MecÃ¢nico precisa de diagnÃ³stico:\nVeÃ­culo: ${veiculo||tipo}\nKM: ${km||'N/I'}\nProblema: "${problema}"${histStr}\n\nForneÃ§a:\n1. **DIAGNÃ“STICO SUGERIDO** (1-2 linhas objetivas)\n2. **Causas provÃ¡veis** (lista)\n3. **Componentes a verificar** (lista)\n4. **Alerta de garantia** se o histÃ³rico mostrar peÃ§a jÃ¡ trocada recentemente`;
+  const prompt = `Mecânico precisa de diagnóstico:\nVeículo: ${veiculo||tipo}\nKM: ${km||'N/I'}\nProblema: "${problema}"${histStr}\n\nForneça:\n1. **DIAGNÓSTICO SUGERIDO** (1-2 linhas objetivas)\n2. **Causas prováveis** (lista)\n3. **Componentes a verificar** (lista)\n4. **Alerta de garantia** se o histórico mostrar peça já trocada recentemente`;
 
   const resp = await _iaConsultarOS(prompt, 'diag');
   if (!resp) return;
 
-  const match = resp.match(/DIAGNÃ“STICO SUGERIDO[:\s\*]*([\s\S]*?)(?=\n\n|\n\*\*|$)/i);
+  const match = resp.match(/DIAGNÓSTICO SUGERIDO[:\s\*]*([\s\S]*?)(?=\n\n|\n\*\*|$)/i);
   _iaOSSugestao = match ? match[1].trim().replace(/\*\*/g,'') : resp.split('\n').slice(0,3).join(' ').replace(/\*\*/g,'').substring(0,300);
 
   const html = resp.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong style="color:var(--cyan)">$1</strong>');
   document.getElementById('modalIaOSBody').innerHTML = `
-    <div style="font-family:var(--fm);font-size:0.6rem;color:#A78BFA;letter-spacing:1px;margin-bottom:12px;">ANÃLISE BASEADA NO PROBLEMA E HISTÃ“RICO</div>
+    <div style="font-family:var(--fm);font-size:0.6rem;color:#A78BFA;letter-spacing:1px;margin-bottom:12px;">ANÁLISE BASEADA NO PROBLEMA E HISTÓRICO</div>
     <div style="font-size:0.85rem;line-height:1.7;">${html}</div>
     <div style="margin-top:14px;padding:12px;background:rgba(167,139,250,0.08);border:1px solid rgba(167,139,250,0.2);border-radius:4px;">
-      <div style="font-family:var(--fm);font-size:0.58rem;color:#A78BFA;margin-bottom:6px;">SERÃ INSERIDO NO CAMPO DIAGNÃ“STICO:</div>
+      <div style="font-family:var(--fm);font-size:0.58rem;color:#A78BFA;margin-bottom:6px;">SERÁ INSERIDO NO CAMPO DIAGNÓSTICO:</div>
       <div style="font-size:0.82rem;line-height:1.5;">${_iaOSSugestao}</div>
     </div>`;
   document.getElementById('btnAplicarIaOS').style.display='';
-  document.getElementById('btnAplicarIaOS').innerText='âœ“ INSERIR NO DIAGNÃ“STICO';
+  document.getElementById('btnAplicarIaOS').innerText='✓ INSERIR NO DIAGNÓSTICO';
 }
 
 async function iaSugerirServicos() {
   const problema = $v('osDesc'), diag = $v('osDiag');
-  if (!problema && !diag) { toast('âš  Descreva o problema ou diagnÃ³stico.','warn'); return; }
+  if (!problema && !diag) { toast('⚠ Descreva o problema ou diagnóstico.','warn'); return; }
   const veiculo = document.getElementById('osVeiculo')?.options[document.getElementById('osVeiculo')?.selectedIndex]?.text || '';
   const km = $v('osKm'), tipo = $v('osTipo');
 
-  const prompt = `VeÃ­culo: ${veiculo||tipo} | KM: ${km||'N/I'}\nProblema: "${problema}"\nDiagnÃ³stico: "${diag||'nÃ£o preenchido'}"\n\nGere lista de SERVIÃ‡OS TÃ‰CNICOS a executar. Formato obrigatÃ³rio:\n- [nome do serviÃ§o objetivo]\nMÃ¡ximo 6 itens. Apenas nomes de serviÃ§os, sem descriÃ§Ã£o longa.`;
+  const prompt = `Veículo: ${veiculo||tipo} | KM: ${km||'N/I'}\nProblema: "${problema}"\nDiagnóstico: "${diag||'não preenchido'}"\n\nGere lista de SERVIÇOS TÉCNICOS a executar. Formato obrigatório:\n- [nome do serviço objetivo]\nMáximo 6 itens. Apenas nomes de serviços, sem descrição longa.`;
 
   const resp = await _iaConsultarOS(prompt, 'servicos');
   if (!resp) return;
@@ -2417,15 +2417,15 @@ async function iaSugerirServicos() {
 
   const html = resp.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong style="color:var(--cyan)">$1</strong>');
   document.getElementById('modalIaOSBody').innerHTML = `
-    <div style="font-family:var(--fm);font-size:0.6rem;color:#A78BFA;letter-spacing:1px;margin-bottom:12px;">SERVIÃ‡OS SUGERIDOS PELA IA</div>
+    <div style="font-family:var(--fm);font-size:0.6rem;color:#A78BFA;letter-spacing:1px;margin-bottom:12px;">SERVIÇOS SUGERIDOS PELA IA</div>
     <div style="font-size:0.85rem;line-height:1.7;">${html}</div>
     ${servicos.length?`<div style="margin-top:14px;padding:12px;background:rgba(0,255,136,0.06);border:1px solid rgba(0,255,136,0.15);border-radius:4px;">
-      <div style="font-family:var(--fm);font-size:0.58rem;color:var(--success);margin-bottom:6px;">${servicos.length} SERVIÃ‡O(S) SERÃƒO ADICIONADOS:</div>
-      ${servicos.map(s=>`<div style="font-size:0.8rem;padding:3px 0;border-bottom:1px solid rgba(255,255,255,0.04);">â€¢ ${s}</div>`).join('')}
+      <div style="font-family:var(--fm);font-size:0.58rem;color:var(--success);margin-bottom:6px;">${servicos.length} SERVIÇO(S) SERÃO ADICIONADOS:</div>
+      ${servicos.map(s=>`<div style="font-size:0.8rem;padding:3px 0;border-bottom:1px solid rgba(255,255,255,0.04);">• ${s}</div>`).join('')}
     </div>`:''}`;
   if (servicos.length) {
     document.getElementById('btnAplicarIaOS').style.display='';
-    document.getElementById('btnAplicarIaOS').innerText=`âœ“ ADICIONAR ${servicos.length} SERVIÃ‡O(S)`;
+    document.getElementById('btnAplicarIaOS').innerText=`✓ ADICIONAR ${servicos.length} SERVIÇO(S)`;
   }
 }
 
@@ -2434,10 +2434,10 @@ function aplicarSugestaoIA() {
     const el = document.getElementById('osDiag');
     const atual = el ? el.value.trim() : '';
     if (el) el.value = atual ? atual + '\n' + _iaOSSugestao : _iaOSSugestao;
-    toast('âœ“ DiagnÃ³stico inserido. Salvando O.S...', 'ok');
+    toast('✓ Diagnóstico inserido. Salvando O.S...', 'ok');
   } else if (_iaOSMode==='servicos' && Array.isArray(_iaOSSugestao) && _iaOSSugestao.length) {
     _iaOSSugestao.forEach(s => adicionarServico({desc:s, valor:0}));
-    toast(`âœ“ ${_iaOSSugestao.length} serviÃ§o(s) adicionado(s). Salvando O.S...`, 'ok');
+    toast(`✓ ${_iaOSSugestao.length} serviço(s) adicionado(s). Salvando O.S...`, 'ok');
   }
   
   fecharModalIA();
