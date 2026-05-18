@@ -794,7 +794,26 @@
     if (typeof W.thiaAudit === 'function') {
       W.thiaAudit('cotacao_pecas_enviada', 'ordens_servico', os.id, null, cotPayload, 'Envio de cotacao para fornecedores').catch(() => {});
     }
-    return { cotacaoId, fornecedores };
+    let valorIA = null;
+    if (typeof W.thiaValorIAAfterSalvarCotacao === 'function') {
+      try {
+        valorIA = await W.thiaValorIAAfterSalvarCotacao({
+          cotacaoId,
+          cotPayload,
+          itensPayload,
+          fornecedores,
+          itemKeys,
+          os,
+          expiraEm,
+          expiraDate,
+          criadoEm
+        });
+      } catch (err) {
+        console.warn('ValorIA nao recebeu a cotacao', err);
+        W.toast?.('Cotacao criada, mas o robo ValorIA nao recebeu a fila: ' + (err.message || err), 'warn');
+      }
+    }
+    return { cotacaoId, fornecedores, valorIA };
   }
 
   function renderMensagens(payload) {
@@ -812,6 +831,7 @@
         <button type="button" class="btn-ghost" onclick="window.copiarTodasMensagensCotacao()">Copiar todas</button>
       </div>
       <small style="display:block;color:var(--muted);font-family:var(--fm);font-size:.60rem;margin-bottom:8px;">WhatsApp Web/wa.me exige confirmacao humana por contato e o navegador pode bloquear varias abas; se isso acontecer, use Copiar todas ou abra uma por vez.</small>
+      ${payload.valorIA?.queueCount ? `<small style="display:block;color:var(--success);font-family:var(--fm);font-size:.62rem;margin-bottom:8px;font-weight:800;">ValorIA: ${payload.valorIA.queueCount} fornecedor(es) colocado(s) na fila do robo. As mensagens manuais continuam disponiveis como contingencia.</small>` : ''}
       ${state.mensagens.map((m, idx) => {
         const c = fornecedorContato(m.fornecedor);
         return `<div class="cot-msg-card">
