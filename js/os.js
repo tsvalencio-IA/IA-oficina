@@ -872,10 +872,10 @@ window.moverStatusOS = async function(id, novoStatus) {
         }
     }
 
-    // Equipe apenas avisa internamente. Gestor/admin confirma Pronto e pode enviar WhatsApp.
+    // No Jarvis, gestor/admin pode mover para Pronto e avisar cliente.
+    // Chat interno como "equipe" so deve nascer quando a equipe.html fizer a mudanca.
     if (novoStatus === 'Pronto' && statusAntes !== 'Pronto') {
         window.registrarAvisoClienteCRMOS?.(id, novoStatus, { origem: 'kanban', osPatch: updateStatus });
-        window.notificarAdminOSPronta?.(id, 'jarvis');
         if (usuarioPodeDispararWppProntoOS()) {
             setTimeout(() => window.dispararAvisoEntregaAutomatico?.(id, novoStatus), 300);
         }
@@ -2396,7 +2396,8 @@ window.salvarOS = async function() {
           }));
           registouAlgo = true;
           
-          // Equipe avisa internamente; admin/gestor confirma Pronto e pode abrir WhatsApp ao cliente.
+          // No Jarvis, gestor/admin pode marcar Pronto e abrir WhatsApp ao cliente.
+          // Nao gera mensagem fingindo origem do mecanico; equipe.html cuida desse aviso.
           if (payload.status === 'Orcamento_Enviado' && oldOS.status !== 'Orcamento_Enviado') {
               setTimeout(() => {
                   window.registrarAvisoClienteCRMOS?.(osId, 'Orcamento_Enviado', { origem: 'salvar_os', osPatch: payload });
@@ -2405,7 +2406,6 @@ window.salvarOS = async function() {
           }
           if (payload.status === 'Pronto' && oldOS.status !== 'Pronto') {
               dispararAvisoPronto = true;
-              window.notificarAdminOSPronta?.(osId, 'jarvis_salvar');
           }
           if ((payload.status === 'Entregue') && oldOS.status !== 'Entregue') {
               dispararAvisoEntrega = true;
@@ -4438,6 +4438,7 @@ async function _ciliaAdicionarPecas(pecas) {
 
 async function _ciliaGarantirTabelaTempa() {
   try {
+    if (typeof window.thiaModEnabled === 'function' && !window.thiaModEnabled('tabelaTempa')) return false;
     if (typeof window.tempaCarregar !== 'function' || typeof window.tempaBuscarPorTexto !== 'function') return false;
     await window.tempaCarregar();
     return !!window._tabelaTempa?.carregada;
@@ -4448,6 +4449,7 @@ async function _ciliaGarantirTabelaTempa() {
 }
 
 function _ciliaBuscarServicoTempa(peca, veiculoAtual) {
+  if (typeof window.thiaModEnabled === 'function' && !window.thiaModEnabled('tabelaTempa')) return null;
   if (typeof window.tempaBuscarPorTexto !== 'function') return null;
   const desc = String(peca?.desc || '').trim();
   const codigo = String(peca?.codigo || '').trim();

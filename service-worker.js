@@ -12,7 +12,7 @@
  *
  * Powered by thIAguinho Soluções Digitais
  */
-const CACHE_VERSION = 'thiaguinho-operacional-fiscal-financeiro-20260518-40';
+const CACHE_VERSION = 'thiaguinho-operacional-fiscal-financeiro-20260518-41';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -49,9 +49,12 @@ const PRECACHE_URLS_RAW = [
   './js/config.js',
   './js/links-publicos.js',
   './js/tenant-modules.js',
+  './js/brasil-cadastros.js',
   './js/hardening-comercial.js',
   './js/uix-theme-fix.js',
   './js/hardening-operacional-20260515.js',
+  './js/operacional-cadastros-nf-fix-20260518.js',
+  './js/superadmin-cadastros-fix-20260518.js',
   './js/theme.js',
   './js/fiscal.js',
   './js/final-1010-regras-os.js',

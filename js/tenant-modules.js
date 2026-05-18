@@ -176,6 +176,15 @@
     st.id = 'thiaTenantModulesCss';
     st.textContent = `
       body[data-mod-tabela-tempa="off"] #navTabelaTempa,
+      body[data-mod-tabela-tempa="off"] #s-tabelatempa,
+      body[data-mod-tabela-tempa="off"] #tempaSearch,
+      body[data-mod-tabela-tempa="off"] #tempaSistema,
+      body[data-mod-tabela-tempa="off"] #tempaTbody,
+      body[data-mod-tabela-tempa="off"] .tempa-inline-box,
+      body[data-mod-tabela-tempa="off"] .serv-tempa-busca,
+      body[data-mod-tabela-tempa="off"] .serv-tempa-aplicar,
+      body[data-mod-tabela-tempa="off"] .serv-tempa-resultados-list,
+      body[data-mod-tabela-tempa="off"] .serv-tempa-meta,
       body[data-mod-tabela-tempa="off"] [onclick*="_tempaSugerir"],
       body[data-mod-tabela-tempa="off"] [onclick*="tempa"],
       body[data-mod-cilia="off"] [id*="cilia" i],
