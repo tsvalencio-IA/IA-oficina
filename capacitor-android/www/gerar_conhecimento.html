@@ -71,9 +71,9 @@
                     <i class="ph ph-database text-3xl text-slate-400"></i>
                     <div class="space-y-1 relative z-10">
                         <p class="drop-copy text-xs font-semibold text-slate-300">Arraste arquivos ou clique</p>
-                        <p class="text-[10px] text-slate-500">Suporta: PDF, APK, TXT e CSV</p>
+                        <p class="text-[10px] text-slate-500">PDF, APK, ZIP, XLSX, DOCX, EXE, TXT, CSV, JSON</p>
                     </div>
-                    <input type="file" id="fileInput" class="hidden" accept=".apk,.db,.sqlite,.pdf,.txt,.csv">
+                    <input type="file" id="fileInput" class="hidden" accept=".apk,.aab,.zip,.jar,.docx,.xlsx,.exe,.dll,.msi,.db,.sqlite,.pdf,.txt,.csv,.json,.xml,.html,.htm,.png,.jpg,.jpeg">
                 </div>
             </div>
 
@@ -131,6 +131,17 @@
                     <textarea id="inpProcedimentos" rows="4" class="w-full input-bg rounded-lg p-3 text-xs resize-y" oninput="updateJSON()"></textarea>
                 </div>
 
+                <div class="editor-grid grid gap-6">
+                    <div class="space-y-2">
+                        <label class="header-text flex items-center justify-between">Fontes Importadas</label>
+                        <textarea id="inpFontes" rows="4" class="w-full input-bg rounded-lg p-3 text-xs resize-y" oninput="updateJSON()" placeholder="Preenchido automaticamente com nome, tipo e resumo dos arquivos analisados."></textarea>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="header-text flex items-center justify-between">Dúvidas / Divergências para Validar</label>
+                        <textarea id="inpPendencias" rows="4" class="w-full input-bg rounded-lg p-3 text-xs resize-y" oninput="updateJSON()" placeholder="Quando o gerador encontrar possível conflito, registre aqui a pergunta para o Superadmin/Jarvis responder."></textarea>
+                    </div>
+                </div>
+
                 <!-- Painel JSON -->
                 <div class="space-y-2 pt-4">
                     <label class="header-text text-blue-400">JSON COMPLETO (REALTIME)</label>
@@ -157,10 +168,15 @@
             catalogos: document.getElementById('inpCatalogos'),
             erros: document.getElementById('inpErros'),
             regras: document.getElementById('inpRegras'),
-            procedimentos: document.getElementById('inpProcedimentos')
+            procedimentos: document.getElementById('inpProcedimentos'),
+            fontes: document.getElementById('inpFontes'),
+            pendencias: document.getElementById('inpPendencias')
         };
         const jsonOutput = document.getElementById('jsonOutput');
         const terminal = document.getElementById('terminalOutput');
+        const MAX_TEXT_BYTES = 2_000_000;
+        const MAX_ARCHIVE_FILES = 180;
+        const state = { fontes: [], pendencias: [] };
 
         function clearField(id) { document.getElementById(id).value = ''; updateJSON(); }
 
@@ -175,7 +191,7 @@
         }
 
         // ==========================================
-        // LÓGICA DE EXTRAÇÃO REAL DE FICHEIROS
+        // LÓGICA DE EXTRAÇÃO REAL DE ARQUIVOS
         // ==========================================
         const fileInput = document.getElementById('fileInput');
         const dropZone = document.getElementById('dropZone');
@@ -199,7 +215,8 @@
             try {
                 let extractedText = "";
 
-                if (file.type === "application/pdf" || file.name.endsWith('.pdf')) {
+                const ext = getExt(file.name);
+                if (file.type === "application/pdf" || ext === 'pdf') {
                     addLog("Formato PDF detectado. Extraindo texto com pdf.js...");
                     extractedText = await extractRealPDF(file);
                 } 
@@ -207,9 +224,13 @@
                     addLog("Imagem detectada. OCR externo está desativado neste gerador local.");
                     extractedText = extractImageLocalHint(file);
                 } 
-                else if (file.name.endsWith('.apk')) {
-                    addLog("APK detectado. Descompactando com JSZip...");
-                    extractedText = await extractRealAPK(file);
+                else if (['apk','aab','zip','jar','docx','xlsx'].includes(ext)) {
+                    addLog(ext.toUpperCase() + " detectado. Abrindo estrutura compactada com JSZip...");
+                    extractedText = await extractArchive(file, ext);
+                }
+                else if (['exe','dll','msi','bin','db','sqlite'].includes(ext)) {
+                    addLog(ext.toUpperCase() + " detectado. Extraindo assinaturas e strings legíveis sem executar o arquivo...");
+                    extractedText = await extractBinaryKnowledge(file, ext);
                 }
                 else {
                     addLog("Lendo como texto/csv bruto...");
@@ -222,9 +243,8 @@
 
                 addLog("Extração concluída com sucesso!", "success");
                 
-                // INJETA O TEXTO REAL NA CAIXA DE EDIÇÃO
-                const prefix = `\n\n--- DADOS EXTRAÍDOS DE ${file.name} ---\n`;
-                inputs.catalogos.value = inputs.catalogos.value + prefix + extractedText;
+                const pacote = buildKnowledgePackage(file, ext, extractedText);
+                appendKnowledgePackage(pacote);
                 
                 // Pisca a textarea para mostrar onde o texto caiu
                 inputs.catalogos.classList.add('ring-2', 'ring-blue-500');
@@ -258,32 +278,149 @@
             return fullText;
         }
 
-        // --- 2. Extração REAL de APK (Usando JSZip para abrir a estrutura) ---
-        async function extractRealAPK(file) {
+        function getExt(name) {
+            return String(name || '').split('.').pop().toLowerCase();
+        }
+
+        function simpleHash(text) {
+            let h = 2166136261;
+            const s = String(text || '');
+            for (let i = 0; i < s.length; i++) {
+                h ^= s.charCodeAt(i);
+                h += (h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24);
+            }
+            return (h >>> 0).toString(16).padStart(8, '0');
+        }
+
+        function cleanExtractedText(text) {
+            return String(text || '')
+                .replace(/\u0000/g, ' ')
+                .replace(/[ \t]{2,}/g, ' ')
+                .replace(/\n{4,}/g, '\n\n')
+                .trim()
+                .slice(0, MAX_TEXT_BYTES);
+        }
+
+        function likelyTextFile(name) {
+            return /\.(txt|csv|json|xml|html|htm|md|ini|cfg|properties|sql|log|yml|yaml)$/i.test(name);
+        }
+
+        function xmlToText(xml) {
+            return String(xml || '')
+                .replace(/<[^>]+>/g, ' ')
+                .replace(/&amp;/g, '&')
+                .replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>')
+                .replace(/&quot;/g, '"')
+                .replace(/&#39;/g, "'")
+                .replace(/\s+/g, ' ')
+                .trim();
+        }
+
+        function stringsFromBytes(bytes, minLen = 5) {
+            const ascii = [];
+            let cur = '';
+            for (let i = 0; i < bytes.length; i++) {
+                const b = bytes[i];
+                if (b >= 32 && b <= 126) cur += String.fromCharCode(b);
+                else {
+                    if (cur.length >= minLen) ascii.push(cur);
+                    cur = '';
+                }
+            }
+            if (cur.length >= minLen) ascii.push(cur);
+
+            const utf16 = [];
+            cur = '';
+            for (let i = 0; i < bytes.length - 1; i += 2) {
+                const b = bytes[i], z = bytes[i + 1];
+                if (z === 0 && b >= 32 && b <= 126) cur += String.fromCharCode(b);
+                else {
+                    if (cur.length >= minLen) utf16.push(cur);
+                    cur = '';
+                }
+            }
+            if (cur.length >= minLen) utf16.push(cur);
+
+            return Array.from(new Set([...ascii, ...utf16]))
+                .filter(s => !/^[\W_]+$/.test(s))
+                .slice(0, 600)
+                .join('\n');
+        }
+
+        // --- 2. Extração de compactados: APK, ZIP, JAR, DOCX, XLSX ---
+        async function extractArchive(file, ext) {
             const zip = new JSZip();
             addLog("Carregando estrutura do ZIP/APK...");
             const contents = await zip.loadAsync(file);
-            
-            let resultText = "ESTRUTURA DO APK ENCONTRADA:\n";
+            const names = Object.keys(contents.files).filter(n => !contents.files[n].dir);
+            let resultText = "ESTRUTURA DO ARQUIVO ENCONTRADA:\n";
             let dbCount = 0;
+            let textCount = 0;
+            let readCount = 0;
+            const picked = [];
 
-            // Percorre os arquivos dentro do APK para encontrar bases de dados ou XMLs úteis
-            for (const filename of Object.keys(contents.files)) {
-                if (filename.includes('assets/') || filename.includes('res/')) {
-                    if (filename.endsWith('.db') || filename.endsWith('.sqlite')) {
-                        resultText += `[BASE DE DADOS] Localizada: ${filename}\n`;
-                        dbCount++;
-                    } else if (filename.endsWith('.xml') && !filename.includes('drawable')) {
-                        // Opcional: extrair texto de alguns XMLs pequenos
-                         resultText += `[XML] Localizado: ${filename}\n`;
+            resultText += names.slice(0, 120).map(n => '- ' + n).join('\n');
+            if (names.length > 120) resultText += `\n... ${names.length - 120} arquivos omitidos no índice.`;
+
+            for (const filename of names.slice(0, MAX_ARCHIVE_FILES)) {
+                const entry = contents.files[filename];
+                const low = filename.toLowerCase();
+                if (/\.(db|sqlite)$/i.test(low)) dbCount++;
+                if (ext === 'docx' && low === 'word/document.xml') {
+                    const xml = await entry.async('text');
+                    picked.push('\n[DOCX word/document.xml]\n' + xmlToText(xml));
+                    textCount++;
+                    continue;
+                }
+                if (ext === 'xlsx' && (low === 'xl/sharedstrings.xml' || low.startsWith('xl/worksheets/'))) {
+                    const xml = await entry.async('text');
+                    picked.push('\n[XLSX ' + filename + ']\n' + xmlToText(xml));
+                    textCount++;
+                    continue;
+                }
+                if (likelyTextFile(filename) && readCount < 55) {
+                    const txt = await entry.async('text').catch(() => '');
+                    if (txt && txt.trim()) {
+                        picked.push('\n[' + filename + ']\n' + cleanExtractedText(txt).slice(0, 16000));
+                        textCount++;
                     }
+                    readCount++;
+                    continue;
+                }
+                if ((/assets|res|catalog|catalogo|parts|pecas|produtos|precos|price|tabela|manual|dados/i.test(filename)) && readCount < 70) {
+                    const bytes = await entry.async('uint8array').catch(() => null);
+                    if (bytes && bytes.length) {
+                        const strings = stringsFromBytes(bytes.slice(0, 900000));
+                        if (strings) picked.push('\n[STRINGS ' + filename + ']\n' + strings.slice(0, 16000));
+                    }
+                    readCount++;
                 }
             }
 
-            resultText += `\nTotal de bases de dados (SQLite) encontradas: ${dbCount}\n`;
-            resultText += "Nota: Para ler o conteúdo das bases de dados SQLite do APK diretamente, é necessário processamento backend (Python). O front-end localizou os arquivos com sucesso.";
-            
-            return resultText;
+            resultText += `\n\nResumo técnico: ${names.length} arquivo(s) internos; ${textCount} arquivo(s) textuais extraídos; ${dbCount} base(s) SQLite detectada(s).\n`;
+            if (dbCount) resultText += "Atenção: bases SQLite foram detectadas, mas leitura relacional profunda exige processamento backend. O navegador extraiu nomes e strings úteis sem executar código.\n";
+            resultText += picked.join('\n');
+            return cleanExtractedText(resultText);
+        }
+
+        async function extractBinaryKnowledge(file, ext) {
+            const max = Math.min(file.size, 14 * 1024 * 1024);
+            const bytes = new Uint8Array(await file.slice(0, max).arrayBuffer());
+            const signature = Array.from(bytes.slice(0, 16)).map(b => b.toString(16).padStart(2, '0')).join(' ');
+            const isPE = bytes[0] === 0x4d && bytes[1] === 0x5a;
+            const strings = stringsFromBytes(bytes);
+            return cleanExtractedText([
+                'ARQUIVO BINÁRIO ANALISADO SEM EXECUÇÃO',
+                'Nome: ' + file.name,
+                'Extensão: ' + ext,
+                'Tamanho lido: ' + max + ' bytes de ' + file.size,
+                'Assinatura inicial: ' + signature,
+                isPE ? 'Formato provável: Windows PE/EXE/DLL.' : 'Formato PE não confirmado pelos primeiros bytes.',
+                '',
+                'STRINGS LEGÍVEIS EXTRAÍDAS:',
+                strings || 'Nenhuma string útil encontrada no trecho analisado.'
+            ].join('\n'));
         }
 
         // --- 3. Imagem sem provedor externo ---
@@ -294,6 +431,66 @@
                 "Se esta imagem tiver tabela, manual, etiqueta ou catálogo, transcreva o conteúdo relevante neste campo ou converta o arquivo para PDF/texto antes de importar.",
                 "Campos sugeridos: código da peça, descrição, aplicação, marca, modelo, ano, observação técnica e fonte."
             ].join("\n");
+        }
+
+        function lines(text) {
+            return String(text || '').split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+        }
+
+        function detectDivergences(newText) {
+            const oldLines = new Set(lines(inputs.catalogos.value).map(s => s.toLowerCase()));
+            const found = [];
+            lines(newText).forEach(line => {
+                const code = line.match(/\b[A-Z0-9][A-Z0-9.\-\/]{4,}\b/);
+                if (!code) return;
+                const c = code[0].toLowerCase();
+                const old = Array.from(oldLines).find(x => x.includes(c));
+                if (old && old !== line.toLowerCase()) {
+                    found.push('Validar possível divergência para código ' + code[0] + ': novo="' + line.slice(0, 180) + '" | existente="' + old.slice(0, 180) + '"');
+                }
+            });
+            return found.slice(0, 40);
+        }
+
+        function buildKnowledgePackage(file, ext, extractedText) {
+            const text = cleanExtractedText(extractedText);
+            const divergencias = detectDivergences(text);
+            return {
+                versao: 1,
+                escopo: inputs.escopo.value || 'tenant',
+                comportamento: { tom: inputs.tom.value || 'direto', permitirPiadas: false },
+                fonte: {
+                    nome: file.name,
+                    tipo: ext || file.type || 'desconhecido',
+                    tamanho: file.size,
+                    hashTexto: simpleHash(text),
+                    importadoEm: new Date().toISOString()
+                },
+                catalogos: text,
+                conhecimento: lines(text).slice(0, 900).map((linha, idx) => ({
+                    id: simpleHash(file.name + ':' + idx + ':' + linha),
+                    fonte: file.name,
+                    texto: linha
+                })),
+                pendenciasConhecimento: divergencias.map((d, idx) => ({
+                    id: simpleHash(file.name + ':div:' + idx + ':' + d),
+                    pergunta: d,
+                    status: 'pendente',
+                    origem: file.name,
+                    criadaEm: new Date().toISOString()
+                })),
+                atualizadoEm: new Date().toISOString()
+            };
+        }
+
+        function appendKnowledgePackage(pkg) {
+            const prefix = `\n\n--- DADOS EXTRAÍDOS DE ${pkg.fonte.nome} | ${pkg.fonte.tipo} | hash ${pkg.fonte.hashTexto} ---\n`;
+            inputs.catalogos.value = inputs.catalogos.value + prefix + pkg.catalogos;
+            state.fontes.push(pkg.fonte);
+            state.pendencias.push(...(pkg.pendenciasConhecimento || []));
+            inputs.fontes.value = state.fontes.map(f => `${f.importadoEm} | ${f.nome} | ${f.tipo} | ${f.tamanho} bytes | hash ${f.hashTexto}`).join('\n');
+            inputs.pendencias.value = state.pendencias.map(p => p.pergunta || p).join('\n');
+            addLog(`Conhecimento gerado: ${pkg.conhecimento.length} linha(s), ${pkg.pendenciasConhecimento.length} pendência(s).`, pkg.pendenciasConhecimento.length ? 'error' : 'success');
         }
 
         // ==========================================
@@ -316,6 +513,8 @@
                 procedimentos: splitByLine(inputs.procedimentos.value),
                 diagnosticos: [],
                 conhecimento: splitByLine(inputs.catalogos.value), // Usa o texto bruto como arrays de conhecimento
+                fontes: splitByLine(inputs.fontes.value),
+                pendenciasConhecimento: splitByLine(inputs.pendencias.value).map(p => ({ pergunta: p, status: "pendente" })),
                 atualizadoEm: new Date().toISOString()
             };
 

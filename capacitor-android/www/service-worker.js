@@ -12,7 +12,7 @@
  *
  * Powered by thIAguinho Soluções Digitais
  */
-const CACHE_VERSION = 'thiaguinho-operacional-fiscal-financeiro-20260518-43';
+const CACHE_VERSION = 'thiaguinho-operacional-fiscal-financeiro-20260518-44';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -65,7 +65,14 @@ const PRECACHE_URLS_RAW = [
   './assets/templates/I-30003_PLANILHA_DE_CUSTOS.xlsx',
   './data/tabela-tempa.min.json',
   './elm327-service.js',
-  './elm-bridge.js'
+  './elm-bridge.js',
+  './scripts/devtools/README_DEVTOOLS_TESTES.txt',
+  './scripts/devtools/TESTE_DEVTOOLS_SUPERADMIN.js',
+  './scripts/devtools/TESTE_DEVTOOLS_JARVIS.js',
+  './scripts/devtools/TESTE_DEVTOOLS_EQUIPE.js',
+  './scripts/devtools/TESTE_DEVTOOLS_CLIENTE.js',
+  './scripts/devtools/TESTE_DEVTOOLS_CLIENTEOFICIAL.js',
+  './scripts/devtools/GERAR_TENANT_TESTE_300_FLUXO.js'
 ];
 const SW_BASE = self.location.pathname.includes('/js/service-worker.js') ? '../' : './';
 const PRECACHE_URLS = PRECACHE_URLS_RAW.map(url => url === './' ? SW_BASE : SW_BASE + url.replace(/^\.\//, ''));

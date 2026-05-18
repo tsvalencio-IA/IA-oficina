@@ -177,6 +177,10 @@
       procedimentos: asArray(obj.procedimentos || fallback?.procedimentos),
       diagnosticos: asArray(obj.diagnosticos || fallback?.diagnosticos),
       conhecimento: asArray(obj.conhecimento || fallback?.conhecimento),
+      fontes: asArray(obj.fontes || fallback?.fontes),
+      pendenciasConhecimento: asArray(obj.pendenciasConhecimento || obj.pendencias || fallback?.pendenciasConhecimento),
+      duvidasResolvidas: asArray(obj.duvidasResolvidas || fallback?.duvidasResolvidas),
+      conflitosConhecimento: asArray(obj.conflitosConhecimento || fallback?.conflitosConhecimento),
       atualizadoEm: obj.atualizadoEm || new Date().toISOString()
     };
   }
@@ -228,6 +232,8 @@
       regras: [...asArray(global?.regras), ...asArray(tenant?.regras)],
       procedimentos: [...asArray(global?.procedimentos), ...asArray(tenant?.procedimentos)],
       diagnosticos: [...asArray(global?.diagnosticos), ...asArray(tenant?.diagnosticos)],
+      pendenciasConhecimento: [...asArray(global?.pendenciasConhecimento), ...asArray(tenant?.pendenciasConhecimento)],
+      duvidasResolvidas: [...asArray(global?.duvidasResolvidas), ...asArray(tenant?.duvidasResolvidas)],
       textos: uniq([
         global?.contexto, global?.catalogos, global?.erros,
         tenant?.contexto, tenant?.catalogos, tenant?.erros
@@ -482,6 +488,36 @@
   W.thiaCarregarCerebroGlobal = carregarCerebroGlobal;
   W.thiaResponderLocal = thiaResponderLocal;
   W.thiaIAAsk = thiaIAAsk;
+  W.thiaResponderPendenciaConhecimento = async function (pergunta, resposta) {
+    const J = getJ();
+    const database = W.db || J.db;
+    const textoPergunta = String(pergunta || '').trim();
+    const textoResposta = String(resposta || '').trim();
+    if (!textoPergunta || !textoResposta) throw new Error('Informe pergunta/pendencia e resposta validada.');
+    const payload = {
+      tenantId: J.tid || '',
+      pergunta: textoPergunta,
+      resposta: textoResposta,
+      respondidoPor: J.nome || J.usuario || J.role || 'jarvis',
+      perfil: J.role || 'jarvis',
+      origem: 'jarvis_validacao_conhecimento',
+      createdAt: new Date().toISOString()
+    };
+    if (database) {
+      await database.collection('cerebro_respostas').add(payload);
+      const FieldValue = W.firebase?.firestore?.FieldValue;
+      if (FieldValue && J.tid) {
+        const item = Object.assign({ atualizadoEm: payload.createdAt }, payload);
+        try { await database.collection('oficinas').doc(J.tid).set({ brain: { duvidasResolvidas: FieldValue.arrayUnion(item), atualizadoEm: payload.createdAt } }, { merge: true }); } catch (_) {}
+        try { await database.collection('tenants').doc(J.tid).set({ brain: { duvidasResolvidas: FieldValue.arrayUnion(item), atualizadoEm: payload.createdAt } }, { merge: true }); } catch (_) {}
+      }
+    }
+    const ofi = J.oficina = J.oficina || {};
+    ofi.brain = ofi.brain || ofi.cerebro || {};
+    ofi.brain.duvidasResolvidas = asArray(ofi.brain.duvidasResolvidas);
+    ofi.brain.duvidasResolvidas.push(payload);
+    return payload;
+  };
 
   W.iaPerguntar = function () { return thiaIAAsk('iaInput', podeFinanceiro({ perfil: getJ().role }) ? 'jarvis' : getJ().role); };
   W.iaEnviar = function () { return thiaIAAsk('iaInput', 'equipe'); };
