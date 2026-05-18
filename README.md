@@ -1,40 +1,40 @@
-﻿# JARVIS ERP V2 â€” Sistema de GestÃ£o Automotiva
+# JARVIS ERP V2 — Sistema de Gestão Automotiva
 
-**Sistema 100% funcional para GitHub Pages** â€” Vanilla JavaScript + Firestore + IA Local
+**Sistema 100% funcional para GitHub Pages** — Vanilla JavaScript + Firestore + IA Local
 
 ---
 
-## ðŸ“‹ Estrutura de Arquivos
+## 📋 Estrutura de Arquivos
 
 ```
 JARVIS_V2_FINAL/
-â”œâ”€â”€ index.html              # Login (Master + Equipe + PIN)
-â”œâ”€â”€ jarvis.html             # Dashboard Admin
-â”œâ”€â”€ equipe.html             # Painel Equipe
-â”œâ”€â”€ css/
-â”‚   â””â”€â”€ design.css          # Design System Dark Mode Premium
-â”œâ”€â”€ js/
-â”‚   â”œâ”€â”€ config.js           # Firebase + White-label
-â”‚   â”œâ”€â”€ core.js             # Namespace J + Listeners Firestore
-â”‚   â”œâ”€â”€ auth.js             # AutenticaÃ§Ã£o hÃ­brida
-â”‚   â”œâ”€â”€ os.js               # Ordens de ServiÃ§o (Kanban)
-â”‚   â”œâ”€â”€ financeiro.js       # DRE + Parcelamento + NF
-â”‚   â””â”€â”€ ia.js               # IA local \+ cérebro JSON
-â””â”€â”€ README.md               # Este arquivo
+├── index.html              # Login (Master + Equipe + PIN)
+├── jarvis.html             # Dashboard Admin
+├── equipe.html             # Painel Equipe
+├── css/
+│   └── design.css          # Design System Dark Mode Premium
+├── js/
+│   ├── config.js           # Firebase + White-label
+│   ├── core.js             # Namespace J + Listeners Firestore
+│   ├── auth.js             # Autenticação híbrida
+│   ├── os.js               # Ordens de Serviço (Kanban)
+│   ├── financeiro.js       # DRE + Parcelamento + NF
+│   └── ia.js               # IA local \+ cérebro JSON
+└── README.md               # Este arquivo
 ```
 
 ---
 
-## ðŸš€ Deployment no GitHub Pages
+## 🚀 Deployment no GitHub Pages
 
-### 1. Preparar RepositÃ³rio
+### 1. Preparar Repositório
 
 ```bash
 # Clonar este projeto
 git clone https://github.com/tsvalencio-ia/OFICIN-IA.git
 cd OFICIN-IA
 
-# Criar branch gh-pages (se nÃ£o existir)
+# Criar branch gh-pages (se não existir)
 git checkout --orphan gh-pages
 git reset --hard
 git commit --allow-empty -m "Initial commit"
@@ -43,12 +43,12 @@ git push -u origin gh-pages
 
 ### 2. Copiar Arquivos
 
-Copie todos os arquivos de `JARVIS_V2_FINAL/` para a raiz do repositÃ³rio.
+Copie todos os arquivos de `JARVIS_V2_FINAL/` para a raiz do repositório.
 
 ### 3. Configurar GitHub Pages
 
-No repositÃ³rio:
-- **Settings** â†’ **Pages**
+No repositório:
+- **Settings** → **Pages**
 - Source: `Deploy from a branch`
 - Branch: `gh-pages` / `root`
 - Salvar
@@ -61,17 +61,17 @@ git commit -m "Deploy JARVIS ERP V2"
 git push origin gh-pages
 ```
 
-Seu site estarÃ¡ disponÃ­vel em: `https://tsvalencio-ia.github.io/OFICIN-IA/`
+Seu site estará disponível em: `https://tsvalencio-ia.github.io/OFICIN-IA/`
 
 ---
 
-## ðŸ” ConfiguraÃ§Ã£o do Firebase
+## 🔐 Configuração do Firebase
 
 ### 1. Criar Projeto Firebase
 
 1. Acesse [Firebase Console](https://console.firebase.google.com)
 2. Crie um novo projeto
-3. Ative **Firestore Database** (modo teste ou produÃ§Ã£o)
+3. Ative **Firestore Database** (modo teste ou produção)
 4. Copie as credenciais
 
 ### 2. Atualizar `js/config.js`
@@ -89,39 +89,39 @@ window.JARVIS_FB_CONFIG = {
 
 ### 3. Estrutura Firestore
 
-Crie as coleÃ§Ãµes:
+Crie as coleções:
 
 ```
 oficinas/
-â”œâ”€â”€ {id_oficina}/
-â”‚   â”œâ”€â”€ nomeFantasia: "Oficina XYZ"
-â”‚   â”œâ”€â”€ usuario: "admin"
-â”‚   â”œâ”€â”€ senha: "senha123"
-â”‚   â”œâ”€â”€ status: "Ativo"
-â”‚   â”œâ”€â”€ brandColor: "#3B82F6"
-â”‚   â”œâ”€â”€ apiKeys: {
-â”‚   â”‚   IA Local: "CEREBRO_JSON",
-â”‚   â”‚   cloudName: "seu-cloudinary",
-â”‚   â”‚   cloudPreset: "seu-preset"
-â”‚   â”‚ }
-â”‚   â””â”€â”€ subcoleÃ§Ãµes:
-â”‚       â”œâ”€â”€ ordens_servico/
-â”‚       â”œâ”€â”€ clientes/
-â”‚       â”œâ”€â”€ veiculos/
-â”‚       â”œâ”€â”€ funcionarios/
-â”‚       â”œâ”€â”€ estoqueItems/
-â”‚       â”œâ”€â”€ financeiro/
-â”‚       â”œâ”€â”€ fornecedores/
-â”‚       â”œâ”€â”€ mensagens/
-â”‚       â”œâ”€â”€ chat_equipe/
-â”‚       â”œâ”€â”€ agendamentos/
-â”‚       â”œâ”€â”€ conhecimento_ia/
-â”‚       â””â”€â”€ lixeira_auditoria/
+├── {id_oficina}/
+│   ├── nomeFantasia: "Oficina XYZ"
+│   ├── usuario: "admin"
+│   ├── senha: "senha123"
+│   ├── status: "Ativo"
+│   ├── brandColor: "#3B82F6"
+│   ├── apiKeys: {
+│   │   IA Local: "CEREBRO_JSON",
+│   │   cloudName: "seu-cloudinary",
+│   │   cloudPreset: "seu-preset"
+│   │ }
+│   └── subcoleções:
+│       ├── ordens_servico/
+│       ├── clientes/
+│       ├── veiculos/
+│       ├── funcionarios/
+│       ├── estoqueItems/
+│       ├── financeiro/
+│       ├── fornecedores/
+│       ├── mensagens/
+│       ├── chat_equipe/
+│       ├── agendamentos/
+│       ├── conhecimento_ia/
+│       └── lixeira_auditoria/
 ```
 
 ---
 
-## ðŸ¤– Configurar IA Local
+## 🤖 Configurar IA Local
 
 1. Acesse [Google AI Studio](https://aistudio.google.com/app/apikeys)
 2. Crie uma chave de API
@@ -129,7 +129,7 @@ oficinas/
 
 ---
 
-## ðŸ‘¥ Criar UsuÃ¡rios
+## 👥 Criar Usuários
 
 ### Admin (Master)
 
@@ -143,7 +143,7 @@ oficinas/
 }
 ```
 
-### FuncionÃ¡rio (Equipe)
+### Funcionário (Equipe)
 
 ```javascript
 // Firestore: oficinas/{id}/funcionarios/{id}
@@ -151,7 +151,7 @@ oficinas/
   usuario: "joao",
   senha: "senha123",
   pin: "1234",
-  nome: "JoÃ£o Silva",
+  nome: "João Silva",
   cargo: "mecanico",
   comissao: 10,
   tenantId: "{id_oficina}"
@@ -160,46 +160,46 @@ oficinas/
 
 ---
 
-## ðŸ“Š MÃ³dulos Implementados
+## 📊 Módulos Implementados
 
-### âœ… AutenticaÃ§Ã£o
+### ✅ Autenticação
 - Login Master (Admin)
-- Login Equipe (FuncionÃ¡rio)
-- Login com PIN (4 dÃ­gitos)
-- SessÃ£o persistente (sessionStorage)
+- Login Equipe (Funcionário)
+- Login com PIN (4 dígitos)
+- Sessão persistente (sessionStorage)
 
-### âœ… Ordens de ServiÃ§o
+### ✅ Ordens de Serviço
 - Kanban visual com 6 status
 - CRUD completo
-- AtribuiÃ§Ã£o de mecÃ¢nicos
+- Atribuição de mecânicos
 - Dashboard com resumos
 
-### âœ… Financeiro
-- DRE (Entradas Ã— SaÃ­das)
-- LanÃ§amentos manuais
-- NF Entrada com **parcelamento automÃ¡tico**
-- ComissÃµes por mecÃ¢nico
+### ✅ Financeiro
+- DRE (Entradas × Saídas)
+- Lançamentos manuais
+- NF Entrada com **parcelamento automático**
+- Comissões por mecânico
 - Status: Pago/Pendente
 
-### âœ… IA (RAG)
+### ✅ IA (RAG)
 - IA local integrada
-- Contexto dinÃ¢mico (dados da oficina)
-- Base de conhecimento tÃ©cnico
+- Contexto dinâmico (dados da oficina)
+- Base de conhecimento técnico
 - Chat com admin
 
-### âœ… Estoque
+### ✅ Estoque
 - CRUD de itens
-- Controle de mÃ­nimo
-- SugestÃ£o automÃ¡tica em NF
+- Controle de mínimo
+- Sugestão automática em NF
 
-### âœ… Clientes & Equipe
+### ✅ Clientes & Equipe
 - Cadastro completo
-- VinculaÃ§Ã£o com O.S.
-- Chat CRM (admin â†” cliente)
+- Vinculação com O.S.
+- Chat CRM (admin ↔ cliente)
 
 ---
 
-## ðŸŽ¨ CustomizaÃ§Ã£o
+## 🎨 Customização
 
 ### Cores (White-Label)
 
@@ -230,34 +230,34 @@ Modifique `css/design.css`:
 
 ---
 
-## ðŸ”§ Troubleshooting
+## 🔧 Troubleshooting
 
 ### "Erro ao conectar com o servidor"
 - Verifique credenciais do Firebase em `js/config.js`
-- Confirme que Firestore estÃ¡ ativo
-- Verifique regras de seguranÃ§a (modo teste = aberto)
+- Confirme que Firestore está ativo
+- Verifique regras de segurança (modo teste = aberto)
 
-### "API Key invÃ¡lida"
+### "API Key inválida"
 - Gere nova chave em [Google AI Studio](https://aistudio.google.com/app/apikeys)
 - Salve em `oficinas/{id}/apiKeys/IA Local`
 
-### Dados nÃ£o aparecem
-- Abra DevTools (F12) â†’ Console
-- Verifique se hÃ¡ erros de Firestore
-- Confirme que `tenantId` estÃ¡ correto
+### Dados não aparecem
+- Abra DevTools (F12) → Console
+- Verifique se há erros de Firestore
+- Confirme que `tenantId` está correto
 
 ---
 
-## ðŸ“± Responsividade
+## 📱 Responsividade
 
 Sistema otimizado para:
-- âœ… Desktop (1920px+)
-- âœ… Tablet (768px - 1024px)
-- âœ… Mobile (320px - 767px)
+- ✅ Desktop (1920px+)
+- ✅ Tablet (768px - 1024px)
+- ✅ Mobile (320px - 767px)
 
 ---
 
-## ðŸ”’ SeguranÃ§a
+## 🔒 Segurança
 
 ### Regras Firestore (Modo Teste)
 
@@ -272,37 +272,37 @@ service cloud.firestore {
 }
 ```
 
-**âš ï¸ PRODUÃ‡ÃƒO:** Implemente autenticaÃ§Ã£o Firebase Auth e regras de seguranÃ§a apropriadas.
+**⚠️ PRODUÇÃO:** Implemente autenticação Firebase Auth e regras de segurança apropriadas.
 
 ---
 
-## ðŸ“ž Suporte
+## 📞 Suporte
 
-Para dÃºvidas ou bugs:
+Para dúvidas ou bugs:
 1. Verifique o console (F12)
-2. Consulte o README de cada mÃ³dulo
+2. Consulte o README de cada módulo
 3. Abra issue no GitHub
 
 ---
 
-## ðŸ“„ LicenÃ§a
+## 📄 Licença
 
-Desenvolvido por **thIAguinho SoluÃ§Ãµes Digitais** â€” 2026
+Desenvolvido por **thIAguinho Soluções Digitais** — 2026
 
 ---
 
-## ðŸŽ¯ Roadmap
+## 🎯 Roadmap
 
-- [ ] ExportaÃ§Ã£o de relatÃ³rios (PDF)
-- [ ] IntegraÃ§Ã£o com WhatsApp API
+- [ ] Exportação de relatórios (PDF)
+- [ ] Integração com WhatsApp API
 - [ ] Dashboard mobile nativo
-- [ ] Backup automÃ¡tico
-- [ ] SincronizaÃ§Ã£o offline
-- [ ] IntegraÃ§Ã£o com sistemas de pagamento
+- [ ] Backup automático
+- [ ] Sincronização offline
+- [ ] Integração com sistemas de pagamento
 
 ---
 
-**VersÃ£o:** 2.0.0  
-**Ãšltima atualizaÃ§Ã£o:** Abril 2026  
-**Status:** âœ… ProduÃ§Ã£o
+**Versão:** 2.0.0  
+**Última atualização:** Abril 2026  
+**Status:** ✅ Produção
 
