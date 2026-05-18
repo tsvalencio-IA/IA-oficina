@@ -25,6 +25,11 @@ Conclusão: a ponte `js/valoria-integracao.js` está alinhada com a versão nova
 - Cadastro de tenant agora tem `SALVAR SEM FECHAR` no topo e `SALVAR E CONTINUAR` no rodapé, sem obrigar sair e voltar do cadastro.
 - `gerar_conhecimento.html` foi incluído no pacote e ficou responsivo para desktop e celular.
 - O gerador não chama Gemini/API externa; imagens agora recebem orientação local para transcrição/conversão.
+- O gerador agora aceita PDF, APK, AAB, ZIP, JAR, DOCX, XLSX, EXE, DLL, MSI, DB, SQLite, TXT, CSV, JSON, XML e HTML.
+- APK/ZIP/DOCX/XLSX são abertos localmente via JSZip. EXE/DLL/MSI/DB/SQLite passam por extração segura de assinatura e strings legíveis, sem executar arquivo.
+- Superadmin importa conhecimento pronto complementando o cérebro atual, sem sobrescrever. Se detectar possível divergência por código, pergunta a decisão e salva como pendência ou decisão resolvida.
+- Criados scripts DevTools por painel em `scripts/devtools`.
+- Criado gerador de massa `GERAR_TENANT_TESTE_300_FLUXO.js` para tenant de teste, com confirmação explícita e sem apagar dados existentes.
 
 ## Validações executadas
 
@@ -35,6 +40,8 @@ Conclusão: a ponte `js/valoria-integracao.js` está alinhada com a versão nova
 - Parse dos scripts inline das cópias Android.
 - Verificação local via navegador em `gerar_conhecimento.html`: sem overflow horizontal, JSON visível, sem menção a Gemini.
 - Verificação local via navegador em `superadmin.html`: botões de salvar existem, campos ValorIA existem, header/footer do modal estão sticky.
+- `node --check` nos scripts DevTools.
+- Parse dos scripts inline das cópias Android.
 
 ## Limite honesto
 

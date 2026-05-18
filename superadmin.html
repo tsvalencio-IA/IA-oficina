@@ -259,7 +259,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
             <div class="form-group"><label class="j-label">JSON do cérebro global</label><textarea class="j-input" id="iaBrainGlobalJson" rows="7" placeholder='{"versao":1,"escopo":"global","comportamento":{"tom":"direto","permitirPiadas":false},"conhecimento":[]}' style="resize:vertical;min-height:150px;font-family:var(--fm);"></textarea></div>
             <div class="form-row c2">
               <button class="btn-ghost" type="button" onclick="gerarModeloCerebroGlobal()">GERAR MODELO JSON</button>
-              <input class="j-input" type="file" id="iaBrainGlobalFile" accept=".json,application/json" onchange="importarCerebroGlobalArquivo(this)">
+              <input class="j-input" type="file" id="iaBrainGlobalFile" accept=".json,application/json" onchange="importarCerebroGlobalArquivo(this)" title="Importa e complementa. Não sobrescreve o cérebro atual.">
             </div>
             <button class="btn-cyan" onclick="salvarConfigIA()" style="width:100%;padding:10px;justify-content:center;">SALVAR CONFIGURAÇÃO LOCAL</button>
           </div>
@@ -397,7 +397,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <div class="form-group"><label class="j-label">Status da Licença</label>
         <select class="j-select" id="tStatus"><option value="Online">Online (Ativo)</option><option value="Trial">Trial</option><option value="Bloqueado">Bloqueado</option></select>
       </div>
-      <div class="form-group"><label class="j-label">Cérebro JSON da oficina (opcional)</label><input class="j-input" type="file" id="tBrainJsonFile" accept=".json,application/json" onchange="importarCerebroTenantArquivo(this)"></div>
+      <div class="form-group"><label class="j-label">Importar conhecimento pronto (complementa)</label><input class="j-input" type="file" id="tBrainJsonFile" accept=".json,application/json" onchange="importarCerebroTenantArquivo(this)" title="Importa JSON gerado e mescla sem apagar o conhecimento atual."></div>
     </div>
     <div class="form-row c2">
       <div class="form-group"><label class="j-label">Cloudinary Cloud Name</label><input class="j-input" id="tCloudName" placeholder="dmuvm1o6m"></div>
@@ -1249,6 +1249,92 @@ function normalizarCerebroAdmin(raw,escopo){
   return data;
 }
 
+function chaveConhecimento(v){
+  const txt=typeof v==='string'?v:(v?.texto||v?.descricao||v?.titulo||JSON.stringify(v||{}));
+  return String(txt||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim();
+}
+function asArrayConhecimento(v){
+  if(!v) return [];
+  if(Array.isArray(v)) return v;
+  if(typeof v==='string') return v.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
+  if(typeof v==='object') return Object.values(v);
+  return [];
+}
+function mergeArraySemSobrescrever(base, add){
+  const out=asArrayConhecimento(base).slice();
+  const seen=new Set(out.map(chaveConhecimento).filter(Boolean));
+  asArrayConhecimento(add).forEach(item=>{
+    const k=chaveConhecimento(item);
+    if(!k||seen.has(k)) return;
+    seen.add(k);
+    out.push(item);
+  });
+  return out;
+}
+function juntarTextoCampo(base, add, titulo){
+  const b=String(base||'').trim();
+  const a=String(add||'').trim();
+  if(!a) return b;
+  if(b && b.includes(a.slice(0,160))) return b;
+  const bloco='--- IMPORTADO: '+titulo+' ---\n'+a;
+  return [b,bloco].filter(Boolean).join('\n\n');
+}
+function detectarConflitosConhecimento(base, add){
+  const linhasBase=asArrayConhecimento(base?.conhecimento).map(chaveConhecimento);
+  const linhasAdd=asArrayConhecimento(add?.conhecimento);
+  const conflitos=[];
+  linhasAdd.forEach(item=>{
+    const txt=typeof item==='string'?item:(item?.texto||item?.descricao||item?.titulo||'');
+    const code=String(txt).match(/\b[A-Z0-9][A-Z0-9.\-\/]{4,}\b/);
+    if(!code) return;
+    const c=code[0].toLowerCase();
+    const old=linhasBase.find(x=>x.includes(c));
+    const novo=chaveConhecimento(txt);
+    if(old&&old!==novo){
+      conflitos.push({codigo:code[0], existente:old.slice(0,240), novo:String(txt).slice(0,240), status:'pendente', criadoEm:new Date().toISOString()});
+    }
+  });
+  return conflitos.slice(0,50);
+}
+function perguntarConflitos(conflitos){
+  const resolvidas=[];
+  const pendentes=[];
+  conflitos.slice(0,8).forEach(c=>{
+    const resp=prompt('Divergência encontrada para '+c.codigo+'.\n\nExistente: '+c.existente+'\n\nNovo: '+c.novo+'\n\nDigite a decisão correta para salvar no cérebro, ou deixe vazio para marcar pendente.');
+    if(resp&&resp.trim()) resolvidas.push({...c,resposta:resp.trim(),status:'resolvida',respondidoPor:'superadmin',respondidoEm:new Date().toISOString()});
+    else pendentes.push(c);
+  });
+  return {resolvidas,pendentes:pendentes.concat(conflitos.slice(8))};
+}
+function mesclarCerebroSemSobrescrever(baseRaw, importadoRaw, escopo){
+  const base=normalizarCerebroAdmin(baseRaw||{},escopo);
+  const add=normalizarCerebroAdmin(importadoRaw||{},escopo);
+  const conflitos=detectarConflitosConhecimento(base,add);
+  const respostas=conflitos.length?perguntarConflitos(conflitos):{resolvidas:[],pendentes:[]};
+  const fonteTitulo=(add.fontes?.[0]?.nome||add.fonte?.nome||'conhecimento importado');
+  const merged={
+    ...base,
+    escopo:escopo||base.escopo||add.escopo,
+    comportamento:base.comportamento||add.comportamento||{tom:'direto',permitirPiadas:false},
+    contexto:juntarTextoCampo(base.contexto,add.contexto,fonteTitulo),
+    catalogos:juntarTextoCampo(base.catalogos,add.catalogos,fonteTitulo),
+    erros:juntarTextoCampo(base.erros,add.erros,fonteTitulo),
+    regras:mergeArraySemSobrescrever(base.regras,add.regras),
+    procedimentos:mergeArraySemSobrescrever(base.procedimentos,add.procedimentos),
+    diagnosticos:mergeArraySemSobrescrever(base.diagnosticos,add.diagnosticos),
+    conhecimento:mergeArraySemSobrescrever(base.conhecimento,add.conhecimento),
+    fontes:mergeArraySemSobrescrever(base.fontes,add.fontes||add.fonte),
+    conflitosConhecimento:mergeArraySemSobrescrever(base.conflitosConhecimento,respostas.pendentes),
+    pendenciasConhecimento:mergeArraySemSobrescrever(base.pendenciasConhecimento||base.pendencias,respostas.pendentes.concat(add.pendenciasConhecimento||[])),
+    duvidasResolvidas:mergeArraySemSobrescrever(base.duvidasResolvidas,respostas.resolvidas),
+    atualizadoEm:new Date().toISOString()
+  };
+  if(respostas.resolvidas.length){
+    merged.conhecimento=mergeArraySemSobrescrever(merged.conhecimento,respostas.resolvidas.map(r=>({titulo:'Decisão Superadmin '+r.codigo,texto:r.resposta,origem:'resolucao_divergencia',codigo:r.codigo,atualizadoEm:r.respondidoEm})));
+  }
+  return {merged,conflitos:conflitos.length,resolvidas:respostas.resolvidas.length,pendentes:respostas.pendentes.length};
+}
+
 function gerarModeloCerebroGlobal(){
   $('iaBrainGlobalJson').value=(window.thiaGerarModeloCerebroJSON?window.thiaGerarModeloCerebroJSON('global'):JSON.stringify({versao:1,escopo:'global',comportamento:{tom:'direto',permitirPiadas:false},conhecimento:[],regras:[],procedimentos:[],diagnosticos:[]},null,2));
 }
@@ -1257,11 +1343,24 @@ function gerarModeloCerebroTenant(){
 }
 async function importarCerebroGlobalArquivo(input){
   const file=input?.files?.[0]; if(!file) return;
-  try{$('iaBrainGlobalJson').value=await file.text(); toast('JSON global carregado. Revise e salve.','ok');}catch(e){toast('Erro ao ler JSON: '+(e.message||e),'err');}
+  try{
+    const raw=await file.text();
+    const atual=$v('iaBrainGlobalJson')||'{}';
+    const res=mesclarCerebroSemSobrescrever(atual,raw,'global');
+    $('iaBrainGlobalJson').value=JSON.stringify(res.merged,null,2);
+    toast(`Conhecimento global importado sem sobrescrever. Novas divergências: ${res.pendentes}. Resolvidas agora: ${res.resolvidas}.`,'ok');
+  }catch(e){toast('Erro ao importar JSON: '+(e.message||e),'err');}
 }
 async function importarCerebroTenantArquivo(input){
   const file=input?.files?.[0]; if(!file) return;
-  try{$('tBrainJsonRaw').value=await file.text(); validarCerebroTenant();}catch(e){toast('Erro ao ler JSON: '+(e.message||e),'err');}
+  try{
+    const raw=await file.text();
+    const atual=$v('tBrainJsonRaw')||'{}';
+    const res=mesclarCerebroSemSobrescrever(atual,raw,'tenant');
+    $('tBrainJsonRaw').value=JSON.stringify(res.merged,null,2);
+    validarCerebroTenant();
+    toast(`Conhecimento da oficina complementado. Pendências: ${res.pendentes}. Resolvidas agora: ${res.resolvidas}.`,'ok');
+  }catch(e){toast('Erro ao importar JSON: '+(e.message||e),'err');}
 }
 function validarCerebroTenant(){
   try{normalizarCerebroAdmin($v('tBrainJsonRaw')||'{}','tenant'); toast('JSON do tenant valido.','ok');}catch(e){toast('JSON invalido: '+(e.message||e),'err');}
