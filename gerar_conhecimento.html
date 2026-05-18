@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programador do Cérebro IA - ERP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- PDF.js para extrair textos de PDFs localmente -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script>pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';</script>
+    <style>
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .dark-scroll::-webkit-scrollbar-thumb { background: #334155; }
+        
+        .loader { border-top-color: #3b82f6; animation: spinner 1s linear infinite; }
+        @keyframes spinner { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        /* Layout */
+        .layout-grid { display: grid; grid-template-columns: 350px 1fr 350px; height: 100vh; overflow: hidden; }
+    </style>
+</head>
+<body class="bg-gray-50 text-slate-800 font-sans h-screen overflow-hidden">
+
+    <!-- Header -->
+    <header class="bg-indigo-950 text-white px-6 py-3 flex items-center justify-between shadow-md z-20 relative">
+        <div class="flex items-center gap-3">
+            <i class="ph ph-brain text-3xl text-indigo-400"></i>
+            <div>
+                <h1 class="text-lg font-bold">Estação de Treinamento do Cérebro IA</h1>
+                <p class="text-[11px] text-indigo-300">Transcreva ficheiros e digite regras para a IA aprender TUDO.</p>
+            </div>
+        </div>
+        <button onclick="exportJSON()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold rounded shadow-lg transition flex items-center gap-2">
+            <i class="ph ph-download-simple"></i> Baixar JSON de Conhecimento
+        </button>
+    </header>
+
+    <div class="layout-grid">
+        
+        <!-- COLUNA 1: Ingestão e Personalidade -->
+        <aside class="bg-white border-r border-gray-200 flex flex-col overflow-y-auto">
+            
+            <!-- Personalidade -->
+            <div class="p-5 border-b border-gray-100 bg-indigo-50/30">
+                <h2 class="text-xs font-bold uppercase tracking-wider text-indigo-800 mb-4 flex items-center gap-2">
+                    <i class="ph ph-mask-happy text-lg"></i> Personalidade da IA
+                </h2>
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">Escopo de Atuação</label>
+                        <input type="text" id="inpEscopo" value="tenant" class="w-full p-2 text-sm border border-gray-300 rounded focus:border-indigo-500 outline-none" oninput="updateState()">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Tom da Resposta</label>
+                            <input type="text" id="inpTom" value="gentil e prestativo" class="w-full p-2 text-sm border border-gray-300 rounded focus:border-indigo-500 outline-none" oninput="updateState()" placeholder="Ex: gentil, direto...">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Pode fazer piadas?</label>
+                            <select id="inpPiadas" class="w-full p-2 text-sm border border-gray-300 rounded focus:border-indigo-500 outline-none bg-white" onchange="updateState()">
+                                <option value="false">Não</option>
+                                <option value="true">Sim</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upload e Transcrição -->
+            <div class="p-5 flex-1 flex flex-col">
+                <h2 class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3 flex items-center gap-2">
+                    <i class="ph ph-file-arrow-up text-lg"></i> Transcrever Ficheiro
+                </h2>
+                <p class="text-xs text-gray-500 mb-3">Envie um PDF ou imagem. O sistema vai extrair o texto bruto para poderes editar ao lado.</p>
+                
+                <div id="dropZone" class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center bg-gray-50 hover:bg-indigo-50 hover:border-indigo-400 transition cursor-pointer flex flex-col items-center gap-2">
+                    <i class="ph ph-upload-simple text-3xl text-gray-400"></i>
+                    <span class="text-sm font-medium text-gray-600">Arraste o arquivo aqui</span>
+                    <input type="file" id="fileInput" class="hidden" accept=".pdf,image/*">
+                </div>
+
+                <div id="processingUI" class="hidden mt-4 flex-col items-center p-4 bg-indigo-50 rounded-lg border border-indigo-100 text-center">
+                    <div class="loader border-4 border-indigo-200 rounded-full w-8 h-8 mb-2"></div>
+                    <p class="text-sm font-semibold text-indigo-900" id="procStatus">A ler ficheiro...</p>
+                    <p class="text-xs text-indigo-600 mt-1">A usar visão computacional/OCR.</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- COLUNA 2: O Cérebro (Digitação Livre e Edição) -->
+        <main class="bg-slate-50 flex flex-col z-10 overflow-hidden relative">
+            <div class="bg-white px-6 py-3 border-b border-gray-200 shadow-sm flex items-center justify-between shrink-0">
+                <h2 class="text-sm font-bold text-gray-700 flex items-center gap-2">
+                    <i class="ph ph-keyboard text-xl text-indigo-600"></i> Editor de Conhecimento e Regras
+                </h2>
+                <span class="text-xs font-medium text-gray-400">Digita livremente o que a IA deve saber.</span>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto p-6 space-y-6">
+                
+                <!-- Metadados de Busca -->
+                <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 grid grid-cols-2 gap-4">
+                    <div class="col-span-2">
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Contexto Geral</label>
+                        <input type="text" id="inpContexto" class="w-full p-2 text-sm border border-gray-300 rounded focus:border-indigo-500 outline-none" placeholder="Ex: Informações sobre comissões de vendedores e financeiro..." oninput="updateState()">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Ficheiros / Catálogos Base</label>
+                        <input type="text" id="inpCatalogos" class="w-full p-2 text-sm border border-gray-300 rounded focus:border-indigo-500 outline-none" placeholder="Ex: regulamento_interno_2026.pdf" oninput="updateState()">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Mapeamento de Erros/DTCs</label>
+                        <input type="text" id="inpErros" class="w-full p-2 text-sm border border-gray-300 rounded focus:border-indigo-500 outline-none" placeholder="Ex: Erro 404 (Sistema RH offline)" oninput="updateState()">
+                    </div>
+                </div>
+
+                <!-- Conhecimento Bruto (Onde cai a transcrição e digitação livre) -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden flex flex-col" style="min-height: 250px;">
+                    <div class="bg-gray-50 p-3 border-b border-gray-200 flex justify-between items-center">
+                        <h3 class="font-semibold text-sm text-gray-700 flex items-center gap-2"><i class="ph ph-books"></i> Fatos e Conhecimento (Digite tudo aqui)</h3>
+                    </div>
+                    <textarea id="inpConhecimento" class="flex-1 w-full p-4 text-sm font-mono text-gray-700 outline-none resize-y border-none focus:ring-inset focus:ring-2 focus:ring-indigo-500" placeholder="A IA não sabe de comissões? Ensine-a aqui:
+- A comissão do vendedor sobre peças é de 5%.
+- A comissão sobre serviços é de 10%.
+- Os boletos vencem dia 10 de cada mês.
+
+Ou faça upload de um ficheiro à esquerda para que o texto seja transcrito para este quadro automaticamente, e depois tu editas." oninput="updateState()"></textarea>
+                </div>
+
+                <!-- Regras Estritas -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                    <div class="bg-gray-50 p-3 border-b border-gray-200 flex justify-between items-center">
+                        <h3 class="font-semibold text-sm text-gray-700 flex items-center gap-2"><i class="ph ph-gavel"></i> Regras de Ouro</h3>
+                        <button onclick="addRegra()" class="text-xs bg-white border border-gray-300 hover:bg-gray-100 px-3 py-1 rounded shadow-sm text-gray-700 font-medium">Adicionar Regra</button>
+                    </div>
+                    <div id="containerRegras" class="p-3 space-y-2"></div>
+                </div>
+
+                <!-- Procedimentos Passo-a-passo -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                    <div class="bg-gray-50 p-3 border-b border-gray-200 flex justify-between items-center">
+                        <h3 class="font-semibold text-sm text-gray-700 flex items-center gap-2"><i class="ph ph-list-numbers"></i> Procedimentos</h3>
+                        <button onclick="addProcedimento()" class="text-xs bg-white border border-gray-300 hover:bg-gray-100 px-3 py-1 rounded shadow-sm text-gray-700 font-medium">Adicionar Passo</button>
+                    </div>
+                    <div id="containerProcedimentos" class="p-3 space-y-2"></div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- COLUNA 3: Payload Preview -->
+        <aside class="bg-[#1e1e2e] flex flex-col border-l border-gray-800">
+            <div class="bg-[#181825] px-4 py-3 border-b border-[#313244] flex items-center justify-between shrink-0">
+                <span class="text-sm font-semibold text-[#cdd6f4] flex items-center gap-2"><i class="ph ph-code"></i> Arquivo JSON Final</span>
+            </div>
+            <div class="flex-1 overflow-auto p-4 dark-scroll relative">
+                <pre id="jsonPreview" class="text-[13px] font-mono leading-relaxed text-[#a6adc8] whitespace-pre-wrap"></pre>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        // API Key do Gemini (fornecida no ambiente)
+        const apiKey = "";
+
+        // ==========================================
+        // 1. ESTADO CENTRAL DA APLICAÇÃO (TEU SCHEMA)
+        // ==========================================
+        let appState = {
+            versao: 1,
+            escopo: "tenant",
+            comportamento: {
+                tom: "gentil e prestativo",
+                permitirPiadas: false
+            },
+            contexto: "",
+            catalogos: "",
+            erros: "",
+            regras: [
+                { tipo: "Instrução Financeira", descricao: "A IA tem total autoridade para falar sobre regras financeiras da empresa cadastradas aqui." }
+            ],
+            procedimentos: [],
+            diagnosticos: [],
+            conhecimento: [], // Vamos tratar como um array de parágrafos/linhas
+            atualizadoEm: new Date().toISOString()
+        };
+
+        // ==========================================
+        // 2. ATUALIZAÇÃO DO ESTADO COM O QUE DIGITAS
+        // ==========================================
+        function updateState() {
+            appState.escopo = document.getElementById('inpEscopo').value;
+            appState.comportamento.tom = document.getElementById('inpTom').value;
+            appState.comportamento.permitirPiadas = document.getElementById('inpPiadas').value === 'true';
+            
+            appState.contexto = document.getElementById('inpContexto').value;
+            appState.catalogos = document.getElementById('inpCatalogos').value;
+            appState.erros = document.getElementById('inpErros').value;
+
+            // Transforma o texto livre da textarea num array de conhecimento (separado por quebras de linha)
+            const rawText = document.getElementById('inpConhecimento').value;
+            appState.conhecimento = rawText.split('\n')
+                                           .map(s => s.trim())
+                                           .filter(s => s.length > 0 && s !== "-");
+
+            appState.atualizadoEm = new Date().toISOString();
+            renderJSON();
+        }
+
+        // ==========================================
+        // 3. RENDERIZAÇÃO DAS LISTAS (Regras, Procedimentos)
+        // ==========================================
+        function renderLists() {
+            // Regras
+            const cRegras = document.getElementById('containerRegras');
+            cRegras.innerHTML = appState.regras.length === 0 ? '<p class="text-xs text-gray-400 text-center py-2">Sem regras cadastradas.</p>' : '';
+            appState.regras.forEach((r, i) => {
+                cRegras.innerHTML += `
+                    <div class="flex gap-2 items-center">
+                        <input type="text" class="w-1/3 p-2 text-xs border border-gray-300 rounded focus:border-indigo-500 outline-none" placeholder="Tipo (ex: Comissão)" value="${r.tipo}" oninput="updateArrayObj('regras', ${i}, 'tipo', this.value)">
+                        <input type="text" class="flex-1 p-2 text-xs border border-gray-300 rounded focus:border-indigo-500 outline-none" placeholder="A comissão é 5%..." value="${r.descricao}" oninput="updateArrayObj('regras', ${i}, 'descricao', this.value)">
+                        <button onclick="removeArrayItem('regras', ${i})" class="text-gray-400 hover:text-red-500 p-1"><i class="ph ph-trash"></i></button>
+                    </div>
+                `;
+            });
+
+            // Procedimentos
+            const cProc = document.getElementById('containerProcedimentos');
+            cProc.innerHTML = appState.procedimentos.length === 0 ? '<p class="text-xs text-gray-400 text-center py-2">Sem procedimentos.</p>' : '';
+            appState.procedimentos.forEach((p, i) => {
+                cProc.innerHTML += `
+                    <div class="flex gap-2 items-center">
+                        <span class="text-xs font-bold text-gray-400 w-4">${i+1}.</span>
+                        <input type="text" class="flex-1 p-2 text-xs border border-gray-300 rounded focus:border-indigo-500 outline-none" placeholder="Passo a realizar..." value="${p}" oninput="updateArrayStr('procedimentos', ${i}, this.value)">
+                        <button onclick="removeArrayItem('procedimentos', ${i})" class="text-gray-400 hover:text-red-500 p-1"><i class="ph ph-trash"></i></button>
+                    </div>
+                `;
+            });
+        }
+
+        window.addRegra = () => { appState.regras.push({ tipo: "", descricao: "" }); renderLists(); updateState(); }
+        window.addProcedimento = () => { appState.procedimentos.push(""); renderLists(); updateState(); }
+        window.updateArrayObj = (arr, i, key, val) => { appState[arr][i][key] = val; updateState(); }
+        window.updateArrayStr = (arr, i, val) => { appState[arr][i] = val; updateState(); }
+        window.removeArrayItem = (arr, i) => { appState[arr].splice(i, 1); renderLists(); updateState(); }
+
+        // ==========================================
+        // 4. RENDERIZAÇÃO DO JSON
+        // ==========================================
+        function renderJSON() {
+            const jsonString = JSON.stringify(appState, null, 2);
+            // Coloração Catppuccin Mocha theme (bonito e legível)
+            const colorized = jsonString
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                .replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+                    let cls = 'text-[#fab387]'; // numbers
+                    if (/^"/.test(match)) {
+                        if (/:$/.test(match)) { cls = 'text-[#89b4fa] font-semibold'; } // keys
+                        else { cls = 'text-[#a6e3a1]'; } // strings
+                    } else if (/true|false/.test(match)) { cls = 'text-[#f38ba8]'; } // booleans
+                    return '<span class="' + cls + '">' + match + '</span>';
+                });
+            document.getElementById('jsonPreview').innerHTML = colorized;
+        }
+
+        // ==========================================
+        // 5. MÁQUINA DE TRANSCRIÇÃO (ARQUIVOS -> TEXTO)
+        // ==========================================
+        const fileInput = document.getElementById('fileInput');
+        const dropZone = document.getElementById('dropZone');
+        const processingUI = document.getElementById('processingUI');
+        const procStatus = document.getElementById('procStatus');
+        const inpConhecimento = document.getElementById('inpConhecimento');
+        const inpCatalogos = document.getElementById('inpCatalogos');
+
+        dropZone.addEventListener('click', () => fileInput.click());
+        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('border-indigo-400', 'bg-indigo-50'); });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('border-indigo-400', 'bg-indigo-50'));
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('border-indigo-400', 'bg-indigo-50');
+            if (e.dataTransfer.files.length) processTranscription(e.dataTransfer.files[0]);
+        });
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length) processTranscription(e.target.files[0]);
+        });
+
+        async function processTranscription(file) {
+            dropZone.classList.add('hidden');
+            processingUI.classList.remove('hidden');
+            processingUI.classList.add('flex');
+            
+            inpCatalogos.value = file.name;
+            updateState();
+
+            try {
+                let rawTextToInsert = "";
+
+                if (file.type === "application/pdf") {
+                    procStatus.textContent = "Lendo texto do PDF localmente...";
+                    rawTextToInsert = await extractTextFromPDF(file);
+                } else if (file.type.startsWith("image/")) {
+                    procStatus.textContent = "Usando Visão IA para ler imagem...";
+                    rawTextToInsert = await extractTextFromImageViaGemini(file);
+                } else {
+                    throw new Error("Envie um PDF ou uma Imagem.");
+                }
+
+                // Injeta o texto na área de digitação livre!
+                // O utilizador agora pode apagar o lixo e manter só as verdades.
+                const currentText = inpConhecimento.value;
+                const newText = (currentText.trim() ? currentText + "\n\n=== TEXTO EXTRAÍDO ===\n" : "") + rawTextToInsert;
+                
+                inpConhecimento.value = newText;
+                
+                // Piscar a textarea para chamar a atenção
+                inpConhecimento.classList.add('bg-indigo-50');
+                setTimeout(() => inpConhecimento.classList.remove('bg-indigo-50'), 1000);
+
+                updateState();
+
+                procStatus.textContent = "Transcrição Concluída!";
+                setTimeout(() => {
+                    processingUI.classList.add('hidden');
+                    processingUI.classList.remove('flex');
+                    dropZone.classList.remove('hidden');
+                }, 2000);
+
+            } catch (error) {
+                procStatus.textContent = "Erro: " + error.message;
+                setTimeout(() => {
+                    processingUI.classList.add('hidden');
+                    processingUI.classList.remove('flex');
+                    dropZone.classList.remove('hidden');
+                }, 3000);
+            }
+        }
+
+        // Leitura de PDF Local
+        async function extractTextFromPDF(file) {
+            const arrayBuffer = await file.arrayBuffer();
+            const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
+            let fullText = "";
+            const maxPages = Math.min(pdf.numPages, 10); 
+            for (let i = 1; i <= maxPages; i++) {
+                const page = await pdf.getPage(i);
+                const textContent = await page.getTextContent();
+                fullText += textContent.items.map(item => item.str).join(" ") + "\n";
+            }
+            return fullText;
+        }
+
+        // Leitura de Imagem via Gemini
+        async function extractTextFromImageViaGemini(file) {
+            const base64Content = await new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result.split(',')[1]);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ 
+                    role: "user", 
+                    parts: [
+                        { text: "Por favor, transcreva e estruture de forma legível todo o texto útil, regras, valores ou dados técnicos contidos nesta imagem. Resuma em fatos claros." },
+                        { inlineData: { mimeType: file.type, data: base64Content } }
+                    ] 
+                }]
+            };
+
+            const delays = [1000, 2000, 4000];
+            for (let i = 0; i < 3; i++) {
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (!response.ok) throw new Error("API Falhou");
+                    const result = await response.json();
+                    return result.candidates[0].content.parts[0].text;
+                } catch (err) {
+                    if (i === 2) throw new Error("Não foi possível processar a imagem.");
+                    await new Promise(r => setTimeout(r, delays[i]));
+                }
+            }
+        }
+
+        // Exportar JSON
+        window.exportJSON = () => {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState, null, 2));
+            const dl = document.createElement('a');
+            dl.setAttribute("href", dataStr);
+            dl.setAttribute("download", `cerebro_ia_${Date.now()}.json`);
+            document.body.appendChild(dl);
+            dl.click();
+            dl.remove();
+        };
+
+        // Inicializar
+        renderLists();
+        renderJSON();
+
+    </script>
+</body>
+</html>
